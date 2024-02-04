@@ -1,72 +1,72 @@
 body {
   overflow: hidden;
+
 }
 
 .Login {
   display: flex;
-  width: 100vw; /* Full width of the viewport */
-  height: 100vh; /* Full height of the viewport */
+  width: 100vw;
+  /* Full width of the viewport */
+  height: 100vh;
+  /* Full height of the viewport */
   background-color: #e9e9f2;
-  
+
 }
-  
-  .label-username {
-    width: 400%; /* Adjust this to control the width of the label */
-  }
- 
-  
- 
-  
-  .content-box {
-    position: absolute;
-    background-color: rgb(242, 242, 246);
-    top: 30%;
-    right: 10%;
-    width:20%;
-     /* Center the box */
-     /* Adjust this to control the width of the box */
-    
-    height: auto;
-    padding: 20px;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-  }
-  
-  #textContainerf {
-    /* Adjust these values based on your layout preferences */
-    position: absolute;
-    font-size:600% ;
-    right: 58%;
-    bottom: 20%;
-    width: 50%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgb(24, 119, 242);
-    font-weight: bold;
-    
-  }
-  
-  #textContainer {
-    /* Adjust these values based on your layout preferences */
-    position: absolute;
-    left: 10px;
-    top: 20px;
-    width: 50%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 200%;
-  }
-  
-  input,
-  button {
-    margin-bottom: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    border-radius: 5px;
-    padding: 10px;
-  }
-  
+
+.label-username {
+  width: 400%;
+  /* Adjust this to control the width of the label */
+}
+
+.content-box {
+  position: absolute;
+  background-color: rgb(242, 242, 246);
+  top: 30%;
+  right: 10%;
+  width: 20%;
+  /* Center the box */
+  /* Adjust this to control the width of the box */
+
+  height: auto;
+  padding: 20px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+#textContainerf {
+  /* Adjust these values based on your layout preferences */
+  position: absolute;
+  font-size: 600%;
+  right: 58%;
+  bottom: 20%;
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(24, 119, 242);
+  font-weight: bold;
+
+}
+
+#textContainer {
+  /* Adjust these values based on your layout preferences */
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 200%;
+}
+
+input,
+button {
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 10px;
+}

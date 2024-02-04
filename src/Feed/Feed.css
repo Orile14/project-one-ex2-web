@@ -7,10 +7,21 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 .feedContainer {
-    width: 100vw; /* Full width of the viewport */
-    height: 100vh; /* Full height of the viewport */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  width: 100vw; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.feed {
+  width: 100%; /* Adjust the width as needed */
+  max-width: 1200px; /* Add a maximum width if desired */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-sizing: border-box;
+  margin-top: 20px;
+}

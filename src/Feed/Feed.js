@@ -1,7 +1,9 @@
 // Feed.js
 import React, { useState } from 'react';
 import LeftMenu from './LeftMenu';
-import "./Feed.css";
+import PostBox from './Post/PostBox';
+import Posts from './Post/Posts';
+
 const Feed = () => {
     return (
         <div className="feedContainer">
@@ -48,7 +50,8 @@ const Feed = () => {
                     <LeftMenu />
                 </div>
                 <div class="col-8">
-                    Posts
+                    <PostBox />
+                    <Posts />
                 </div>
                 <div class="col-2">
                     FriendsList
