@@ -16,4 +16,4 @@ const MakeButton = ({ id, label, type, value, handleChange }) => {
   );
 };
 
-export default MakeButton;
+export default MakeButton;
