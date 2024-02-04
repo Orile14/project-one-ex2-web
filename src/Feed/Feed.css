@@ -1,0 +1,16 @@
+/* Define a custom CSS class */
+.bi-facebook {
+    fill: blue;
+  }
+  .row{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.feedContainer {
+    width: 100vw; /* Full width of the viewport */
+    height: 100vh; /* Full height of the viewport */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }

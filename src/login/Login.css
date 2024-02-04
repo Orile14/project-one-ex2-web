@@ -5,7 +5,7 @@ body {
 .Login {
   display: flex;
   width: 100vw; /* Full width of the viewport */
-  height: 110vh; /* Full height of the viewport */
+  height: 100vh; /* Full height of the viewport */
   background-color: #e9e9f2;
   
 }
