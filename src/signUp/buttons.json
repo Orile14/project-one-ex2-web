@@ -1,23 +1,24 @@
 [
-    {
-      "id": "Name",
-      "label": "Enter User Name",
-      "value": "",
-      "type": "text",
-      "handleChange": "handleNameChange"
-    },
-    {
-      "id": "Password",
-      "label": "Enter Password",
-      "value": "",
-      "type": "password",
-      "handleChange": "handlePasswordChange"
-    },
-    {
-      "id": "ConfirmPassword",
-      "label": "Confirm Password",
-      "value": "",
-      "type": "password",
-      "handleChange": "handleConfirmPasswordChange"
-    }
+  {
+    "id": "Name",
+    "label": "Enter User Name",
+    "value": "",
+    "type": "text",
+    "handleChange": "handleNameChange"
+  },
+  {
+    "id": "Password",
+    "label": "Enter Password",
+    "value": "",
+    "type": "password",
+    "handleChange": "handlePasswordChange"
+  },
+  {
+    "id": "ConfirmPassword",
+    "label": "Confirm Password",
+    "value": "",
+    "type": "password",
+    "handleChange": "handleConfirmPasswordChange"
+  }
+ 
 ]
