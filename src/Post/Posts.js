@@ -1,3 +1,4 @@
+import React from 'react';
 import CreatePost from './CreatePost';
 import "./Post.css";
 import postsList from './PostsList';

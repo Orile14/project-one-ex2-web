@@ -1,34 +1,37 @@
 /* Your existing styling for circular-container */
 .circular-container {
-    margin-right: 5px;
-    margin-left: 5px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: lightgray;
-    color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: width 0.3s, height 0.3s; /* Add transition for smooth effect */
-  }
+  margin-right: 5px;
+  margin-left: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: lightgray;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.3s, height 0.3s; /* Add transition for a smooth effect */
+}
 
-  .option-section-button {
-    height: 60px;
-    border: none;
-    background-color: white;
-    text-align: center;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Add a smooth transition effect */
-  }
-  
-  /* Add hover effect for the button */
-  .option-section-button:hover .circular-container {
-    background-color: gray;
-    width: 50px; /* Adjust the size as needed */
-    height: 50px; /* Adjust the size as needed */
-  }
+.option-section-button {
+  height: 60px;
+  border: none;
+  background-color: white;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, width 0.3s, height 0.3s; /* Add a smooth transition effect for background-color, width, and height */
+}
 
+/* Add hover effect for the button */
+.option-section-button:hover {
+  background-color: white;
+}
+
+/* Adjust the size of the circular-container on hover */
+.option-section-button:hover .circular-container {
+  width: 40px; /* Adjust the size as needed */
+  height: 40px; /* Adjust the size as needed */
+}

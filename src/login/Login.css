@@ -1,13 +1,13 @@
 body {
-  overflow: hidden;
+  overflow: auto;
 
 }
 
 .Login {
   display: flex;
-  width: 100vw;
+  width: 100%;
   /* Full width of the viewport */
-  height: 100vh;
+  height: 100%;
   /* Full height of the viewport */
   background-color: #e9e9f2;
 

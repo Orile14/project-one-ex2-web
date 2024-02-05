@@ -1,4 +1,5 @@
 
+import IMG from './IMG_8579.jpg';
 let posts = [
     {
       username: 'Alice',
@@ -6,7 +7,7 @@ let posts = [
       content: 'Lovely day at the park!',
       likes: 15,
       comments: [],
-      image:``,
+      image:`${IMG}`,
     },
     {
       username: 'Bob',

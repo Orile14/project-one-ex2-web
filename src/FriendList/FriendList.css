@@ -1,0 +1,24 @@
+/* FriendsList.css */
+.friends-list {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .friend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .friend-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Makes the image circular */
+    margin-right: 10px;
+  }
+  
+  .friend-name {
+    margin: 0;
+  }
+  
