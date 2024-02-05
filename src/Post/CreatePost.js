@@ -3,6 +3,11 @@ import React from 'react';
 import './Post.css';
 import { useState } from 'react';
 const CreatePost = ({ username, timestamp, content, likes, comments, image }) => {
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handle = () => {
+    setIsLiked(!isLiked);
+  };
   return (
     <div className="post">
       <div className="post-header">
@@ -16,20 +21,20 @@ const CreatePost = ({ username, timestamp, content, likes, comments, image }) =>
       <div className="post-footer">
 
         <div class="buttons">
-          <button className="like-button">
-          <i class="bi bi-hand-thumbs-up"></i>
+          <button className="like-button" onClick={handle}>
+            <i class="bi bi-hand-thumbs-up"></i>
             &nbsp; {/* Add space here */}
-            Likes: {likes}
+            Likes: {isLiked ? likes + 1 : likes}
           </button>
 
           <button className="comment-button">
-          <i class="bi bi-chat"></i>
+            <i class="bi bi-chat"></i>
             &nbsp; {/* Add space here */}
             Comments: {comments.length}
           </button>
 
           <button className="share-button">
-          <i class="bi bi-send"></i>
+            <i class="bi bi-send"></i>
             &nbsp; {/* Add space here */}
             Share
           </button>

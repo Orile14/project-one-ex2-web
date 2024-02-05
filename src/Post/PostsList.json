@@ -1,0 +1,116 @@
+[
+    {
+      "username": "Alice",
+      "timestamp": "3 hours ago",
+      "content": "Lovely day at the park!",
+      "likes": 15,
+      "comments": [
+        {
+          "username": "Commenter1",
+          "timestamp": "2 hours ago",
+          "content": "This is amazing!"
+        },
+        {
+          "username": "Commenter2",
+          "timestamp": "1 hour ago",
+          "content": "I wish I was there!"
+        }
+      ],
+      "image": ""
+    },
+    {
+      "username": "Bob",
+      "timestamp": "1 day ago",
+      "content": "Just finished reading a great book.",
+      "likes": 20,
+      "comments": [
+        {
+          "username": "Commenter1",
+          "timestamp": "2 hours ago",
+          "content": "I love it!"
+        },
+        {
+          "username": "Commenter2",
+          "timestamp": "1 hour ago",
+          "content": "Great job!"
+        }
+      ],
+      "image": ""
+    },
+    {
+      "username": "Charlie",
+      "timestamp": "2 days ago",
+      "content": "Coding all night!",
+      "likes": 25,
+      "comments": [
+        {
+          "username": "Commenter1",
+          "timestamp": "2 hours ago",
+          "content": "Can't wait to try this!"
+        },
+        {
+          "username": "Commenter2",
+          "timestamp": "1 hour ago",
+          "content": "Impressive!"
+        }
+      ],
+      "image": "placeholder_IMG_8578"
+    },
+    {
+      "username": "David",
+      "timestamp": "4 days ago",
+      "content": "Exploring new recipes in the kitchen.",
+      "likes": 30,
+      "comments": [
+        {
+          "username": "Commenter1",
+          "timestamp": "3 days ago",
+          "content": "What's your favorite recipe so far?"
+        },
+        {
+          "username": "Commenter2",
+          "timestamp": "2 days ago",
+          "content": "I love cooking too!"
+        }
+      ],
+      "image": "placeholder_IMG_8579"
+    },
+    {
+      "username": "Eve",
+      "timestamp": "1 week ago",
+      "content": "Relaxing on the beach.",
+      "likes": 18,
+      "comments": [
+        {
+          "username": "Commenter1",
+          "timestamp": "6 days ago",
+          "content": "Wish I could join you!"
+        },
+        {
+          "username": "Commenter2",
+          "timestamp": "5 days ago",
+          "content": "Which beach are you at?"
+        }
+      ],
+      "image": "placeholder_imgbeach"
+    },
+    {
+      "username": "Frank",
+      "timestamp": "2 weeks ago",
+      "content": "Hiking in the mountains.",
+      "likes": 22,
+      "comments": [
+        {
+          "username": "Commenter1",
+          "timestamp": "12 days ago",
+          "content": "Looks like a breathtaking view!"
+        },
+        {
+          "username": "Commenter2",
+          "timestamp": "10 days ago",
+          "content": "I love hiking too!"
+        }
+      ],
+      "image": "IMG_8581"
+    }
+  ]
