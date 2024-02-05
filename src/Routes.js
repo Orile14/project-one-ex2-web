@@ -1,8 +1,8 @@
 // src/Routes.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "../login/Login";
-import SignUp from "../signUp/SignUp"; // Adjust the path based on your project structure
+import Login from "./login/Login";
+import SignUp from "./signUp/SignUp"; // Adjust the path based on your project structure
 
 const Home = () => {
   return <h2>Home Page</h2>; // You can replace this with your home page component
@@ -17,8 +17,8 @@ const AppRoutes = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />{"../login/Login"}
-        <Route path="/signup" element={<SignUp />} /> {"../signUp/SignUp"}
+        <Route path="/login" element={<Login />} />{"./login/Login"}
+        <Route path="/signup" element={<SignUp />} /> {"./signUp/SignUp"}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
 import "./Login.css";
 import InputBox from "../inputBox/InputBox";
-
+import Feed from "../Feed/Feed";
 import User from "../signUp/user"; // Update the path accordingly
 
 const Login = () => {
@@ -21,6 +21,7 @@ const Login = () => {
 
     if (user) {
       setLoginMessage(`Welcome, ${username}! You have successfully logged in.`);
+      navigate('/Feed'); // Change this to the path of your feed page
       // Add additional logic or redirect the user as needed
     } else {
       setLoginMessage('Invalid email or password. Please try again.');
