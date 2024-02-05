@@ -8,7 +8,7 @@ import OptionSection from '../OptionSection/OptionSection';
 
 const NavigationBar = () => {
     return (
-        <nav className="navbar navbar-expand-lg bar">
+        <nav className="navbar navbar-expand-lg">
             <div className="container-fluid ">
 
                 <div className="d-flex align-items-center bar">

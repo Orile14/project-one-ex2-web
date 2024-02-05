@@ -1,6 +1,7 @@
-.bar { 
+.navbar { 
     padding: 0px;
     height: 60px;
+    background-color: white;
   }
   
   .logo-icon {
