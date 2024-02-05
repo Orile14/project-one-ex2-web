@@ -1,3 +1,4 @@
 .row {
+    overflow: auto;
     background-color: lightgrey;
 }

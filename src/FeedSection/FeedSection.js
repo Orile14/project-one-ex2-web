@@ -3,9 +3,10 @@ import "./FeedSection.css";
 import FeedItem from "./FeedItem/FeedItem";
 import FeedData from "./FeedItem/FeedItem.json";
 
-
 const FeedSection = () => {
-  const [selectedIcon, setSelectedIcon] = useState(null);
+  // Initialize selectedIcon with the class of the first icon in FeedData
+  const initialSelectedIcon = FeedData.length > 0 ? FeedData[0] : null;
+  const [selectedIcon, setSelectedIcon] = useState(initialSelectedIcon);
 
   const handleItemClick = (iconClass) => {
     setSelectedIcon(iconClass === selectedIcon ? null : iconClass);
