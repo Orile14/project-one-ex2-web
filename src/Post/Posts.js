@@ -1,3 +1,4 @@
+// Posts.js
 import React from 'react';
 import CreatePost from './CreatePost';
 import "./Post.css";
@@ -6,9 +7,8 @@ import postsList from './PostsList';
 const Posts = () => {
     return (
         <div className="posts">
-            {postsList.map((post, index) => (
+            {postsList.map((post) => (
                 <CreatePost
-                    key={index}
                     username={post.username}
                     timestamp={post.timestamp}
                     content={post.content}
@@ -20,4 +20,5 @@ const Posts = () => {
         </div>
     );
 }
+
 export default Posts;
