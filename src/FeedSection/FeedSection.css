@@ -1,0 +1,43 @@
+.bar { 
+  padding: 0px;
+  height: 60px;
+}
+
+.feed-item-icon {
+  padding: 8px; 
+  font-size: 25px;
+  margin-right: 10px;
+  margin-left: 10px;
+  color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.feed-item-button {
+  height: 60px;
+  background-color: white;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  padding: 0; 
+  transition: background-color 0.3s ease; 
+}
+
+.feed-item-button:hover {
+  background-color: lightgray;
+}
+
+
+.feed-item-button.clicked {
+  color: var(--bs-primary);
+  border-bottom: 3px solid var(--bs-primary);
+}
+.feed-item-icon.clicked {
+  color: var(--bs-primary);
+}

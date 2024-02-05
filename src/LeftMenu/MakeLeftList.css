@@ -1,11 +1,9 @@
 .list-group-item{
     border: none;
+    background-color: lightgray;
 }
 .list-group-item:hover{
     cursor: pointer;
     background-color: #f0f0f0;
-    border: none;
-}
-.list-group-item{
     border: none;
 }

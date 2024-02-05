@@ -1,6 +1,5 @@
-
 .left-menu-container {
     margin: 0;
     padding: 0;
-    background-color: bg-light;
+    box-sizing: border-box;
 }

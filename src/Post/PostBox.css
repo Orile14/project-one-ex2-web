@@ -1,6 +1,7 @@
 /* PostBox.css */
 
 .post-box {
+    background-color: #fff;
     margin-left: 20%;
     padding: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

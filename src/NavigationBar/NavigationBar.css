@@ -1,0 +1,13 @@
+.bar { 
+    padding: 0px;
+    height: 60px;
+  }
+  
+  .logo-icon {
+    padding: 0px;
+    font-size: 40px; /* Set the desired size */
+    color: var(--bs-primary); /* Set the desired color using Bootstrap primary variable */
+  }
+  
+  
+  

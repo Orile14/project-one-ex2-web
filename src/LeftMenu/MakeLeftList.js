@@ -1,11 +1,11 @@
 // MakeLeftList.js
 import React from 'react';
-import members from './LeftListMembers'; // Update path if needed
+import members from './LeftListMembers';
 import './MakeLeftList.css';
 
 const MakeLeftList = () => {
     const showToast = (message) => {
-        alert(message); // Using alert for simplicity, you can replace it with your preferred toast library
+        alert(message);
     };
 
     return (
