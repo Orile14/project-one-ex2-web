@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import './Post.css';
 
-const CreatePost = ({ username, timestamp, originalContent, likes, comments, image }) => {
-  console.log("Original content:", originalContent); // Add this line to debug
-
+const CreatePost = ({ id, username, timestamp, originalContent, likes, comments, image }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -28,17 +26,17 @@ const CreatePost = ({ username, timestamp, originalContent, likes, comments, ima
   };
 
   const handleChange = (event) => {
-        setEditableContent(event.target.value);
-    };
+    setEditableContent(event.target.value);
+  };
 
   if (isRemoved) {
     return null;
-  } 
+  }
 
 
   return (
     isRemoved ? null :
-          <div className="post">
+      <div className="post">
         <div className="post-header">
           <div className="post-header-info">
             <p className="username">{username}</p>
@@ -55,11 +53,11 @@ const CreatePost = ({ username, timestamp, originalContent, likes, comments, ima
         </div>
 
         <div className="post-content">
-                {isEditing ? (
-                    <textarea value={editableContent} onChange={handleChange} className="edit-textarea" />
-                ) : (
-                    <p>{editableContent}</p>
-                )}
+          {isEditing ? (
+            <textarea value={editableContent} onChange={handleChange} className="edit-textarea" />
+          ) : (
+            <p>{editableContent}</p>
+          )}
           {image && <img src={image} alt="Post Image" className="post-image" />}
         </div>
 
