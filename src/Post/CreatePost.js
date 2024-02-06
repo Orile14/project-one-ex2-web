@@ -1,46 +1,51 @@
 // Post.js
-import React from 'react';
+import React, { useState } from 'react';
 import './Post.css';
-import { useState } from 'react';
+
 const CreatePost = ({ username, timestamp, content, likes, comments, image }) => {
   const [isLiked, setIsLiked] = useState(false);
+  const [isRemoved, setIsRemoved] = useState(false);
 
-  const handle = () => {
+  const Remove = () => {
+    setIsRemoved(true);
+  };
+
+  const handleLike = () => {
     setIsLiked(!isLiked);
   };
-  return (
-    <div className="post">
-      <div className="post-header">
-        <p className="username">{username}</p>
-        <p className="timestamp">{timestamp}</p>
-      </div>
-      <div className="post-content">
-        <p>{content}</p>
-        {image && <img src={image} alt="Post Image" className="post-image" />}
-      </div>
-      <div className="post-footer">
 
-        <div class="buttons">
-          <button className="like-button" onClick={handle}>
-            <i class="bi bi-hand-thumbs-up"></i>
-            &nbsp; {/* Add space here */}
-            Likes: {isLiked ? likes + 1 : likes}
+  return (
+    isRemoved ? null :
+      <div className="post">
+        <div className="post-header">
+          <p className="username">{username}</p>
+          <p className="timestamp">{timestamp}</p>
+          <button className="x-button" onClick={Remove}><i className="bi bi-x-lg"></i></button>
+          <i className="bi bi-pencil-square Edit" ></i>
+        </div>
+
+        <div className="post-content">
+          <p>{content}</p>
+          {image && <img src={image} alt="Post Image" className="post-image" />}
+        </div>
+
+        <div className="buttons">
+          <button className="like-button" onClick={handleLike}>
+            <i className="bi bi-hand-thumbs-up"></i>
+            &nbsp; Likes: {isLiked ? likes + 1 : likes}
           </button>
 
           <button className="comment-button">
-            <i class="bi bi-chat"></i>
-            &nbsp; {/* Add space here */}
-            Comments: {comments.length}
+            <i className="bi bi-chat"></i>
+            &nbsp; Comments: {comments.length}
           </button>
 
           <button className="share-button">
-            <i class="bi bi-send"></i>
-            &nbsp; {/* Add space here */}
-            Share
+            <i className="bi bi-send"></i>
+            &nbsp; Share
           </button>
         </div>
       </div>
-    </div>
   );
 };
 

@@ -77,3 +77,12 @@ button:hover {
     cursor: pointer;
     background-color: #e7e9ec;
 }
+
+.Edit:hover{
+    cursor: pointer;
+    background-color: #e7e9ec;
+}
+.x-button:hover{
+    cursor: pointer;
+    background-color: #e7e9ec;
+}
