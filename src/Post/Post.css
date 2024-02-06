@@ -72,14 +72,14 @@
     margin: 5px;
 }
 
-button {
+.button {
     border: none;
     outline: none;
 }
 
-button:hover {
-    cursor: pointer;
-    background-color: #e7e9ec;
+.Button:hover {
+    background-color: var(--bs-primary);
+    color: black;
 }
 
 .Edit:hover{

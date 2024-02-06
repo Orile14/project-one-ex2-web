@@ -45,5 +45,6 @@
 }
 
 .postButton:hover {
-    color: var(--bs-primary);
+    background-color: var(--bs-primary);
+    color: black;
 }

@@ -17,7 +17,7 @@ const PostBox = ({addPost}) => {
                 <input type="text"  ref={input}  placeholder="What's on your mind?" className="postInput"/>
             </div>
             <div className="postBox_bottom">
-                <button className="addPost" onClick={add}>Post</button>
+                <button className="postButton" onClick={add}>Post</button>
                 <button className="postButton">Tag Friends</button>
                 <button className="postButton">Feeling/Activity</button>
             </div>
