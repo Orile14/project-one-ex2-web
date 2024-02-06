@@ -17,12 +17,16 @@
     justify-content: center;
 }
 
-/* Post header styles */
 .post-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+}
+
+.post-header-actions {
+    display: flex;
+    align-items: center;
 }
 
 .username {
@@ -82,7 +86,28 @@ button:hover {
     cursor: pointer;
     background-color: #e7e9ec;
 }
-.x-button:hover{
-    cursor: pointer;
-    background-color: #e7e9ec;
+.x-button {
+    margin-top: 10px;
 }
+.x-button, .Edit {
+    background-color: transparent; /* No background color */
+    border: none; /* Remove border */
+    color: #65676b; /* Facebook-like gray color */
+    padding: 3px;
+    font-size: 1.2em; /* Adjust the size of the icon as needed */
+    border-radius: 10%; /* Slightly rounded */
+}
+
+.x-button:hover, .Edit:hover {
+    background-color: #f0f2f5; /* Slight highlight on hover */
+    cursor: pointer;
+}
+
+.edit-textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  

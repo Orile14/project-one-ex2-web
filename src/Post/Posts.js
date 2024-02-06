@@ -1,17 +1,21 @@
 // Posts.js
-import React from 'react';
+import React, { useState } from 'react';
 import CreatePost from './CreatePost';
 import "./Post.css";
-import postsList from './PostsList';
+import postsList from './PostsList'; // Assuming this is your provided data
 
 const Posts = () => {
+    const [posts, setPosts] = useState(postsList);
+
     return (
         <div className="posts">
-            {postsList.map((post) => (
+            {posts.map((post, index) => (
                 <CreatePost
+                    
+                    id={index} // Using index as an id, but ideally use a unique id
                     username={post.username}
                     timestamp={post.timestamp}
-                    content={post.content}
+                    originalContent={post.content}
                     likes={post.likes}
                     comments={post.comments}
                     image={post.image}
@@ -19,6 +23,6 @@ const Posts = () => {
             ))}
         </div>
     );
-}
+};
 
 export default Posts;

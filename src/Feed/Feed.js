@@ -17,10 +17,12 @@ const Feed = () => {
         setIsSearchPerformed(true);
     }
 
+    
+
     return (
+
         <div>
             <NavigationBar doSearch={doSearch} />
-        
             <div className="row">
                 <div className="col-2">
                     <LeftMenu />
