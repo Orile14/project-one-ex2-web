@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Post.css';
 import Comment from '../Comment/Comment';
-
+import ShareMenu from './ShareMenu';
 const CreatePost = ({key, id, username, timestamp, originalContent, likes, comments, image }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
@@ -68,10 +68,9 @@ const CreatePost = ({key, id, username, timestamp, originalContent, likes, comme
           </button>
           <Comment postId={id} comments={comments} className="comment-button" />
 
-          <button className="share-button">
-            <i className="bi bi-send"></i>
-            &nbsp; Share
-          </button>
+          <ShareMenu className="share-button" >
+            
+          </ShareMenu>
         </div>
       </div>
   );
