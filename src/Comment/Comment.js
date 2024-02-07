@@ -1,16 +1,39 @@
 import React, { useState } from 'react'
 import CommentsCreate from './CommentsCreate';
-
+import { useRef } from 'react';
+import User from '../signUp/user';
 const Comment = ({ comments, postId }) => {
-    const modalId = `commentsModal-${postId}`; 
+
+    const user =User.allUsers[0];
+    let username;
+    {user == null ? username = "User": username = user.getName()}
+
+
+    const [isAdded, setIsAdded] = useState(false);
+    const input = useRef(null);
+
+    const modalId = `commentsModal-${postId}`;
 
     const [newComments, setNewComments] = useState(comments);
-    
+
     const deleteComment = (id) => {
         const updatedComments = newComments.filter((comment) => comment.id !== id);
         setNewComments(updatedComments);
     }
-
+    const Add = () => {
+        setIsAdded(true);
+    }
+    const AddComment = () => {
+        const comment = {
+            id: newComments.length + 1,
+            username: username,
+            timestamp: "Just now",
+            content: input.current.value
+        };
+        setNewComments([...newComments, comment]);
+        input.current.value = "";
+        setIsAdded(false);
+    }
     return (
         <div>
             <button className="button" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
@@ -28,7 +51,7 @@ const Comment = ({ comments, postId }) => {
                         <div className="modal-body">
                             {newComments.map((comment) => (
                                 <CommentsCreate
-                                    key={comment.id} 
+                                    key={comment.id}
                                     id={comment.id}
                                     username={comment.username}
                                     timestamp={comment.timestamp}
@@ -37,8 +60,17 @@ const Comment = ({ comments, postId }) => {
                                 />
                             ))}
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" className="btn btn-primary">Save changes</button>
+                                {isAdded ? (
+                                    <>
+                                        <input ref={input} className="input" placeholder="What's on your mind?" />
+                                        <button type="button" className="btn btn-primary" onClick={AddComment} >Send</button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" className="btn btn-primary" onClick={Add}>Add comment</button>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>

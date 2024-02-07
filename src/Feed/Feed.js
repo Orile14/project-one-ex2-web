@@ -6,8 +6,12 @@ import Posts from '../Post/Posts';
 import PostBox from '../PostBox/PostBox';
 import FriendList from '../FriendList/FriendList';
 import PostList from '../Post/PostsList';
+import User from '../signUp/user';
 
 const Feed = () => {
+    const user = User.allUsers[0];
+    let username;
+    {user == null ? username = "User": username = user.getName()}
 
     const [posts, setPosts] = useState(PostList);
     const [isUpdated, setIsUpdated] = useState(false);
@@ -15,7 +19,7 @@ const Feed = () => {
     const addPost = (postContent) => {
         const newPost = {
             id: posts.length,
-            username: "username", 
+            username: username, 
             timestamp: "Just now",
             content: postContent,
             likes: 0,
@@ -38,7 +42,6 @@ const Feed = () => {
                     <LeftMenu />
                 </div>
                 <div className="col-8 d-flex flex-column justify-content-start align-items-center">
-                    {console.log("asdasdasdasdasdasd", posts)}
                     <PostBox addPost={addPost} />
                     <Posts posts={posts} />
                 </div>
