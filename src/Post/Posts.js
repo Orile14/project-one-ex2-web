@@ -1,5 +1,5 @@
 // Posts.js
-import React, { useState } from 'react';
+import React from 'react';
 import CreatePost from './CreatePost';
 import "./Post.css";
 

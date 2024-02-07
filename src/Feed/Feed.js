@@ -6,7 +6,6 @@ import Posts from '../Post/Posts';
 import PostBox from '../PostBox/PostBox';
 import FriendList from '../FriendList/FriendList';
 import PostList from '../Post/PostsList';
-import PostResult from '../PostsResult/PostsResult';
 
 const Feed = () => {
 

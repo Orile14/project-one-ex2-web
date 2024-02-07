@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Post.css';
+import Comment from '../Comment/Comment';
 
 const CreatePost = ({key, id, username, timestamp, originalContent, likes, comments, image }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -21,8 +22,7 @@ const CreatePost = ({key, id, username, timestamp, originalContent, likes, comme
 
   const handleSave = () => {
     setIsEditing(false);
-    // Here you would typically update the post content in your backend
-    // For now, we're just updating the local state
+
   };
 
   const handleChange = (event) => {
@@ -66,11 +66,7 @@ const CreatePost = ({key, id, username, timestamp, originalContent, likes, comme
             <i className="bi bi-hand-thumbs-up"></i>
             &nbsp; Likes: {isLiked ? likes + 1 : likes}
           </button>
-
-          <button className="comment-button">
-            <i className="bi bi-chat"></i>
-            &nbsp; Comments: {comments.length}
-          </button>
+          <Comment comments={comments} className="comment-button" />
 
           <button className="share-button">
             <i className="bi bi-send"></i>
