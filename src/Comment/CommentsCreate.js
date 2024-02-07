@@ -1,8 +1,24 @@
 import React, { useState } from 'react';
 import './Comment.css';
 
-const CommentsCreate = ({ id, username, timestamp, content, deleteComment }) => { 
-    
+const CommentsCreate = ({ id, username, timestamp, content, deleteComment }) => {
+    const [isRemoved, setIsRemoved] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editableContent, setEditableContent] = useState(content);
+
+    const handleEdit = () => {
+        setIsEditing(true);
+    };
+
+    const handleSave = () => {
+        setIsEditing(false);
+
+    };
+
+    const handleChange = (event) => {
+        setEditableContent(event.target.value);
+    };
+
     const Remove = () => {
         deleteComment(id);
     };
@@ -14,16 +30,25 @@ const CommentsCreate = ({ id, username, timestamp, content, deleteComment }) => 
                     <p className="username">{username}</p>
                     <p className="timestamp">{timestamp}</p>
                 </div>
-                <i className="bi bi-pencil-square Edit"></i>
-                <button className="x-button" onClick={Remove}>
-                    <i className="bi bi-x-lg"></i>
-                </button>
+                <div className="post-header-actions">
+                    {isEditing ? (
+                        <button onClick={handleSave}>Save</button>
+                    ) : (
+                        <i className="bi bi-pencil-square Edit" onClick={handleEdit}></i>
+                    )}
+                    <button className="x-button" onClick={Remove}><i className="bi bi-x-lg"></i></button>
+                </div>
             </div>
             <div className="modal-body">
-                <p>{content}</p>
+                <div className="post-content">
+                    {isEditing ? (
+                        <textarea value={editableContent} onChange={handleChange} className="edit-textarea" />
+                    ) : (
+                        <p>{editableContent}</p>
+                    )}
+                </div>
             </div>
         </div>
     );
 };
-
 export default CommentsCreate;
