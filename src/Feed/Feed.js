@@ -10,11 +10,12 @@ import PostResult from '../PostsResult/PostsResult';
 
 const Feed = () => {
 
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState(PostList);
     const [isUpdated, setIsUpdated] = useState(false);
 
     const addPost = (postContent) => {
         const newPost = {
+            id: posts.length,
             username: "username", 
             timestamp: "Just now",
             content: postContent,
@@ -24,8 +25,7 @@ const Feed = () => {
         };
         
         setIsUpdated(true);
-        
-        setPosts([newPost, ...posts]);  
+        setPosts([...posts, newPost]);
     }
 
 
@@ -39,11 +39,9 @@ const Feed = () => {
                     <LeftMenu />
                 </div>
                 <div className="col-8 d-flex flex-column justify-content-start align-items-center">
+                    {console.log("asdasdasdasdasdasd", posts)}
                     <PostBox addPost={addPost} />
-                    {isUpdated ? <Posts posts={posts} /> : null}
-                    <Posts posts={PostList} />
-                    
-                    
+                    <Posts posts={posts} />
                 </div>
                 <div className="col-2">
                     <FriendList />

@@ -3,12 +3,16 @@ import React, { useState } from 'react';
 import CreatePost from './CreatePost';
 import "./Post.css";
 
-const Posts = ({posts}) => {
-   
+const Posts = ({ posts }) => {
+    // Sort posts in descending order based on their IDs
+    const sortedPosts = posts.slice().sort((a, b) => b.id - a.id);
+
     return (
         <div className="posts">
-            {posts.map((post) => (
+            {sortedPosts.map((post) => (
                 <CreatePost
+                    key={post.id}
+                    id={post.id}
                     username={post.username}
                     timestamp={post.timestamp}
                     originalContent={post.content}

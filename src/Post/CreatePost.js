@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Post.css';
 
-const CreatePost = ({ id, username, timestamp, originalContent, likes, comments, image }) => {
+const CreatePost = ({key, id, username, timestamp, originalContent, likes, comments, image }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
   const [isEditing, setIsEditing] = useState(false);

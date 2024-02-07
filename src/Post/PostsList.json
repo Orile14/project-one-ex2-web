@@ -1,5 +1,6 @@
 [
     {
+      "id": 0,
       "username": "Alice",
       "timestamp": "3 hours ago",
       "content": "Lovely day at the park!",
@@ -19,6 +20,7 @@
       "image": ""
     },
     {
+      "id": 1,
       "username": "Bob",
       "timestamp": "1 day ago",
       "content": "Just finished reading a great book.",
@@ -38,6 +40,7 @@
       "image": ""
     },
     {
+      "id": 2,
       "username": "Charlie",
       "timestamp": "2 days ago",
       "content": "Coding all night!",
@@ -57,6 +60,7 @@
       "image": "placeholder_IMG_8578"
     },
     {
+      "id": 3,
       "username": "David",
       "timestamp": "4 days ago",
       "content": "Exploring new recipes in the kitchen.",
@@ -76,6 +80,7 @@
       "image": "placeholder_IMG_8579"
     },
     {
+      "id": 4,
       "username": "Eve",
       "timestamp": "1 week ago",
       "content": "Relaxing on the beach.",
@@ -95,6 +100,7 @@
       "image": "placeholder_imgbeach"
     },
     {
+      "id": 5,
       "username": "Frank",
       "timestamp": "2 weeks ago",
       "content": "Hiking in the mountains.",
@@ -112,5 +118,86 @@
         }
       ],
       "image": "IMG_8581"
+    },
+    {
+      "id": 6,
+      "username": "Moshe",
+      "timestamp": "1 hour ago",
+      "content": "Enjoying a new hobby!",
+      "likes": 10,
+      "comments": [
+        {
+          "username": "Commenter3",
+          "timestamp": "30 minutes ago",
+          "content": "That's awesome!"
+        },
+        {
+          "username": "Commenter4",
+          "timestamp": "20 minutes ago",
+          "content": "What are you doing?"
+        }
+      ],
+      "image": ""
+    },
+    {
+      "id": 7,
+      "username": "Nathaniel",
+      "timestamp": "3 hours ago",
+      "content": "Beautiful sunset at the lake.",
+      "likes": 18,
+      "comments": [
+        {
+          "username": "Commenter5",
+          "timestamp": "2 hours ago",
+          "content": "Looks peaceful!"
+        },
+        {
+          "username": "Commenter6",
+          "timestamp": "1 hour ago",
+          "content": "Amazing view!"
+        }
+      ],
+      "image": "placeholder_IMG_8582"
+    },
+    {
+      "id": 8,
+      "username": "Oriki",
+      "timestamp": "5 hours ago",
+      "content": "Trying out new recipes.",
+      "likes": 22,
+      "comments": [
+        {
+          "username": "Commenter7",
+          "timestamp": "4 hours ago",
+          "content": "Can you share the recipe?"
+        },
+        {
+          "username": "Commenter8",
+          "timestamp": "3 hours ago",
+          "content": "That looks delicious!"
+        }
+      ],
+      "image": "placeholder_IMG_8583"
+    },
+    {
+      "id": 9,
+      "username": "Eitanosh",
+      "timestamp": "1 day ago",
+      "content": "Just completed a marathon!",
+      "likes": 35,
+      "comments": [
+        {
+          "username": "Commenter9",
+          "timestamp": "20 hours ago",
+          "content": "Incredible achievement!"
+        },
+        {
+          "username": "Commenter10",
+          "timestamp": "18 hours ago",
+          "content": "How did you train for it?"
+        }
+      ],
+      "image": "placeholder_IMG_8584"
     }
+
   ]

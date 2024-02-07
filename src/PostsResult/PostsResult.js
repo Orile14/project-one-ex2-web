@@ -3,8 +3,8 @@ import CreatePost from '../Post/CreatePost';
 
 
 function PostsResult({ posts }) {
-    const renderedPosts = posts.map((post, index) => (
-        <CreatePost key={index} {...post} />
+    const renderedPosts = posts.map((post) => (
+        <CreatePost key={post.id} {...post} />
     ));
     
 
