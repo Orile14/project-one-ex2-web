@@ -11,6 +11,8 @@ import User from '../signUp/user';
 const Feed = () => {
     const user = User.allUsers[0];
     let username;
+    let profile;
+    {user == null ? profile = "": profile = user.getImage()}
     {user == null ? username = "User": username = user.getName()}
 
     const [posts, setPosts] = useState(PostList);
@@ -24,7 +26,8 @@ const Feed = () => {
             content: postContent,
             likes: 0,
             comments: [],
-            image: ""
+            image: "",
+            profile: profile
         };
         
         setIsUpdated(true);

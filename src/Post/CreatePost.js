@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Post.css';
 import Comment from '../Comment/Comment';
 import ShareMenu from './ShareMenu';
-const CreatePost = ({key, id, username, timestamp, originalContent, likes, comments, image }) => {
+const CreatePost = ({key, id, username, timestamp, originalContent, likes, comments, image,profile }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -39,8 +39,10 @@ const CreatePost = ({key, id, username, timestamp, originalContent, likes, comme
       <div className="post">
         <div className="post-header">
           <div className="post-header-info">
+          <img src = {profile} alt="Post Image" className="profilePic"/>
             <p className="username">{username}</p>
             <p className="timestamp">{timestamp}</p>
+  
           </div>
           <div className="post-header-actions">
             {isEditing ? (

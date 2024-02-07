@@ -9,6 +9,9 @@ class User {
      getName() {
       return this.name;
     }
+    getImage() {
+      return this.image;
+    }
   }
   
   export default User;

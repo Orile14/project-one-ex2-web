@@ -19,7 +19,8 @@
           "content": "I wish I was there!"
         }
       ],
-      "image": ""
+      "image": "/park.jpg",
+      "profile": "/img4.jpg"
     },
     
     {
@@ -42,7 +43,9 @@
           "content": "Great job!"
         }
       ],
-      "image": ""
+      "image": "/book.jpg",
+      "profile": "/img1.jpg"
+
     },
     {
       "id": 2,
@@ -64,7 +67,8 @@
           "content": "What breed?"
         }
       ],
-      "image": ""
+      "image": "/puppy.jpg",
+      "profile": "/img9.jpg"
     },
     {
       "id": 3,
@@ -92,7 +96,9 @@
           "content": "What's the company?"
         }
       ],
-      "image": ""
+      "image": "/job.jpg",
+      "profile": "/img8.jpg"
+
     },
     {
       "id": 4,
@@ -114,7 +120,9 @@
           "content": "What was your time?"
         }
       ],
-      "image": ""
+      "image": "/marathon.jpg",
+      "profile": "/img7.jpg"
+
     },
     {
       "id": 5,
@@ -142,7 +150,9 @@
           "content": "What's the plan?"
         }
       ],
-      "image": ""
+      "image": "/anniversary.jpg",
+      "profile": "/imgg6.jpg"
+
     },
     {
       "id": 6,
@@ -170,7 +180,9 @@
           "content": "What's the address?"
         }
       ],
-      "image": ""
+      "image":"",
+      "profile": "/img5.jpg"
+
     },
     {
       "id": 7,
@@ -204,7 +216,9 @@
           "content": "Good luck!"
         }
       ],
-      "image": ""
+      "image": "/language.jpg",
+      "profile": "/img4.jpg"
+
     },
     {
       "id": 8,
@@ -238,7 +252,9 @@
           "content": "What's the name of your business?"
         }
       ],
-      "image": ""
+      "image": "/business.jpg",
+      "profile": "/img3.jpg"
+
     },
     {
       "id": 9,
@@ -266,7 +282,9 @@
           "content": "Hope you had a great time!"
         }
       ],
-      "image": ""
+      "image": "/birthday.jpg",
+      "profile": "/img2.jpg"
+
     },
     {
       "id": 10,
@@ -283,7 +301,9 @@
         }
 
       ],
-      "image": ""
+      "image": "/newcountry.jpg",
+      "profile": "/img1.jpg"
+
     }            
 
   ]

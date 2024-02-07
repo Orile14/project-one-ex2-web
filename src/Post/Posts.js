@@ -19,6 +19,7 @@ const Posts = ({ posts }) => {
                     likes={post.likes}
                     comments={post.comments}
                     image={post.image}
+                    profile={post.profile}
                 />
             ))}
         </div>

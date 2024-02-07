@@ -1,9 +1,11 @@
 import React from 'react';
 import { useRef } from 'react'; // Importing the useRef hook
 import './PostBox.css'; // Importing the CSS file for styling
-import IMG from './IMG_8579.jpg'; // Importing the image file
-
+import User from '../signUp/user'; 
 const PostBox = ({addPost}) => {
+    const user = User.allUsers[0];
+    let profile;
+    {user == null ? profile = "": profile = user.getImage()}
     const input = useRef(null);
 
     const add = () => {
@@ -13,7 +15,7 @@ const PostBox = ({addPost}) => {
     return (
         <div className="postBox">
             <div className="postBox_top">
-                <img src = {IMG} alt="profile" className="profilePic"/>
+                <img src = {profile} alt="profile" className="profilePic"/>
                 <input type="text"  ref={input}  placeholder="What's on your mind?" className="postInput"/>
             </div>
             <div className="postBox_bottom">
