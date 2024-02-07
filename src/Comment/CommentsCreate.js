@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import './Comment.css';
 
-const CommentsCreate = ({ id, username, timestamp, content }) => {
-    const [isRemoved, setIsRemoved] = useState(false);
+const CommentsCreate = ({ id, username, timestamp, content, deleteComment }) => { 
+    
     const Remove = () => {
-        setIsRemoved(true);
+        deleteComment(id);
     };
 
     return (
-        isRemoved ? null :
         <div className='container'>
             <div className="post-header">
                 <div className="post-header-info">

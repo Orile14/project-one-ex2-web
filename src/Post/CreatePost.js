@@ -66,7 +66,7 @@ const CreatePost = ({key, id, username, timestamp, originalContent, likes, comme
             <i className="bi bi-hand-thumbs-up"></i>
             &nbsp; Likes: {isLiked ? likes + 1 : likes}
           </button>
-          <Comment comments={comments} className="comment-button" />
+          <Comment postId={id} comments={comments} className="comment-button" />
 
           <button className="share-button">
             <i className="bi bi-send"></i>
