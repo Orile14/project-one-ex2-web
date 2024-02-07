@@ -1,40 +1,53 @@
-body {
-  overflow: auto;
+:root {
+  /* Light Theme */
+  --bg-color-light: #f0f2f5; /* Facebook light background color */
+  --text-color-light: #1c1e21; /* Facebook light text color */
+  --button-bg-light: #1877f2; /* Facebook primary button color */
+  --button-text-light: #ffffff; /* White text on buttons */
+  --input-border-light: #dddfe2; /* Light grey border for inputs */
+  --box-shadow-light: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle box-shadow */
 
+  /* Dark Theme */
+  --bg-color-dark: #18191a; /* Facebook dark background color */
+  --bg-color-soft-dark: #252b32; /* Facebook dark background color */
+  --text-color-dark: #e4e6eb; /* Facebook dark text color */
+  --button-bg-dark: #3a3b3c; /* Darker grey for buttons */
+  --button-text-dark: #ffffff; /* White text on buttons */
+  --input-border-dark: #3e4042; /* Dark grey border for inputs */
+  --box-shadow-dark: 0 4px 8px rgba(0, 0, 0, 0.2); /* Darker box-shadow */
 }
 
 .Login {
   display: flex;
   width: 100%;
-  /* Full width of the viewport */
   height: 100%;
-  /* Full height of the viewport */
-  background-color: #e9e9f2;
-
+  background-color: var(--bg-color-light); /* Using variable for light theme */
+  color: var(--text-color-light); /* Using variable for light theme */
 }
 
-.label-username {
-  width: 400%;
-  /* Adjust this to control the width of the label */
+body[data-theme="dark"] .Login {
+  background-color: var(--bg-color-dark); /* Dark mode background color */
+  color: var(--text-color-dark); /* Dark mode text color */
 }
 
 .content-box {
   position: absolute;
-  background-color: rgb(242, 242, 246);
+  background-color: var(--bg-color-light); /* Using variable for light theme */
   top: 30%;
   right: 10%;
   width: 20%;
-  /* Center the box */
-  /* Adjust this to control the width of the box */
-
   height: auto;
   padding: 20px;
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow-light); /* Using variable for light theme */
   border-radius: 10px;
 }
 
+body[data-theme="dark"] .content-box {
+  background-color: var(--bg-color-soft-dark); /* Dark mode background color */
+  box-shadow: var(--box-shadow-dark); /* Dark mode box-shadow */
+}
+
 #textContainerf {
-  /* Adjust these values based on your layout preferences */
   position: absolute;
   font-size: 600%;
   right: 58%;
@@ -44,13 +57,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgb(24, 119, 242);
+  color: rgb(24, 119, 242); /* Facebook blue color */
   font-weight: bold;
-
 }
 
 #textContainer {
-  /* Adjust these values based on your layout preferences */
   position: absolute;
   left: 10px;
   top: 20px;
@@ -62,11 +73,26 @@ body {
   font-size: 200%;
 }
 
-input,
-button {
+input, button {
   margin-bottom: 10px;
   width: 100%;
   box-sizing: border-box;
   border-radius: 5px;
   padding: 10px;
+  border: 1px solid var(--input-border-light); /* Using variable for light theme */
+}
+
+body[data-theme="dark"] input, body[data-theme="dark"] button {
+  border: 1px solid var(--input-border-dark); 
+  background-color: var(--bg-color-dark); 
+  color: var(--text-color-dark); 
+}
+
+.Toggle {
+  width: fit-content;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 10px;
+  border-radius: 5px;
 }

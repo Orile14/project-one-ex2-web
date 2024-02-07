@@ -1,66 +1,55 @@
-body {
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding: 0;
-  background-color: #f0f2f5; /* Facebook's background color */
+:root {
+  /* Light Theme */
+  --bg-color-light: #f0f2f5; /* Facebook light background color */
+  --text-color-light: #1c1e21; /* Facebook light text color */
+  --button-bg-light: #1877f2; /* Facebook primary button color */
+  --button-text-light: #ffffff; /* White text on buttons */
+  --input-border-light: #dddfe2; /* Light grey border for inputs */
+  --box-shadow-light: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle box-shadow */
+
+  /* Dark Theme */
+  --bg-color-dark: #18191a; /* Facebook dark background color */
+  --text-color-dark: #e4e6eb; /* Facebook dark text color */
+  --button-bg-dark: #3a3b3c; /* Darker grey for buttons */
+  --button-text-dark: #ffffff; /* White text on buttons */
+  --input-border-dark: #3e4042; /* Dark grey border for inputs */
+  --box-shadow-dark: 0 4px 8px rgba(0, 0, 0, 0.2); /* Darker box-shadow */
+}
+
+body[data-theme="light"] {
+  background-color: var(--bg-color-light);
+  color: var(--text-color-light);
+}
+
+body[data-theme="dark"] {
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-dark);
 }
 
 .signin-container {
-  margin-top: 100px; /* Increased top margin */
+  margin-top: 100px;
   margin-right: auto;
   margin-bottom: auto;
   margin-left: auto;
   text-align: center;
-  width: 400px; /* Fixed width for the form */
+  width: 400px;
   padding: 20px;
   border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
   border-radius: 8px;
+  box-shadow: var(--box-shadow-light);
+  background-color: var(--bg-color-light);
+  color: var(--text-color-light);
 }
 
-
-.signin-header {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #1877f2; /* Facebook's blue color */
-}
-
-.signin-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  display: block;
-  color: #65676b; /* Facebook's text color */
-}
-
-input[type="text"],
-input[type="password"],
-input[type="file"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-top: 5px;
-}
-
-input[type="file"] {
-  border: none;
+body[data-theme="dark"] .signin-container {
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-dark);
+  box-shadow: var(--box-shadow-dark);
 }
 
 button {
-  background-color: #1877f2;
-  color: #fff;
+  background-color: var(--button-bg-light);
+  color: var(--button-text-light);
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -70,13 +59,46 @@ button {
   margin-top: 15px;
 }
 
-button:hover {
-  background-color: #1558d6;
+body[data-theme="dark"] button {
+  background-color: var(--button-bg-dark);
+  color: var(--button-text-dark);
 }
 
-img {
-  margin-top: 10px;
-  border-radius: 50%; /* Circular image */
-  max-width: 50%;
-  height: auto;
+/* Add similar styling for input fields, labels, etc., using the defined variables */
+input[type="text"],
+input[type="password"],
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--input-border-light);
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+body[data-theme="dark"] input[type="text"],
+body[data-theme="dark"] input[type="password"],
+body[data-theme="dark"] input[type="file"] {
+  border: 1px solid var(--input-border-dark);
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-dark);
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+  color: var(--text-color-light);
+}
+
+body[data-theme="dark"] label {
+  color: var(--text-color-dark);
+}
+
+.Toggle {
+  width: fit-content;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 10px;
+  border-radius: 5px;
 }
