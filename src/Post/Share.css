@@ -1,4 +1,4 @@
-#commentbutton {
+#share{
     background-color: #f0f2f5;
     border: none;
     padding: 5px 10px;
@@ -9,7 +9,7 @@
     display: inline-block; /* Display the buttons inline */
     width: 190px;
 }
-#commentbutton:hover {
+#share:hover {
     background-color: var(--bs-primary);
     color: black;
 }

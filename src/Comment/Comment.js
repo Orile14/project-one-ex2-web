@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import CommentsCreate from './CommentsCreate';
 import { useRef } from 'react';
 import User from '../signUp/user';
+import './Comment.css';
 const Comment = ({ comments, postId }) => {
 
     const user =User.allUsers[0];
@@ -36,7 +37,7 @@ const Comment = ({ comments, postId }) => {
     }
     return (
         <div>
-            <button className="button" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
+            <button id = "commentbutton"  data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
                 <i className="bi bi-chat"></i>
                 &nbsp; Comments: {newComments.length}
             </button>

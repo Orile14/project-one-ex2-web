@@ -1,7 +1,6 @@
 // Posts.js
 import React from 'react';
 import CreatePost from './CreatePost';
-import "./Posts.css";
 
 const Posts = ({ posts }) => {
     // Sort posts in descending order based on their IDs

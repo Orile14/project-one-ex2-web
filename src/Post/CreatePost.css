@@ -26,8 +26,6 @@
     margin-top: 10px;
   } 
   
-
-  
 .buttons {
     display: flex;
     justify-content: space-evenly;
@@ -36,8 +34,6 @@
     margin-top: 10px;
 }
 
-.share-button,
-.comment-button,
 .like-button {
     background-color: #f0f2f5;
     border: none;
@@ -46,17 +42,14 @@
     font-weight: bold;
     color: gray;
     margin: 5px;
+    display: inline-block; /* Display the buttons inline */
 }
 
-.button {
-    border: none;
-    outline: none;
-}
-
-.Button:hover {
+.like-button:hover {
     background-color: var(--bs-primary);
     color: black;
 }
+
 
 .Edit:hover{
     cursor: pointer;
@@ -74,7 +67,7 @@
     border-radius: 10%; 
 }
 
-.x-button:hover, .Edit:hover {
+.x-button:hover {
     background-color: #f0f2f5; /* Slight highlight on hover */
     cursor: pointer;
 }

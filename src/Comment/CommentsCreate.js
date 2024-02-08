@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Comment.css';
+import './CommentCreate.css';
 
 const CommentsCreate = ({ id, username, timestamp, content, deleteComment }) => {
     const [isRemoved, setIsRemoved] = useState(false);
