@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Post.css';
+import './CreatePost.css';
 import Comment from '../Comment/Comment';
 import ShareMenu from './ShareMenu';
 const CreatePost = ({key, id, username, timestamp, originalContent, likes, comments, image,profile }) => {
@@ -70,9 +70,8 @@ const CreatePost = ({key, id, username, timestamp, originalContent, likes, comme
           </button>
           <Comment postId={id} comments={comments} className="comment-button" />
 
-          <ShareMenu className="share-button" >
+          <ShareMenu className="share-button" />
             
-          </ShareMenu>
         </div>
       </div>
   );
