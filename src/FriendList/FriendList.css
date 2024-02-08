@@ -21,4 +21,8 @@
   .friend-name {
     margin: 0;
   }
-  
+.friend-item:hover{
+    cursor: pointer;
+    background-color: #f0f2f5;
+    border-radius: 3%;
+}  

@@ -9,7 +9,10 @@
     width: 600px; 
     margin: 20px auto; 
 }
-
+.post-header-info:hover{
+    cursor: pointer;
+    border-radius: 3%;
+}
 .post-image {
     max-width: 100%; 
     height: auto; 
