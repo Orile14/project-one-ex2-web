@@ -6,9 +6,24 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
-    background-color: white;
+    background-color: white; /* Light mode background color */
     width: 100%;
     max-width: 600px;
+}
+
+.modal-content {
+    background-color: var(--bg-color-light); /* Light mode background color */
+
+}
+
+body[data-theme="dark"] .modal-content {
+    background-color: var(--bg-color-dark); /* Dark mode background color */
+}
+
+/* Dark Mode styles for container */
+body[data-theme="dark"] .container {
+    background-color: var(--bg-color-dark); /* Dark mode background color */
+    color: var(--text-color-dark); /* Dark mode text color */
 }
 
 .post-header {
@@ -28,14 +43,57 @@
 }
 
 .timestamp {
-    color: gray;
+    color: var(--text-color-light);
     font-size: 0.8em;
 }
 
-.input {
+/* Dark Mode styles for timestamp */
+body[data-theme="dark"] .timestamp {
+    color: var(--text-color-dark); /* Dark mode text color */
+}
 
+.input {
+    background-color: var(--bg-color-light); /* Light mode background */
+    color: var(--text-color-light); /* Light mode text color */
     border: none;
     flex: 1;
     padding: 10px;
     font-size: 16px;
+}
+
+/* Dark Mode styles for input */
+body[data-theme="dark"] .input {
+    background-color: var(--bg-color-soft-dark); /* Dark mode background */
+    color: var(--text-color-dark); /* Dark mode text color */
+}
+
+.post-header-actions {
+    background-color: white; /* Dark mode background color */
+}
+
+body[data-theme="dark"] .post-header-actions {
+    background-color: var(--bg-color-soft-light); /* Light mode background color */
+}
+
+.modal-body {
+    background-color: var(--bg-color-light); /* Dark mode background color */
+}
+
+body[data-theme="dark"] .modal-body {
+    background-color: var(--bg-color-soft-dark); /* Light mode background color */
+}
+
+body[data-theme="dark"] .modal-header {
+    background-color: var(--bg-color-soft-dark); /* Light mode background color */
+}
+
+body[data-theme="dark"] .btn-close {
+    background-color: var(--bg-color-soft-dark); /* Light mode background color */
+    color: white;
+}
+
+/* Dark Mode styles for edit-textarea */
+body[data-theme="dark"] .edit-textarea {
+    background-color: var(--bg-color-soft-dark); /* Dark mode background */
+    
 }

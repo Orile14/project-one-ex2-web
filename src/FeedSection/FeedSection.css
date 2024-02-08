@@ -15,6 +15,8 @@
   height: 100%;
 }
 
+
+
 .feed-item-button {
   width: 60px;
   height: 60px;
@@ -30,15 +32,30 @@
   transition: background-color 0.3s ease; 
 }
 
+/* Dark mode styles for feed item button */
+body[data-theme="dark"] .feed-item-button {
+  background-color: var(--bg-color-dark);
+  border: none; /* Remove border */
+}
+
 .feed-item-button:hover {
   background-color: lightgray;
 }
 
+body[data-theme="dark"] .feed-item-button:hover {
+  background-color: var(--button-bg-dark);
+}
 
 .feed-item-button.clicked {
   color: var(--bs-primary);
   border-bottom: 3px solid var(--bs-primary);
 }
+
+body[data-theme="dark"] .feed-item-icon.clicked {
+  color: var(--bs-primary);
+  border-bottom: 3px solid var(--bs-primary);
+}
+
 .feed-item-icon.clicked {
   color: var(--bs-primary);
 }

@@ -1,5 +1,5 @@
 #share{
-    background-color: #f0f2f5;
+    background-color: var(--button-bg-light);
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
@@ -9,7 +9,15 @@
     display: inline-block; /* Display the buttons inline */
     width: 190px;
 }
+body[data-theme="dark"] #share {
+    background-color: var(--bg-color-dark); /* Dark mode background */
+    color: var(--button-text-dark); /* Dark mode text color */
+}
 #share:hover {
-    background-color: var(--bs-primary);
+    background-color: var(--button-bg-light);
     color: black;
+}
+body[data-theme="dark"] #share:hover {
+    background-color: var(--button-bg-dark);
+    color: white;
 }

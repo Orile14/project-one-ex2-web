@@ -1,6 +1,6 @@
 /* Main post container */
 .post {
-    background-color: #fff;
+    background-color: white;
     margin-bottom: 20px;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -8,6 +8,11 @@
     max-width: 600px; 
     width: 600px; 
     margin: 20px auto; 
+}
+
+body[data-theme="dark"] .post {
+    background-color: var(--bg-color-soft-dark); /* Dark mode background color */
+    color: var(--text-color-dark); /* Dark mode text color */
 }
 .post-header-info:hover{
     cursor: pointer;
@@ -27,7 +32,16 @@
     border-radius: 5px;
     padding: 10px;
     margin-top: 10px;
+    background-color: var(--bg-color-light); /* Light mode background */
+    color: var(--text-color-light); /* Light mode text color */
   } 
+
+  /* Dark Mode styles for edit-textarea */
+body[data-theme="dark"] .edit-textarea {
+    background-color: var(--bg-color-dark); /* Dark mode background */
+    color: var(--text-color-dark); /* Dark mode text color */
+    border-color: var(--input-border-dark); /* Dark mode border color */
+}
   
 .buttons {
     display: flex;
@@ -38,7 +52,7 @@
 }
 
 .like-button {
-    background-color: #f0f2f5;
+    background-color: var(--button-bg-light);
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
@@ -48,30 +62,69 @@
     display: inline-block; /* Display the buttons inline */
 }
 
+/* Dark Mode styles for like-button */
+body[data-theme="dark"] .like-button {
+    background-color: var(--bg-color-dark); /* Dark mode background */
+    color: var(--button-text-dark); /* Dark mode text color */
+}
+
 .like-button:hover {
-    background-color: var(--bs-primary);
+    background-color: var(--button-bg-light);
     color: black;
 }
 
+body[data-theme="dark"] .like-button:hover {
+    background-color: var(--button-bg-dark);
+    color: white;
+}
 
-.Edit:hover{
-    cursor: pointer;
-    background-color: #e7e9ec;
-}
 .x-button {
-    margin-top: 10px;
-}
-.x-button, .Edit {
-    background-color: transparent; 
+    background-color: white; 
     border: none; 
     color: #65676b;
+    margin: 3px;
     padding: 3px;
     font-size: 1.2em; 
     border-radius: 10%; 
 }
 
+body[data-theme="dark"] .x-button {
+    background-color: transparent; /* Dark mode background color */
+    border: var(--input-border-dark);
+}
+
 .x-button:hover {
     background-color: #f0f2f5; /* Slight highlight on hover */
     cursor: pointer;
+}
+
+body[data-theme="dark"] .x-button:hover {
+    background-color: #3a3b3d; /* Slight highlight on hover */
+    color: white; /* Change text color on hover */
+}
+
+.Edit {
+    background-color: transparent;
+    border: none; 
+    color: #65676b;
+    padding: 3px;
+    font-size: 1.2em; 
+    border-radius: 10%;
+}
+
+body[data-theme="dark"] .Edit {
+    background-color: transparent;
+    color: var(--text-color-dark); /* Dark mode text color */
+    border: var(--input-border-dark);
+}
+
+.Edit:hover {
+    background-color: #f0f2f5; /* Slight highlight on hover */
+    cursor: pointer;
+}
+
+body[data-theme="dark"] .Edit:hover {
+    background-color: #3a3b3d; /* Slight highlight on hover */
+    color: white; /* Change text color on hover */
 }
 

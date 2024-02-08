@@ -18,7 +18,7 @@ const PostBox = ({addPost}) => {
                 <img src = {profile} alt="profile" className="profilePic"/>
                 <input type="text"  ref={input}  placeholder="What's on your mind?" className="postInput"/>
             </div>
-            <div className="postBox_bottom">
+            <div className="postBox_buttons">
                 <button className="postButton" onClick={add}>Post</button>
                 <button className="postButton">Tag Friends</button>
                 <button className="postButton">Feeling/Activity</button>
