@@ -30,7 +30,7 @@ body[data-theme="dark"] .circular-container {
   color: var(--text-color-dark); /* Dark text color */
 }
 .option-section-button {
-  height: 60px;
+  height: 58px;
   border: none;
   background-color: white;
   text-align: center;

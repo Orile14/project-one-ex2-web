@@ -1,4 +1,4 @@
-body[data-theme="light"] {
+  body[data-theme="light"] {
   background-color: var(--bg-color-light);
   color: var(--text-color-light);
 }
@@ -67,6 +67,8 @@ body[data-theme="dark"] label {
 }
 
 .Toggle {
+  background-color: var(--button-bg-light);
+  color: black;
   width: fit-content;
   position: absolute;
   right: 10px;
@@ -75,9 +77,24 @@ body[data-theme="dark"] label {
   border-radius: 5px;
 }
 
+body[data-theme="dark"] .Toggle {
+  background-color: var(--button-bg-dark);
+  color: var(--button-text-dark);
+}
+
+.Toggle:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+body[data-theme="dark"] .Toggle:hover {
+  background-color: var(--bg-color-dark);
+  color: var(--button-text-dark);
+}
+
 #submit {
   background-color: var(--button-bg-light);
-  color: var(--button-text-light);
+  color: black;
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -86,8 +103,18 @@ body[data-theme="dark"] label {
   font-size: 16px;
   margin-top: 15px;
 }
+
+body[data-theme="dark"] #submit {
+  background-color: var(--button-bg-dark);
+  color: var(--button-text-dark);
+}
+
 #submit:hover {
-  background-color:var(--button-bg-light);
+  background-color: lightgray;
   color:black;
-  font-weight: bold;
+}
+
+body[data-theme="dark"] #submit:hover {
+  background-color: var(--bg-color-dark);
+  color: var(--button-text-dark);
 }

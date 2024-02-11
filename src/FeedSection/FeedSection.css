@@ -19,7 +19,7 @@
 
 .feed-item-button {
   width: 60px;
-  height: 60px;
+  height: 58px;
   background-color: white;
   border: none;
   text-align: center;
@@ -48,14 +48,14 @@ body[data-theme="dark"] .feed-item-button:hover {
 
 .feed-item-button.clicked {
   color: var(--bs-primary);
-  border-bottom: 3px solid var(--bs-primary);
 }
 
 body[data-theme="dark"] .feed-item-icon.clicked {
   color: var(--bs-primary);
-  border-bottom: 3px solid var(--bs-primary);
 }
 
 .feed-item-icon.clicked {
   color: var(--bs-primary);
+  border-bottom: 3px solid var(--bs-primary);
+
 }

@@ -48,12 +48,6 @@ body[data-theme="dark"] .navbar {
   color: var(--bs-primary);
 }
 
-/* Search Form */
-.search-form {
-  margin-left: 5px;
-  margin-top: 15px;
-}
-
 /* Dark Theme Search Form */
 [data-theme="dark"] .search-form {
   background-color: var(--bg-color-dark);
@@ -62,7 +56,11 @@ body[data-theme="dark"] .navbar {
 
 /* Theme Toggle Button */
 .toggle-theme-btn {
-  margin-left: 5px;
+  background-color: var(--button-bg-light);
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
   width: fit-content;
   padding: 5px 10px;
   border-radius: 5px;
@@ -73,12 +71,24 @@ body[data-theme="dark"] .navbar {
 
 /* Dark Theme Toggle Button */
 [data-theme="dark"] .toggle-theme-btn {
+  background-color: var(--button-bg-dark);
+  color: var(--button-text-dark);
+}
+
+.toggle-theme-btn:hover {
+  background-color: lightgray;
+}
+
+/* Dark Theme Toggle Button Hover */
+[data-theme="dark"] .toggle-theme-btn:hover {
   background-color: var(--bg-color-dark);
   color: var(--button-text-dark);
 }
 
 /* Search Input */
 .search-input {
+  margin-top: 5px;
+  margin-bottom: 5px;
   width: 100%;
   width: 180px; /* Should this be 'max-width' instead of 'width'? */
   border-radius: 20px;
