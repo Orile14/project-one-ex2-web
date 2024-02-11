@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './CreatePost.css';
 import Comment from '../Comment/Comment';
 import ShareMenu from './ShareMenu';
-const CreatePost = ({key, id, username, timestamp, originalContent, likes, comments, image,profile }) => {
+const CreatePost = ({ id, username, timestamp, originalContent, likes, comments, image, profile }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
   const [isEditing, setIsEditing] = useState(false);

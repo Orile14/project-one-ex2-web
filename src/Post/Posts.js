@@ -8,9 +8,9 @@ const Posts = ({ posts }) => {
 
     return (
         <div className="posts">
-            {sortedPosts.map((post) => (
+            {sortedPosts.map(post => (
                 <CreatePost
-                    key={post.id}
+                    key={post.id} // key is used here
                     id={post.id}
                     username={post.username}
                     timestamp={post.timestamp}
