@@ -6,14 +6,14 @@ import { ThemeContext } from '../ThemeContext/ThemeContext';
 import '@testing-library/jest-dom';
 
 describe('Feed Component', () => {
-  test('new post should be added and displayed in feed', () => {
+  test('new post should be added and then removed from the feed', () => {
     const mockThemeContextValue = {
       theme: 'light',
       toggleTheme: jest.fn(),
     };
 
-    // Wrap Feed component in MemoryRouter and ThemeContext.Provider
-    render(
+    // Wrap Feed component in BrowserRouter and ThemeContext.Provider
+    const { container } = render(
       <BrowserRouter>
         <ThemeContext.Provider value={mockThemeContextValue}>
           <Feed />
@@ -33,7 +33,13 @@ describe('Feed Component', () => {
     fireEvent.click(postButton);
 
     // Verify that the post appears in the feed
-    const addedPost = screen.getByText(testPostContent);
-    expect(addedPost).toBeInTheDocument();
+    expect(screen.getByText(testPostContent)).toBeInTheDocument();
+
+    // Simulate removing the post using container.querySelector
+    const removeButton = container.querySelector('.x-button');
+    fireEvent.click(removeButton);
+
+    // Verify that the post is no longer displayed
+    expect(screen.queryByText(testPostContent)).not.toBeInTheDocument();
   });
 });
