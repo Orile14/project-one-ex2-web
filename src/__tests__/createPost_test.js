@@ -30,7 +30,7 @@ describe('CreatePost Component', () => {
     const saveButton = screen.getByText('Save');
     fireEvent.click(saveButton);
 
-     // Save the changes
+     // Exit edit mode
     const closeButton = screen.getByText('Close');
     fireEvent.click(closeButton);
 

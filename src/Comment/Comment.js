@@ -37,7 +37,7 @@ const Comment = ({ comments, postId }) => {
     }
     return (
         <div>
-            <button id = "commentbutton"  data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
+            <button className="commentButton" id = "commentbutton"  data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
                 <i className="bi bi-chat"></i>
                 &nbsp; Comments: {newComments.length}
             </button>
@@ -47,7 +47,7 @@ const Comment = ({ comments, postId }) => {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5" id={`${modalId}Label`}>Comments List</h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" className="btn-close CloseEditMode" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
                             {newComments.map((comment) => (
@@ -63,13 +63,13 @@ const Comment = ({ comments, postId }) => {
                             <div className="modal-footer">
                                 {isAdded ? (
                                     <>
-                                        <input ref={input} className="input" placeholder="What's on your mind?" />
+                                        <input ref={input} className="input" placeholder="add a comment..." />
                                         <button type="button" className="btn btn-primary" onClick={AddComment} >Send</button>
                                     </>
                                 ) : (
                                     <>
                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" className="btn btn-primary" onClick={Add}>Add comment</button>
+                                        <button type="button" className="addComment btn btn-primary" onClick={Add}>Add comment</button>
                                     </>
                                 )}
                             </div>
