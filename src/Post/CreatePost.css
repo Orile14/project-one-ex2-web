@@ -26,6 +26,11 @@ body[data-theme="dark"] .post {
     display: block; 
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
 }
+#save:hover{
+    cursor: pointer;
+    background-color: #f0f2f5;
+    color: black;
+}
 .edit-textarea {
     width: 100%;
     border: 1px solid #ccc;
@@ -94,7 +99,7 @@ body[data-theme="dark"] .x-button {
 }
 
 .x-button:hover {
-    background-color: #f0f2f5; /* Slight highlight on hover */
+    background-color: #f5f2f0; /* Slight highlight on hover */
     cursor: pointer;
 }
 

@@ -31,3 +31,6 @@
 body[data-theme="dark"] .row {
     background-color: var(--bg-color-dark); /* Dark mode background color */
 }
+.Feed{
+    overflow: hidden;
+}

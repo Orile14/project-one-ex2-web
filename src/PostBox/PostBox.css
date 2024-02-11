@@ -48,6 +48,9 @@ body[data-theme="dark"] .postInput {
 }
 
 .postButton {
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    width:100%;
     background-color: var(--button-bg-light); 
     border: none;
     padding: 10px 20px;
@@ -71,4 +74,11 @@ body[data-theme="dark"] .postButton {
 body[data-theme="dark"] .postButton:hover {
     background-color: var(--bs-primary); /* Dark mode hover background */
     color: var(--button-text-dark-hover); /* Dark mode hover text color */
+}
+.selectedImage{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

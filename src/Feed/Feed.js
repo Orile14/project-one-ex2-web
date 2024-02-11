@@ -18,27 +18,25 @@ const Feed = () => {
     const [posts, setPosts] = useState(PostList);
     const [isUpdated, setIsUpdated] = useState(false);
 
-    const addPost = (postContent) => {
+    const addPost = (postContent, image) => {
         const newPost = {
             id: posts.length,
-            username: username, 
+            username: username,
             timestamp: "Just now",
             content: postContent,
             likes: 0,
             comments: [],
-            image: "",
+            image: image,
             profile: profile
         };
-        
-        setIsUpdated(true);
-        setPosts([...posts, newPost]);
-    }
 
+        setPosts([...posts, newPost]);
+    };
 
     return (
         
     
-        <div>
+        <div className='Feed'>
             <NavigationBar />
             <div className="row">
                 <div className="col-2">

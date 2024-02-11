@@ -7,6 +7,8 @@ const CreatePost = ({key, id, username, timestamp, originalContent, likes, comme
   const [isRemoved, setIsRemoved] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editableContent, setEditableContent] = useState(originalContent);
+  const [editableImage, setEditableImage] = useState(image);
+
 
   const Remove = () => {
     setIsRemoved(true);
@@ -32,6 +34,20 @@ const CreatePost = ({key, id, username, timestamp, originalContent, likes, comme
   if (isRemoved) {
     return null;
   }
+  const handlleImage = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setEditableImage(reader.result); 
+    };
+    reader.readAsDataURL(file);
+  };
+
+
+  if (isRemoved) {
+    return null;
+  }
+
 
 
   return (
@@ -46,7 +62,7 @@ const CreatePost = ({key, id, username, timestamp, originalContent, likes, comme
           </div>
           <div className="post-header-actions">
             {isEditing ? (
-              <button onClick={handleSave}>Save</button>
+              <button id="save" onClick={handleSave}>Save</button>
             ) : (
               <i className="bi bi-pencil-square Edit" onClick={handleEdit}></i>
             )}
@@ -56,11 +72,15 @@ const CreatePost = ({key, id, username, timestamp, originalContent, likes, comme
 
         <div className="post-content">
           {isEditing ? (
+            <div>
             <textarea value={editableContent} onChange={handleChange} className="edit-textarea" />
-          ) : (
+            <input type="file" onChange={handlleImage} />
+            </div>
+            ) : (
             <p>{editableContent}</p>
-          )}
-          {image && <img src={image} alt="Post Image" className="post-image" />}
+            )} 
+          {image && <img src={editableImage} alt="Post Image" className="post-image" />}
+          
         </div>
 
         <div className="buttons">

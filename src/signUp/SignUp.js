@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { ThemeContext } from '../ThemeContext/ThemeContext';
 
 const SignUp = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext); // Destructure theme from ThemeContext
+  const { theme, toggleTheme } = useContext(ThemeContext); 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     Name: "",
@@ -57,7 +57,7 @@ const SignUp = () => {
   return (
     <div>
       <button className="Toggle" onClick={toggleTheme}>
-        {theme === 'dark' ? 'Dark Mode' : 'Light Mode'} {/* Corrected button label based on current theme */}
+        {theme === 'dark' ? 'Dark Mode' : 'Light Mode'} 
       </button>
       <form className="signin-container" onSubmit={handleSubmit}>
         {buttonsData.map((button) => (
@@ -72,14 +72,12 @@ const SignUp = () => {
           />
         ))}
 
-        {/* File input for image selection */}
-        <label htmlFor="imageInput">Select Image:</label>
+        <label id="label" htmlFor="imageInput">Select Image:</label>
         <input type="file" id="imageInput" onChange={handleImageChange} />
 
-        {/* Render the selected image */}
         {formData.img && <img src={formData.img} alt="Selected" style={{ maxWidth: '50%', maxHeight: '100px' }} />}
 
-        <button type="submit">Submit</button>
+        <button id= "submit" type="submit">Submit</button>
       </form>
     </div>
   );
