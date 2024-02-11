@@ -65,7 +65,7 @@ input, button {
 }
 
 body[data-theme="dark"] input, body[data-theme="dark"] button {
-  border: 1px solid var(--input-border-dark); 
+  border: 1px solid var(--bs-primary);
   background-color: var(--bg-color-dark); 
   color: var(--text-color-dark); 
 }
@@ -77,4 +77,8 @@ body[data-theme="dark"] input, body[data-theme="dark"] button {
   top: 10px;
   padding: 10px;
   border-radius: 5px;
+}
+
+body[data-theme="dark"] .Toggle {
+  border: 1px solid var(--input-border-light);
 }

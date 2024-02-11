@@ -80,6 +80,7 @@ body[data-theme="dark"] label {
 body[data-theme="dark"] .Toggle {
   background-color: var(--button-bg-dark);
   color: var(--button-text-dark);
+  border: 1px solid var(--input-border-light);
 }
 
 .Toggle:hover {

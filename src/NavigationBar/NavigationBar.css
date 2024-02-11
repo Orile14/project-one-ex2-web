@@ -71,6 +71,7 @@ body[data-theme="dark"] .navbar {
 
 /* Dark Theme Toggle Button */
 [data-theme="dark"] .toggle-theme-btn {
+  border: 1px solid var(--input-border-light);
   background-color: var(--button-bg-dark);
   color: var(--button-text-dark);
 }

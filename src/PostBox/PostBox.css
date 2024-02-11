@@ -58,9 +58,11 @@ body[data-theme="dark"] .postInput {
     cursor: pointer;
     font-size: 16px;
     margin: 5px;
+    font-weight: bold;
 }
 
 body[data-theme="dark"] .postButton {
+    border: 1px solid var(--bs-primary);
     background-color: var(--bg-color-dark); /* Dark mode button background */
     color: var(--button-text-dark); /* Dark mode button text color */
 }

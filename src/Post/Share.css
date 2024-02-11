@@ -4,17 +4,18 @@
     padding: 5px 10px;
     border-radius: 5px;
     font-weight: bold;
-    color: gray;
+    color: black;
     margin: 5px;
     display: inline-block; /* Display the buttons inline */
     width: 190px;
 }
 body[data-theme="dark"] #share {
+    border: 1px solid var(--bs-primary);    
     background-color: var(--bg-color-dark); /* Dark mode background */
     color: var(--button-text-dark); /* Dark mode text color */
 }
 #share:hover {
-    background-color: var(--button-bg-light);
+    background-color: lightgray;
     color: black;
 }
 body[data-theme="dark"] #share:hover {
