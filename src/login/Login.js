@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
 import "./Login.css";
 import InputBox from "../inputBox/InputBox";
 import User from "../signUp/user"; // Update the path accordingly
+import { ThemeContext } from '../ThemeContext/ThemeContext';
 
 const Login = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext); // Destructure theme from ThemeContext
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -27,32 +29,34 @@ const Login = () => {
     }
   };
 
-    return (
-        <div className="Login">
-            
-                <div className="content-box">
-                    <InputBox param={"username"} value={username} onChange={setUsername} />
-                    <InputBox param={"password"} value={password} onChange={setPassword} />
-                    <button type="button" className="btn btn-primary" onClick={handleLoginClick}>
-                        Login
-                    </button>
-                    <button type="button" className="btn btn-success" onClick={handleSignUpClick}>
-                        Sign Up
-                    </button>
-                    <div>
-                        {loginMessage && <p>{loginMessage}</p>}
-                    </div>
-                </div>
-                
-                <div id="textContainerf">
-                    <p>facebook</p>
-                </div>
-                <div id="textContainer">
-                    <p>Connect with friends and the world around you on Facebook.</p>
-                </div>
-            
+  return (
+    <div className="Login">
+      <button className="Toggle" onClick={toggleTheme}>
+        {theme === 'dark' ? 'Dark Mode' : 'Light Mode'} {/* Corrected button label based on current theme */}
+      </button>
+      <div className="content-box">
+        <InputBox param={"username"} value={username} onChange={setUsername} />
+        <InputBox param={"password"} value={password} onChange={setPassword} />
+        <button type="button" className="btn btn-primary" onClick={handleLoginClick}>
+          Login
+        </button>
+        <button type="button" className="btn btn-success" onClick={handleSignUpClick}>
+          Sign Up
+        </button>
+        <div>
+          {loginMessage && <p>{loginMessage}</p>}
         </div>
-    );
+      </div>
+
+      <div id="textContainerf">
+        <p>facebook</p>
+      </div>
+      <div id="textContainer">
+        <p>Connect with friends and the world around you on Facebook.</p>
+      </div>
+
+    </div>
+  );
 };
 
 

@@ -1,35 +1,32 @@
-// NavigationBar.js
-import { useRef } from 'react';
+import { useContext } from 'react';
 import React from 'react';
 import './NavigationBar.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import FeedSection from '../FeedSection/FeedSection';
 import OptionSection from '../OptionSection/OptionSection';
+import { ThemeContext } from '../ThemeContext/ThemeContext';
 
-const NavigationBar = ({doSearch}) => {
-
-   const searchBox = useRef(null);
-
-    const Search = () => {
-         doSearch(searchBox.current.value);
-    } 
+const NavigationBar = () => {
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     return (
-        <nav className="navbar navbar-expand-lg">
-            <div className="container-fluid ">
+        <nav className="navbar">
+            <div className="navbar-left">
+                <i className="bi bi-facebook logo-icon"></i>
+                <button className="toggle-theme-btn" onClick={toggleTheme}>
+                    {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
+                </button>
+                <form className="search-form">
+                    <input className="form-control search-input" type="search" placeholder="Search Facebook" aria-label="Search" />
+                </form>
+            </div>
 
-                <div className="d-flex align-items-center bar">
-                    <i class="bi bi-facebook logo-icon"></i>
-                    <form className="d-flex ms-2">
-                    <input ref={searchBox} onKeyUp={Search} className="form-control me-2 rounded-pill bg-light" type="search" placeholder="Search Facebook " aria-label="Search"></input>
-                    </form>
-                </div>
-
-
+            <div className="navbar-center">
                 <FeedSection />
+            </div>
 
+            <div className="navbar-right">
                 <OptionSection />
-
             </div>
         </nav>
     );

@@ -1,9 +1,19 @@
+
 .list-group-item{
     border: none;
-    background-color: lightgray;
+    background-color: var(--bg-color-light);
+}
+
+[data-theme="dark"] .list-group-item{
+    background-color: var(--bg-color-dark);
+    color: #e4e6eb;
 }
 .list-group-item:hover{
     cursor: pointer;
-    background-color: #f0f0f0;
+    background-color: var(--button-bg-light);
     border: none;
+}
+[data-theme="dark"] .list-group-item:hover{
+    background-color: var(--button-bg-dark);
+    color: #ffffff;
 }

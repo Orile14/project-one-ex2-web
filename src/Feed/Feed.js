@@ -4,30 +4,47 @@ import NavigationBar from '../NavigationBar/NavigationBar';
 import LeftMenu from '../LeftMenu/LeftMenu';
 import Posts from '../Post/Posts';
 import PostBox from '../PostBox/PostBox';
-import FriendList from '../FriendList/FriendList'; 
-import PostsList from '../Post/PostsList.json';
-import PostsResult from '../PostsResult/PostsResult';
+import FriendList from '../FriendList/FriendList';
+import PostList from '../Post/PostsList';
+import User from '../signUp/user';
 
 const Feed = () => {
-    const [filteredPosts, setFilteredPosts] = useState(PostsList);
-    const [isSearchPerformed, setIsSearchPerformed] = useState(false);
+    const user = User.allUsers[0];
+    let username;
+    let profile;
+    {user == null ? profile = "": profile = user.getImage()}
+    {user == null ? username = "User": username = user.getName()}
 
-    const doSearch = function(q) {
-        setFilteredPosts(PostsList.filter((post) => post.content.includes(q)));
-        setIsSearchPerformed(true);
-    }
+    const [posts, setPosts] = useState(PostList);
+    const [isUpdated, setIsUpdated] = useState(false);
+
+    const addPost = (postContent, image) => {
+        const newPost = {
+            id: posts.length,
+            username: username,
+            timestamp: "Just now",
+            content: postContent,
+            likes: 0,
+            comments: [],
+            image: image,
+            profile: profile
+        };
+
+        setPosts([...posts, newPost]);
+    };
 
     return (
-        <div>
-            <NavigationBar doSearch={doSearch} />
         
+    
+        <div className='Feed'>
+            <NavigationBar />
             <div className="row">
                 <div className="col-2">
                     <LeftMenu />
                 </div>
                 <div className="col-8 d-flex flex-column justify-content-start align-items-center">
-                    <PostBox />
-                    {isSearchPerformed ? <PostsResult posts={filteredPosts} /> : <Posts posts={PostsList}/>}
+                    <PostBox addPost={addPost} />
+                    <Posts posts={posts} />
                 </div>
                 <div className="col-2">
                     <FriendList />
