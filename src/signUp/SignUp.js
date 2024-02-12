@@ -56,7 +56,7 @@ const SignUp = () => {
       return;
     }
 
-    const newUser = new User(formData.Name, formData.Password, formData.img);
+    const newUser = new User(formData.Name,formData.NickName, formData.Password, formData.img);
     navigate('/login');
   };
 
