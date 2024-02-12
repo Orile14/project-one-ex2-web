@@ -9,7 +9,7 @@ describe('overall Component', () => {
     test('post and comment edits are persisted', async () => {
         // Mock ThemeContext value
         const mockThemeContextValue = {
-            theme: 'light', // or 'dark', depending on what your component expects
+            theme: 'light', 
             toggleTheme: jest.fn(),
         };
 

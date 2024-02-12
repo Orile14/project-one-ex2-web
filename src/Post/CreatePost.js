@@ -23,6 +23,11 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
   };
 
   const handleSave = () => {
+    // Check if both content and image are empty
+    if (!editableContent.trim() && !editableImage) {
+      alert('Post must have at least an image or some content.');
+      return;
+    }
     setIsEditing(false);
 
   };
@@ -38,7 +43,7 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
-      setEditableImage(reader.result); 
+      setEditableImage(reader.result);
     };
     reader.readAsDataURL(file);
   };
@@ -55,10 +60,10 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
       <div className="post">
         <div className="post-header">
           <div className="post-header-info">
-          <img src = {profile} alt="Post Image" className="profilePic"/>
+            <img src={profile} alt="PostIm" className="profilePic" />
             <p className="username">{username}</p>
             <p className="timestamp">{timestamp}</p>
-  
+
           </div>
           <div className="post-header-actions">
             {isEditing ? (
@@ -75,12 +80,12 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
             <div>
             <textarea value={editableContent} onChange={handleChange} className="edit-textarea" />
             <input type="file" onChange={handlleImage} />
-            </div>
-            ) : (
+          </div>
+            
+          ) : (
             <p>{editableContent}</p>
-            )} 
-          {image && <img src={editableImage} alt="Post Image" className="post-image" />}
-          
+          )}
+          {editableImage && <img src={editableImage} alt="PostIm" className="post-image" />}
         </div>
 
         <div className="buttons">
@@ -91,7 +96,7 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
           <Comment postId={id} comments={comments} className="comment-button" />
 
           <ShareMenu className="share-button" />
-            
+
         </div>
       </div>
   );

@@ -1,12 +1,11 @@
 import React from 'react';
-import { useRef ,useState} from 'react'; // Importing the useRef hook
+import { useState } from 'react'; // Importing the useRef hook
 import './PostBox.css'; // Importing the CSS file for styling
 import User from '../signUp/user';
 const PostBox = ({ addPost }) => {
 
     const user = User.allUsers[0];
     const [postContent, setPostContent] = useState(""); // State to store post content
-    const input = useRef(null);
     const [image, setImage] = useState(null); // State to store selected image
 
     const handleInputChange = (event) => {
@@ -23,6 +22,11 @@ const PostBox = ({ addPost }) => {
     };
 
     const handleAddPost = () => {
+        // Check if both content and image are empty
+        if (!postContent.trim() && !image) {
+            alert('Please add at least some content or an image.');
+            return;
+        }
         addPost(postContent, image);
         setPostContent("");
         setImage(null);
