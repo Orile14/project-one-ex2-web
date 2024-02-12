@@ -13,7 +13,7 @@ describe('Login Component', () => {
 
   beforeEach(() => {
     User.allUsers = [
-      new User('admin', 'admin', 'admin_image.jpg') // Ensure admin user is also included
+      new User('admin', 'alfredo', 'admin', 'admin_image.jpg') // Ensure admin user is also included
     ];
   });
 

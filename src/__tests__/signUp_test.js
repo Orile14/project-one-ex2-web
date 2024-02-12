@@ -33,6 +33,9 @@ describe('SignUp Component', () => {
     fireEvent.change(screen.getByLabelText(/Enter User Name/i), {
       target: { value: 'testuser' },
     });
+    fireEvent.change(screen.getByLabelText(/Enter Nick Name/i), {
+      target: { value: 'Alfredo' },
+    });
     fireEvent.change(screen.getByLabelText(/Enter Password/i), {
       target: { value: 'password123' },
     });
@@ -52,6 +55,9 @@ describe('SignUp Component', () => {
 
     fireEvent.change(screen.getByLabelText(/Enter User Name/i), {
       target: { value: 'testuser' },
+    });
+    fireEvent.change(screen.getByLabelText(/Enter NIck Name/i), {
+      target: { value: 'Alfredo' },
     });
     fireEvent.change(screen.getByLabelText(/Enter Password/i), {
       target: { value: 'password123' },

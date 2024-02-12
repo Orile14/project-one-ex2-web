@@ -9,7 +9,7 @@ body[data-theme="dark"] {
 }
 
 .signin-container {
-  margin-top: 100px;
+  margin-top: 30px;
   margin-right: auto;
   margin-bottom: auto;
   margin-left: auto;
@@ -28,7 +28,6 @@ body[data-theme="dark"] .signin-container {
   color: var(--text-color-dark);
   box-shadow: var(--box-shadow-dark);
 }
-
 
 
 body[data-theme="dark"] button {
@@ -56,13 +55,12 @@ body[data-theme="dark"] input[type="file"] {
 }
 
 #label {
-  font-weight: bold;
   margin-bottom: 5px;
   display: block;
   color: var(--text-color-light);
 }
 
-body[data-theme="dark"] label {
+body[data-theme="dark"] #label {
   color: var(--text-color-dark);
 }
 

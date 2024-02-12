@@ -7,7 +7,7 @@ const Comment = ({ comments, postId }) => {
 
     const user =User.allUsers[0];
     let username;
-    {user == null ? username = "User": username = user.getName()}
+    {user == null ? username = "User": username = user.getNickName()}
 
 
     const [isAdded, setIsAdded] = useState(false);

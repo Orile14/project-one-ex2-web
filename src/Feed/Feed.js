@@ -13,7 +13,7 @@ const Feed = () => {
     let username;
     let profile;
     {user == null ? profile = "": profile = user.getImage()}
-    {user == null ? username = "User": username = user.getName()}
+    {user == null ? username = "User": username = user.getNickName()}
 
     const [posts, setPosts] = useState(PostList);
     const [isUpdated, setIsUpdated] = useState(false);
