@@ -10,13 +10,15 @@
           "id":0,
           "username": "Nathaniel",
           "timestamp": "2 hours ago",
-          "content": "This is amazing!"
+          "content": "This is amazing!",
+          "likes": { "count": 48, "LikedByUser": false }
         },
         {
           "id":1,
           "username": "Saray",
           "timestamp": "1 hour ago",
-          "content": "I wish I was there!"
+          "content": "I wish I was there!",
+          "likes": { "count": 32, "LikedByUser": false }
         }
       ],
       "image": "/park.jpg",
@@ -34,13 +36,15 @@
           "id":0,
           "username": "Mosh",
           "timestamp": "2 hours ago",
-          "content": "I love it!"
+          "content": "I love it!",
+          "likes": { "count": 9, "LikedByUser": false }
         },
         {
           "id":1,
           "username": "Ori",
           "timestamp": "1 hour ago",
-          "content": "Great job!"
+          "content": "Great job!",
+          "likes": { "count": 14, "LikedByUser": false }
         }
       ],
       "image": "/book.jpg",
@@ -58,13 +62,15 @@
           "id": 0,
           "username": "Emma",
           "timestamp": "2 days ago",
-          "content": "Congratulations!"
+          "content": "Congratulations!",
+          "likes": { "count": 0, "LikedByUser": false }
         },
         {
           "id": 1,
           "username": "Oliver",
           "timestamp": "2 days ago",
-          "content": "What breed?"
+          "content": "What breed?",
+          "likes": { "count": 2, "LikedByUser": false }
         }
       ],
       "image": "/puppy.jpg",
@@ -81,19 +87,22 @@
           "id": 0,
           "username": "Sophia",
           "timestamp": "3 days ago",
-          "content": "Congratulations!"
+          "content": "Congratulations!",
+          "likes": { "count": 9, "LikedByUser": false }
         },
         {
           "id": 1,
           "username": "Ethan",
           "timestamp": "3 days ago",
-          "content": "What's the job?"
+          "content": "What's the job?",
+          "likes": { "count": 8, "LikedByUser": false }
         },
         {
           "id": 2,
           "username": "Evelyn",
           "timestamp": "3 days ago",
-          "content": "What's the company?"
+          "content": "What's the company?",
+          "likes": { "count": 13, "LikedByUser": false }
         }
       ],
       "image": "/job.jpg",
@@ -111,13 +120,15 @@
           "id": 0,
           "username": "Ava",
           "timestamp": "4 days ago",
-          "content": "Great job!"
+          "content": "Great job!",
+          "likes": { "count": 5, "LikedByUser": false }
         },
         {
           "id": 1,
           "username": "Liam",
           "timestamp": "4 days ago",
-          "content": "What was your time?"
+          "content": "What was your time?",
+          "likes": { "count": 2, "LikedByUser": false }
         }
       ],
       "image": "/marathon.jpg",
@@ -135,19 +146,22 @@
           "id": 0,
           "username": "Isabella",
           "timestamp": "5 days ago",
-          "content": "Congratulations!"
+          "content": "Congratulations!",
+          "likes": { "count": 1, "LikedByUser": false }
         },
         {
           "id": 1,
           "username": "Noah",
           "timestamp": "5 days ago",
-          "content": "How many years?"
+          "content": "How many years?",
+          "likes": { "count": 0, "LikedByUser": false }
         },
         {
           "id": 2,
           "username": "Ethan",
           "timestamp": "5 days ago",
-          "content": "What's the plan?"
+          "content": "What's the plan?",
+          "likes": { "count": 3, "LikedByUser": false }
         }
       ],
       "image": "/anniversary.jpg",
@@ -165,19 +179,22 @@
           "id": 0,
           "username": "William",
           "timestamp": "6 days ago",
-          "content": "Exciting! How's the neighborhood?"
+          "content": "Exciting! How's the neighborhood?",
+          "likes": { "count": 2, "LikedByUser": false }
         },
         {
           "id": 1,
           "username": "Mia",
           "timestamp": "6 days ago",
-          "content": "Congratulations on your new place!"
+          "content": "Congratulations on your new place!",
+          "likes": { "count": 4, "LikedByUser": false }
         },
         {
           "id": 2,
           "username": "Ethan",
           "timestamp": "6 days ago",
-          "content": "What's the address?"
+          "content": "What's the address?",
+          "likes": { "count": 2, "LikedByUser": false }
         }
       ],
       "image":"",
@@ -195,25 +212,29 @@
           "id": 0,
           "username": "Charlotte",
           "timestamp": "1 week ago",
-          "content": "Which language are you learning?"
+          "content": "Which language are you learning?",
+          "likes": { "count": 0, "LikedByUser": false }
         },
         {
           "id": 1,
           "username": "Benjamin",
           "timestamp": "1 week ago",
-          "content": "That's impressive!"
+          "content": "That's impressive!",
+          "likes": { "count": 23, "LikedByUser": false }
         },
         {
           "id": 2,
           "username": "Mia",
           "timestamp": "1 week ago",
-          "content": "Good luck!"
+          "content": "Good luck!",
+          "likes": { "count": 12, "LikedByUser": false }
         },
         {
           "id": 3,
           "username": "Ethan",
           "timestamp": "1 week ago",
-          "content": "Good luck!"
+          "content": "Good luck!",
+          "likes": { "count": 42, "LikedByUser": false }
         }
       ],
       "image": "/language.jpg",
@@ -231,25 +252,29 @@
           "id": 0,
           "username": "Amelia",
           "timestamp": "1 week ago",
-          "content": "Congratulations! What's your business about?"
+          "content": "Congratulations! What's your business about?",
+          "likes": { "count": 1, "LikedByUser": false }
         },
         {
           "id": 1,
           "username": "Mason",
           "timestamp": "1 week ago",
-          "content": "That's amazing!"
+          "content": "That's amazing!",
+          "likes": { "count": 2, "LikedByUser": false }
         },
         {
           "id": 2,
           "username": "Evelyn",
           "timestamp": "1 week ago",
-          "content": "Good luck!"
+          "content": "Good luck!",
+          "likes": { "count": 2, "LikedByUser": false }
         },
         {
           "id": 3,
           "username": "Ethan",
           "timestamp": "1 week ago",
-          "content": "What's the name of your business?"
+          "content": "What's the name of your business?",
+          "likes": { "count": 1, "LikedByUser": false }
         }
       ],
       "image": "/business.jpg",
@@ -267,19 +292,22 @@
           "id": 0,
           "username": "Alexander",
           "timestamp": "2 weeks ago",
-          "content": "Happy birthday!"
+          "content": "Happy birthday!",
+          "likes": { "count": 11, "LikedByUser": false }
         },
         {
           "id": 1,
           "username": "Liam",
           "timestamp": "2 weeks ago",
-          "content": "Tell us about your experience!"
+          "content": "Tell us about your experience!",
+          "likes": { "count": 32, "LikedByUser": false }
         },
         {
           "id": 2,
           "username": "Evelyn",
           "timestamp": "2 weeks ago",
-          "content": "Hope you had a great time!"
+          "content": "Hope you had a great time!",
+          "likes": { "count": 12, "LikedByUser": false }
         }
       ],
       "image": "/birthday.jpg",
@@ -297,7 +325,8 @@
           "id": 0,
           "username": "Charlotte",
           "timestamp": "2 weeks ago",
-          "content": "Which country did you visit?"
+          "content": "Which country did you visit?",
+          "likes": { "count": 20, "LikedByUser": false }
         }
 
       ],

@@ -17,6 +17,22 @@ const Comment = ({ comments, postId }) => {
 
     const [newComments, setNewComments] = useState(comments);
 
+    const toggleLike = (id) => {
+        setNewComments(newComments.map(comment => {
+            if (comment.id === id) {
+                const currentLikes = comment.likes || { count: 0, likedByUser: false };
+                return {
+                    ...comment,
+                    likes: {
+                        count: currentLikes.likedByUser ? currentLikes.count - 1 : currentLikes.count + 1,
+                        likedByUser: !currentLikes.likedByUser
+                    }
+                };
+            }
+            return comment;
+        }));
+    };
+    
     const deleteComment = (id) => {
         const updatedComments = newComments.filter((comment) => comment.id !== id);
         setNewComments(updatedComments);
@@ -29,7 +45,8 @@ const Comment = ({ comments, postId }) => {
             id: newComments.length + 1,
             username: username,
             timestamp: "Just now",
-            content: input.current.value
+            content: input.current.value,
+            likes: { count: 0, likedByUser: false } // Initialize the likes property
         };
         setNewComments([...newComments, comment]);
         input.current.value = "";
@@ -58,6 +75,8 @@ const Comment = ({ comments, postId }) => {
                                     timestamp={comment.timestamp}
                                     content={comment.content}
                                     deleteComment={deleteComment}
+                                    likes={comment.likes}
+                                    toggleLike={toggleLike}
                                 />
                             ))}
                             <div className="modal-footer">

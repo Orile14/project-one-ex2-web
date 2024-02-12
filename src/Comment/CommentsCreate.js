@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import './CommentCreate.css';
 
-const CommentsCreate = ({ id, username, timestamp, content, deleteComment }) => {
-    const [isRemoved, setIsRemoved] = useState(false);
+const CommentsCreate = ({ id, username, timestamp, content, deleteComment, likes, toggleLike }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editableContent, setEditableContent] = useState(content);
+    const [likeActive, setLikeActive] = useState(false);
+
+    const handleLike = () => {
+        toggleLike(id);
+        setLikeActive(!likeActive); // Toggle likeActive state
+    };
 
     const handleEdit = () => {
         setIsEditing(true);
@@ -47,6 +52,12 @@ const CommentsCreate = ({ id, username, timestamp, content, deleteComment }) => 
                         <p>{editableContent}</p>
                     )}
                 </div>
+            </div>
+            <div className="comment-footer">
+                <button onClick={handleLike} className={`comments-like ${likeActive ? 'active' : ''}`}>
+                    <i className="bi bi-hand-thumbs-up"></i>
+                    <span>{likes.count}</span>
+                </button>
             </div>
         </div>
     );

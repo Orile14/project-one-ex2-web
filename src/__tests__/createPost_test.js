@@ -18,9 +18,9 @@ describe('CreatePost Component', () => {
 
     const { container } = render(<CreatePost {...testPost} />);
 
-     // Simulate removing the post using container.querySelector
-     const editButton = container.querySelector('.Edit');
-     fireEvent.click(editButton);
+    // Enter edit mode
+    const editButton = container.querySelector('.Edit');
+    fireEvent.click(editButton);
 
     // Change the content
     const textArea = container.querySelector('.edit-textarea');
@@ -39,5 +39,6 @@ describe('CreatePost Component', () => {
 
     // Verify the changes are still there
     expect(textArea.value).toBe('Edited content');
+
   });
 });
