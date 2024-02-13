@@ -5,8 +5,13 @@ import Feed from '../Feed/Feed';
 import { ThemeContext } from '../ThemeContext/ThemeContext';
 import '@testing-library/jest-dom';
 
+// Tests to verify Feed component functionality
 describe('Feed Component', () => {
+
+  // Test to verify that a new post can be added and then removed from the feed
   test('new post should be added and then removed from the feed', () => {
+
+    // Define the mock theme context value
     const mockThemeContextValue = {
       theme: 'light',
       toggleTheme: jest.fn(),

@@ -4,19 +4,16 @@ import { ThemeContext } from '../ThemeContext/ThemeContext';
 import SignUp from '../signUp/SignUp';
 import '@testing-library/jest-dom';
 
+// Tests to verify SignUp component functionality
 describe('SignUp Component', () => {
+
+  // Define the mock theme context value
   const mockThemeContextValue = {
     theme: 'light',
     toggleTheme: jest.fn(),
   };
 
-  const mockNavigate = jest.fn();
-
-  jest.mock('react-router-dom', () => ({
-    ...jest.requireActual('react-router-dom'),
-    useNavigate: () => mockNavigate,
-  }));
-
+  // render the SignUp component
   beforeEach(() => {
     render(
       <BrowserRouter>
@@ -27,9 +24,13 @@ describe('SignUp Component', () => {
     );
   });
 
+  // Test to verify that the SignUp component works as expected
   test('alerts if no photo is selected on submission', () => {
+
+    // Mock the global alert function
     global.alert = jest.fn();
 
+    // Simulate entering user details
     fireEvent.change(screen.getByLabelText(/Enter User Name/i), {
       target: { value: 'testuser' },
     });
@@ -43,16 +44,24 @@ describe('SignUp Component', () => {
       target: { value: 'password123' },
     });
 
+    // Simulate submitting the form
     fireEvent.click(screen.getByText(/Submit/i));
 
+    // Verify that the alert is displayed
     expect(global.alert).toHaveBeenCalledWith('Please select an image.');
 
+    // Clear the mock
     global.alert.mockClear();
+
   });
 
+  // Test to verify that the SignUp component works as expected
   test('alerts if passwords do not match', () => {
+
+    // Mock the global alert function
     global.alert = jest.fn();
 
+    // Simulate entering user details
     fireEvent.change(screen.getByLabelText(/Enter User Name/i), {
       target: { value: 'testuser' },
     });
@@ -66,10 +75,14 @@ describe('SignUp Component', () => {
       target: { value: 'differentpassword' },
     });
 
+    // Simulate submitting the form
     fireEvent.click(screen.getByText(/Submit/i));
 
+    // Verify that the alert is displayed
     expect(global.alert).toHaveBeenCalledWith('Password and Confirm Password must be the same');
 
+    // Clear the mock
     global.alert.mockClear();
+
   });
 });
