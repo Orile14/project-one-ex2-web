@@ -1,10 +1,10 @@
-// In your Friends.js
 import img1 from './Photos/img1.jpg';
 import img2 from './Photos/img2.jpg';
 import img3 from './Photos/img3.jpg';  
 import img4 from './Photos/img4.jpg';  
 import img5 from './Photos/img5.jpg';
 
+//this is the array of objects that contains the data of the friends
 const arr=[
     {
       "id": 1,

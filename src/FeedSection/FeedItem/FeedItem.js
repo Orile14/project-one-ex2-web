@@ -1,7 +1,9 @@
 import React from "react";
 
+// This function creates the feed item
 const FeedItem = ({ iconClass, isClicked, handleClick }) => {
   return (
+    // Add the feed item to the feed section 
     <button
       className={`bar feed-item-button ${isClicked ? "clicked" : ""}`}
       onClick={handleClick}

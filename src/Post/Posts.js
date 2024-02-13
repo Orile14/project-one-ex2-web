@@ -8,9 +8,11 @@ const Posts = ({ posts }) => {
 
     return (
         <div className="posts">
+            {/* Map through the sorted posts and create a CreatePost component for each post */}
             {sortedPosts.map(post => (
+                // Pass the post data as props to the CreatePost component
                 <CreatePost
-                    key={post.id} // key is used here
+                    key={post.id} 
                     id={post.id}
                     username={post.username}
                     timestamp={post.timestamp}
