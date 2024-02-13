@@ -1,5 +1,5 @@
 import React from "react";
-
+// this functiion creates the input fields for the form
 const MakeButton = ({ id, label, type, value, handleChange }) => {
   return (
     <div className="form-group">

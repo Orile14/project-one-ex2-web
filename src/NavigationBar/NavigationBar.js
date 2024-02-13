@@ -7,10 +7,13 @@ import OptionSection from '../OptionSection/OptionSection';
 import { ThemeContext } from '../ThemeContext/ThemeContext';
 
 const NavigationBar = () => {
+
+    // Use the theme and toggleTheme from the ThemeContext
     const { theme, toggleTheme } = useContext(ThemeContext);
 
     return (
         <nav className="navbar">
+            
             <div className="navbar-left">
                 <i className="bi bi-facebook logo-icon"></i>
                 <button className="toggle-theme-btn" onClick={toggleTheme}>
@@ -28,6 +31,7 @@ const NavigationBar = () => {
             <div className="navbar-right">
                 <OptionSection />
             </div>
+
         </nav>
     );
 };

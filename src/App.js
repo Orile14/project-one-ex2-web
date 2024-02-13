@@ -5,17 +5,24 @@ import Feed from './Feed/Feed';
 import Signup from './signUp/SignUp';
 import Login from './login/Login';
 
+// AppContent is the main component that includes the application's routing logic.
 const AppContent = () => {
+
+  // Using useContext to access the current theme from ThemeContext.
   const { theme } = useContext(ThemeContext);
 
+  // useEffect hook to apply the theme to the document's body. This runs whenever the theme changes.
   useEffect(() => {
+    // Setting a data attribute on the body element for theme. This can be used in CSS to style elements based on the theme.
     document.body.setAttribute('data-theme', theme);
   }, [theme]);
 
   return (
     <div className="app">
       <Router>
+        {/* Using React Router for routing between different components/pages. */}
         <Routes>
+          {/* Defining routes for the application. Each route renders a different component. */}
           <Route path="/" element={<Login />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/signup" element={<Signup />} />
@@ -26,6 +33,8 @@ const AppContent = () => {
   );
 };
 
+// App component wraps the whole application with ThemeProvider.
+// ThemeProvider provides a theme context to all components inside it.
 const App = () => (
   <ThemeProvider>
     <AppContent />

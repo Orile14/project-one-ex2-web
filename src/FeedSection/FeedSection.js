@@ -17,6 +17,7 @@ const FeedSection = () => {
 
   return (
     <div className="d-flex align-items-center">
+      {/** Map through the feedItems and create a FeedItem for each item */}
       {feedItems.map((iconClass, index) => (
         <FeedItem
           key={index}
