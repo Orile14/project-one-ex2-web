@@ -1,0 +1,52 @@
+[
+    {
+        "id": "User Name",
+        "icon": "house-fill",
+        "message": "Welcome to Facebook"
+    },
+    {
+        "id": "Friends",
+        "icon": "people-fill",
+        "message": "your friends will show up"
+    },
+    {
+        "id": "Memories",
+        "icon": "alarm-fill",
+        "message": "you still dont have any memories"
+    },
+    {
+        "id": "Saved",
+        "icon": "bookmark-check-fill",
+        "message": "feature still not available"
+    },
+    {
+        "id": "Groups",
+        "icon": "globe-europe-africa",
+        "message": "feature still not available"
+    },
+    {
+        "id": "Video",
+        "icon": "camera-reels-fill",
+        "message": "feature still not available"
+    },
+    {
+        "id": "MarketPlace",
+        "icon": "cart-plus-fill",
+        "message": "feature still not available"
+    },
+    {
+        "id": "Feeds",
+        "icon": "file-person-fill",
+        "message": "feature still not available"
+    },
+    {
+        "id": "Events",
+        "icon": "calendar2-event-fill",
+        "message": "feature still not available"
+    },
+    {
+        "id": "See More...",
+        "icon": "arrow-down-circle-fill",
+        "message": "to be continued..."
+    }
+]

@@ -5,8 +5,12 @@ import Feed from '../Feed/Feed';
 import { ThemeContext } from '../ThemeContext/ThemeContext';
 import '@testing-library/jest-dom';
 
+// Tests to verify Feed component functionality
 describe('overall Component', () => {
-    test('post and comment edits are persisted', async () => {
+
+    // complex test to verify that the the interaction between the components works as expected
+    test('post and comment edits connection', async () => {
+
         // Mock ThemeContext value
         const mockThemeContextValue = {
             theme: 'light', 
@@ -55,7 +59,7 @@ describe('overall Component', () => {
         // Enteering comments
         fireEvent.click(comment);
 
-        // Varify the comment is added
+        // Varify the comment is still there
         expect(screen.getByText('New Comment')).toBeInTheDocument();
 
     });

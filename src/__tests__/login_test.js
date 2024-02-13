@@ -5,19 +5,25 @@ import User from '../signUp/user';
 import { ThemeContext } from '../ThemeContext/ThemeContext';
 import '@testing-library/jest-dom';
 
+// Tests to verify Login component functionality
 describe('Login Component', () => {
+
+  // Define the mock theme context value
   const mockThemeContextValue = {
     theme: 'light',
     toggleTheme: jest.fn(),
   };
 
-  beforeEach(() => {
+  // add admin user to allUsers array before any test
+  beforeAll(() => {
     User.allUsers = [
       new User('admin', 'alfredo', 'admin', 'admin_image.jpg') // Ensure admin user is also included
     ];
   });
 
+  // Test to verify that the login component works as expected
   test('Login functionality with both invalid and valid credentials', () => {
+
     // Test with Invalid Credentials
     render(
       <BrowserRouter>
@@ -26,7 +32,8 @@ describe('Login Component', () => {
         </ThemeContext.Provider>
       </BrowserRouter>
     );
-
+    
+    // Test with Invalid username and password
     fireEvent.change(screen.getByPlaceholderText(/username/i), {
       target: { value: 'wronguser' },
     });
@@ -34,9 +41,11 @@ describe('Login Component', () => {
       target: { value: 'wrongpassword' },
     });
     fireEvent.click(screen.getByText(/Login/i));
+
+    // Verify that the error message is displayed
     expect(screen.getByText(/Invalid email or password. Please try again./i)).toBeInTheDocument();
 
-    // Test with Valid Credentials
+    // Test with Valid username and password
     fireEvent.change(screen.getByPlaceholderText(/username/i), {
       target: { value: 'admin' },
     });
@@ -44,6 +53,8 @@ describe('Login Component', () => {
       target: { value: 'admin' },
     });
     fireEvent.click(screen.getByText(/Login/i));
+
+    // Verify that the user is logged in
     expect(screen.getByText(/Welcome, admin! You have successfully logged in./i)).toBeInTheDocument();
   });
 });
