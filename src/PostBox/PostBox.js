@@ -19,11 +19,17 @@ const PostBox = ({ addPost }) => {
     // Check if the file is an image
     // Update state with the selected image
         const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setImage(reader.result);
-        };
-        reader.readAsDataURL(file);
+        if (file) {
+            // Only proceed if a file is selected
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            // Optionally, handle the case where no file is selected
+            setImage(null);
+        }
     };
     // Function to handle adding a new post
     const handleAddPost = () => {
