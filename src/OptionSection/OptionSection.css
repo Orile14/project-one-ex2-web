@@ -63,3 +63,7 @@ body[data-theme="dark"] .option-section-button:hover .circular-container {
   width: 40px; /* Adjust the size as needed */
   height: 40px; /* Adjust the size as needed */
 }
+.circular-container:has(>.bi-box-arrow-right) {
+  /* primary color from bootstrap */
+  background-color: rgb(221, 46, 49);
+}

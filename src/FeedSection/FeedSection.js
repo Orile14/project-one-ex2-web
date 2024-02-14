@@ -9,7 +9,7 @@ const FeedSection = () => {
   const [selectedIcon, setSelectedIcon] = useState(initialSelectedIcon);
 
   const handleItemClick = (iconClass) => {
-    setSelectedIcon(iconClass === selectedIcon ? null : iconClass);
+    setSelectedIcon(iconClass);
   };
 
   // Import the array of Bootstrap icon classes from FeedItem.json
