@@ -2,8 +2,10 @@ import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, ThemeContext } from './ThemeContext/ThemeContext';
 import Feed from './Feed/Feed';
-import Signup from './signUp/SignUp';
-import Login from './login/Login';
+import Signup from './SignUp/SignUp';
+import Login from './Login/Login';
+import ProtectedRoute from './AuthContext/ProtectedRoute';
+import { AuthProvider } from './AuthContext/AuthContext';
 
 // AppContent is the main component that includes the application's routing logic.
 const AppContent = () => {
@@ -24,7 +26,11 @@ const AppContent = () => {
         <Routes>
           {/* Defining routes for the application. Each route renders a different component. */}
           <Route path="/" element={<Login />} />
-          <Route path="/feed" element={<Feed />} />
+          <Route path="/feed" element={
+            <ProtectedRoute>
+              <Feed />
+            </ProtectedRoute>
+          } />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>
@@ -36,9 +42,11 @@ const AppContent = () => {
 // App component wraps the whole application with ThemeProvider.
 // ThemeProvider provides a theme context to all components inside it.
 const App = () => (
-  <ThemeProvider>
-    <AppContent />
-  </ThemeProvider>
+  <AuthProvider>
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  </AuthProvider>
 );
 
 export default App;

@@ -1,9 +1,9 @@
 // FeedItem.js
 import React from "react";
 
-const OptionItem = ({ iconClass }) => {
+const OptionItem = ({ iconClass, onLogout }) => {
     return (
-        <button className="option-section-button">
+        <button className="option-section-button" onClick={onLogout}>
             <div className="circular-container">
                 <i className={`bi ${iconClass}`}></i>
             </div>

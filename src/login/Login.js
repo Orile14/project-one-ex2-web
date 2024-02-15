@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
-import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import "./Login.css";
-import InputBox from "../inputBox/InputBox";
-import User from "../signUp/user"; 
+import InputBox from "../InputBox/InputBox";
+import User from "../SignUp/User"; 
 import { ThemeContext } from '../ThemeContext/ThemeContext';
+import { useAuth } from '../AuthContext/AuthContext';
 
 const Login = () => {
   // Accessing theme and toggleTheme from ThemeContext using useContext hook
@@ -14,6 +15,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
+  const { login } = useAuth();
 
   const handleSignUpClick = () => {
     // Change this to the path of your signup page
@@ -26,6 +28,7 @@ const Login = () => {
 
     if (user) {
       setLoginMessage(`Welcome, ${username}! You have successfully logged in.`);
+      login();
       //change the path to the feed page
       navigate('/Feed'); 
     } else {

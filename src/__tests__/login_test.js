@@ -1,8 +1,9 @@
 import { render, fireEvent, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import Login from '../login/Login';
-import User from '../signUp/user';
+import Login from '../Login/Login';
+import User from '../SignUp/User';
 import { ThemeContext } from '../ThemeContext/ThemeContext';
+import { AuthContext } from '../AuthContext/AuthContext';
 import '@testing-library/jest-dom';
 
 // Tests to verify Login component functionality
@@ -12,6 +13,12 @@ describe('Login Component', () => {
   const mockThemeContextValue = {
     theme: 'light',
     toggleTheme: jest.fn(),
+  };
+
+  const mockAuthContextValue = {
+    isAuthenticated: false,
+    login: jest.fn(),
+    logout: jest.fn(),
   };
 
   // add admin user to allUsers array before any test
@@ -27,12 +34,14 @@ describe('Login Component', () => {
     // Test with Invalid Credentials
     render(
       <BrowserRouter>
-        <ThemeContext.Provider value={mockThemeContextValue}>
-          <Login />
-        </ThemeContext.Provider>
+        <AuthContext.Provider value={mockAuthContextValue}>
+          <ThemeContext.Provider value={mockThemeContextValue}>
+            <Login />
+          </ThemeContext.Provider>
+        </AuthContext.Provider>
       </BrowserRouter>
     );
-    
+
     // Test with Invalid username and password
     fireEvent.change(screen.getByPlaceholderText(/username/i), {
       target: { value: 'wronguser' },

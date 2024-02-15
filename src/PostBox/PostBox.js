@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import './PostBox.css';
-import User from '../signUp/user';
+import User from '../SignUp/User';
 const PostBox = ({ addPost }) => {
     // Get the first user from the list of all users
     const user = User.allUsers[0];

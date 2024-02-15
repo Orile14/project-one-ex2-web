@@ -3,6 +3,7 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Feed from '../Feed/Feed';
 import { ThemeContext } from '../ThemeContext/ThemeContext';
+import { AuthContext } from '../AuthContext/AuthContext';
 import '@testing-library/jest-dom';
 
 // Tests to verify Feed component functionality
@@ -13,16 +14,24 @@ describe('overall Component', () => {
 
         // Mock ThemeContext value
         const mockThemeContextValue = {
-            theme: 'light', 
+            theme: 'light',
             toggleTheme: jest.fn(),
+        };
+
+        const mockAuthContextValue = {
+            isAuthenticated: true,
+            login: jest.fn(),
+            logout: jest.fn(),
         };
 
         // Wrap Feed component in BrowserRouter and ThemeContext.Provider
         const { container } = render(
             <BrowserRouter>
-                <ThemeContext.Provider value={mockThemeContextValue}>
-                    <Feed />
-                </ThemeContext.Provider>
+                <AuthContext.Provider value={mockAuthContextValue}>
+                    <ThemeContext.Provider value={mockThemeContextValue}>
+                        <Feed />
+                    </ThemeContext.Provider>
+                </AuthContext.Provider>
             </BrowserRouter>
         );
 

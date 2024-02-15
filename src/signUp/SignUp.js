@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import MakeButton from "./MakeButton";
-import buttonsData from "./buttons.json";
+import buttonsData from "./Buttons.json";
 import "./SignUp.css";
-import User from "./user";
+import User from './User';
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from '../ThemeContext/ThemeContext';
 
