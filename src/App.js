@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, ThemeContext } from './ThemeContext/ThemeContext';
 import Feed from './Feed/Feed';
-import Signup from './signUp/SignUp';
-import Login from './login/Login';
+import Signup from './SignUp/SignUp';
+import Login from './Login/Login';
 import ProtectedRoute from './AuthContext/ProtectedRoute';
 import { AuthProvider } from './AuthContext/AuthContext';
 

@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./Login.css";
 import InputBox from "../inputBox/InputBox";
-import User from "../signUp/user"; 
+import User from "../SignUp/User"; 
 import { ThemeContext } from '../ThemeContext/ThemeContext';
 import { useAuth } from '../AuthContext/AuthContext';
 

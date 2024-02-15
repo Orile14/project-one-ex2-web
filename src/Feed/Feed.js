@@ -6,7 +6,7 @@ import Posts from '../Post/Posts';
 import PostBox from '../PostBox/PostBox';
 import FriendList from '../FriendList/FriendList';
 import PostList from '../Post/PostsList';
-import User from '../signUp/user';
+import User from '../SignUp/User';
 
 // This function creates the feed
 const Feed = () => {

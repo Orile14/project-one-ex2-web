@@ -65,5 +65,5 @@ body[data-theme="dark"] .option-section-button:hover .circular-container {
 }
 .circular-container:has(>.bi-box-arrow-right) {
   /* primary color from bootstrap */
-  background-color: rgb(221, 46, 49);
+  background-color: rgb(188, 22, 24);
 }
