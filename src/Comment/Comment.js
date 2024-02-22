@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import CommentsCreate from './CommentsCreate';
 import { useRef } from 'react';
-import User from '../SignUp/User';
+import User from '../signUp/user';
 import './Comment.css';
 
 const Comment = ({ comments, postId }) => {
