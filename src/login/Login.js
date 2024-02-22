@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./Login.css";
-import InputBox from "../InputBox/InputBox";
-import User from "../SignUp/User"; 
+import InputBox from "../inputBox/inputBox";
+import User from "../signUp/user"; 
 import { ThemeContext } from '../ThemeContext/ThemeContext';
 import { useAuth } from '../AuthContext/AuthContext';
 
