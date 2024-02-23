@@ -73,7 +73,7 @@ const PostBox = ({ addPost }) => {
             }); 
             console.log('response:', response);
     
-            if (response.ok) {
+            if (!response.ok) {
                 throw new Error('Failed to add post');
             }
     
@@ -106,7 +106,7 @@ const PostBox = ({ addPost }) => {
             <div className="postBox_buttons">
                 <button className="postButton" onClick={handleAddPost}>Post</button>
                 <label className="postButton">
-                    <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
+                    <input type="file" accept="image/*" id="imageInput" onChange={handleImageChange} style={{ display: 'none' }} />
                     Add Image
                 </label>
                 <button className="postButton">Feeling/Activity</button>
