@@ -5,4 +5,8 @@ const createPost = async (ownerID, content, img, date, comments, likes) => {
     return await post.save(); 
 }
 
-module.exports = { createPost }
+const getPosts = async () => {
+    return await Post.find({}); 
+}
+
+module.exports = { createPost, getPosts }

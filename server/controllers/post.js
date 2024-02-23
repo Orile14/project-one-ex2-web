@@ -5,4 +5,8 @@ const createPost = async (req, res) => {
                                           req.body.date, req.body.comments, req.body.likes ))
 };
 
-module.exports = { createPost }
+const getPosts = async (req, res) => {
+    res.json(await postService.getPosts());
+};
+
+module.exports = { createPost, getPosts }
