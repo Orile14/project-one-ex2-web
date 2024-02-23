@@ -25,5 +25,8 @@ app.use('/articles', articles);
 const user = require('./routes/user');
 app.use('/api/users', user);
 
+const post = require('./routes/post');
+app.use('/api/posts', post);
+
 app.listen(process.env.PORT);
 

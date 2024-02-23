@@ -32,16 +32,66 @@ const PostBox = ({ addPost }) => {
         }
     };
     // Function to handle adding a new post
-    const handleAddPost = () => {
-        // Check if both content and image are empty
-        if (!postContent.trim() && !image) {
-            alert('Please add at least some content or an image.');
-            return;
+    const handleAddPost = async () => {
+        try {
+            // Check if both content and image are empty
+            if (!postContent.trim() && !image) {
+                alert('Please add at least some content or an image.');
+                return;
+            }
+    
+            const readFileAsBase64 = (file) => {
+                return new Promise((resolve, reject) => {
+                  const reader = new FileReader();
+                  reader.onload = () => resolve(reader.result);
+                  reader.onerror = reject;
+                  reader.readAsDataURL(file);
+                });
+              };
+            
+              let base64Image = "";
+              if (document.getElementById('imageInput').files[0]) {
+                base64Image = await readFileAsBase64(document.getElementById('imageInput').files[0]);
+              } else {
+                alert("Please select an image.");
+                return;
+              }
+    
+            const postData = {
+                content: postContent,
+                image: base64Image, // Use the base64 representation of the image
+                ownerID: 'userID', // Set the ownerID to the user's ID
+                date: new Date().toISOString(),
+                comments: [],
+                likes: [],
+              };
+            
+            const response = await fetch('http://localhost:12345/api/posts', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(postData)
+            }); 
+            console.log('response:', response);
+    
+            if (response.ok) {
+                throw new Error('Failed to add post');
+            }
+    
+            const data = await response.json();
+    
+            // Assuming addPost function updates the UI with the new post
+            addPost(data);
+    
+            // Reset state
+            setPostContent("");
+            setImage(null);
+        } catch (error) {
+            console.error('Error adding post:', error);
+            alert('Failed to add post.');
         }
-        addPost(postContent, image);
-        setPostContent("");
-        setImage(null);
     };
+    
+
     return (
         <div className="postBox">
             {/* Display user profile picture and input field */}
