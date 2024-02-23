@@ -31,6 +31,7 @@ const PostBox = ({ addPost }) => {
             setImage(null);
         }
     };
+    
     // Function to handle adding a new post
     const handleAddPost = async () => {
         try {
@@ -52,18 +53,15 @@ const PostBox = ({ addPost }) => {
               let base64Image = "";
               if (document.getElementById('imageInput').files[0]) {
                 base64Image = await readFileAsBase64(document.getElementById('imageInput').files[0]);
-              } else {
-                alert("Please select an image.");
-                return;
               }
     
             const postData = {
+                ownerID: 'userID', // Set the ownerID to the user's ID
                 content: postContent,
                 image: base64Image, // Use the base64 representation of the image
-                ownerID: 'userID', // Set the ownerID to the user's ID
                 date: new Date().toISOString(),
                 comments: [],
-                likes: [],
+                likes: []
               };
             
             const response = await fetch('http://localhost:12345/api/posts', {
@@ -78,9 +76,6 @@ const PostBox = ({ addPost }) => {
             }
     
             const data = await response.json();
-    
-            // Assuming addPost function updates the UI with the new post
-            addPost(data);
     
             // Reset state
             setPostContent("");

@@ -1,8 +1,8 @@
 const postService = require('../services/post');
 
 const createPost = async (req, res) => {
-    res.json(await postService.createUser(req.body.ownerID, req.body.content, req.body.image))
+    res.json(await postService.createPost(req.body.ownerID, req.body.content, req.body.image,
+                                          req.body.date, req.body.comments, req.body.likes ))
 };
-
 
 module.exports = { createPost }

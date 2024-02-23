@@ -7,7 +7,7 @@ const Post = new Schema({
         type: String,
         required: true
     },
-    text: {
+    content: {
         type: String,
         required: false
     },
@@ -16,18 +16,17 @@ const Post = new Schema({
         required: false
     },
     date: {
-        type: date,
+        type: String,
         default: Date.now()
     },
     comments: {
-        type: [Comment],
+        type: [String],
         requied: false
     },
     likes: {
-        type: [Like],
+        type: [String],
         required: false
     }
-    
 });
 
 module.exports = mongoose.model('Post', Post);
