@@ -2,7 +2,7 @@
 import React from 'react';
 import "./optionSection.css";
 import OptionItem from "./optionItem/optionItem";
-import OptionData from "./optionItem/OptionItem.json";
+import OptionData from "./optionItem/optionItem.json";
 import { useAuth } from '../authContext/authContext';
 import { useNavigate } from 'react-router-dom';
 
