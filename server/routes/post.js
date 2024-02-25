@@ -1,18 +1,16 @@
 const postController = require('../controllers/post');
 const userController = require('../controllers/user');
 
-
-
 const express = require('express');
 var router = express.Router();
+
+router.route('/get').get(postController.getPosts)
+
+router.route('/add').post(postController.createPost);
+
 router.route('/:id').get(postController.getPost)
-                    .patch(postController.updatePost)
-                    .delete(postController.deletePost)
-
-router.route('/')
-        .get(userController.isLogedIn,postController.getPosts)
-        .post(userController.isLogedIn,postController.createPost);
-
+        .patch(postController.updatePost)
+        .delete(postController.deletePost)
 
 module.exports = router;
 /*

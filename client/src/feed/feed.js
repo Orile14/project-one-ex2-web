@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './feed.css';
 import NavigationBar from '../navigationBar/navigationBar';
 import LeftMenu from '../leftMenu/leftMenu';

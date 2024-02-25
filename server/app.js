@@ -33,9 +33,6 @@ mongoose.connect(process.env.CONNECTION_STRING).then(() => {
 
 app.use(express.static('public'));
 
-const articles = require('./routes/article' );
-app.use('/articles', articles);
-
 const user = require('./routes/user');
 app.use('/api/users', user);
 
