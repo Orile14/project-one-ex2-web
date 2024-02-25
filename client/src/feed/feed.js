@@ -5,8 +5,6 @@ import LeftMenu from '../leftMenu/leftMenu';
 import Posts from '../post/posts';
 import PostBox from '../postBox/postBox';
 import FriendList from '../friendList/friendList';
-import PostList from '../post/postsList';
-import User from '../signUp/user';
 
 // This function creates the feed
 const Feed = () => {
@@ -34,14 +32,9 @@ const Feed = () => {
                 console.error('There has been a problem with your fetch operation:', error);
             }
         };
+        
         fetchPosts();
     },[refreshFeed]); 
-
-    // Log the images for all posts (if needed for debugging)
-    DBposts.forEach(post => {
-        console.log('AAAAAAAAA')
-        console.log(post.image);
-    });
     
     return (
         //deviide the feed into 3 columns

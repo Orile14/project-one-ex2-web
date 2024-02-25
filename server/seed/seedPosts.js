@@ -24,7 +24,7 @@ const seedPosts = async () => {
 
         if (postCount === 0) {
             const postsWithCustomId = postsData.map((post, index) => {
-                const customId = `${post.ownerID}Post`;
+                const customId = `${post.postOwnerID}Post`;
                 return {
                     ...post,
                     _id: customId,

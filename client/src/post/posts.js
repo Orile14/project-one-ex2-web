@@ -14,10 +14,16 @@ const Posts = ({ posts }) => {
         const year = date.getFullYear();
         return `${hours}:${minutes} ${day}/${month}/${year}`;
     };
-    
+
+    // Log the images for all posts (if needed for debugging)
+    sortedPosts.forEach(post => {
+        console.log('AAAAAAAAA')
+        console.log(post.comments);
+    });
+
     return (
         <div className="posts">
-            {sortedPosts.map(post => (  
+            {sortedPosts.map(post => (
                 <CreatePost
                     key={post._id}
                     id={post._id}
@@ -26,8 +32,8 @@ const Posts = ({ posts }) => {
                     originalContent={post.content}
                     likes={post.likes}
                     comments={post.comments}
-                    image={post.img} 
-                    profile={post.profile} 
+                    image={post.img}
+                    profile={post.profile}
                 />
             ))}
         </div>
