@@ -2,13 +2,13 @@ import React from 'react';
 import { useState } from 'react';
 import './postBox.css';
 import User from '../signUp/user';
-const PostBox = ({ onRefreshFeed  }) => {
+const PostBox = ({ onRefreshFeed }) => {
 
     // Get the first user from the list of all users
     const user = User.allUsers[0];
 
     // Initialize state for post content and image
-    const [postContent, setPostContent] = useState(""); 
+    const [postContent, setPostContent] = useState("");
     const [image, setImage] = useState(null);
 
     // Function to handle input change
@@ -18,8 +18,8 @@ const PostBox = ({ onRefreshFeed  }) => {
 
     // Function to handle image selection
     const handleImageChange = (event) => {
-    // Check if the file is an image
-    // Update state with the selected image
+        // Check if the file is an image
+        // Update state with the selected image
         const file = event.target.files[0];
         if (file) {
             // Only proceed if a file is selected
@@ -33,7 +33,7 @@ const PostBox = ({ onRefreshFeed  }) => {
             setImage(null);
         }
     };
-    
+
     // Function to handle adding a new post
     const handleAddPost = async () => {
         try {
@@ -42,40 +42,48 @@ const PostBox = ({ onRefreshFeed  }) => {
                 alert('Please add at least some content or an image.');
                 return;
             }
-    
+
+            // Retrieve the token from local storage
+            const token = localStorage.getItem('userToken');
+            if (!token) {
+                alert('You must be logged in to post.');
+                return;
+            }
+
             const readFileAsBase64 = (file) => {
                 return new Promise((resolve, reject) => {
-                  const reader = new FileReader();
-                  reader.onload = () => resolve(reader.result);
-                  reader.onerror = reject;
-                  reader.readAsDataURL(file);
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
                 });
-              };
-            
-              let base64Image = "";
-              if (document.getElementById('imageInput').files[0]) {
+            };
+
+            let base64Image = "";
+            if (document.getElementById('imageInput').files[0]) {
                 base64Image = await readFileAsBase64(document.getElementById('imageInput').files[0]);
-              }
-    
+            }
+
             const postData = {
-                ownerID: 'userID', // Set the ownerID to the user's ID
                 content: postContent,
                 image: base64Image, // Use the base64 representation of the image
                 date: new Date().toISOString(),
                 comments: [],
                 likes: []
-              };
-            
+            };
+
             const response = await fetch('http://localhost:12345/api/posts/add', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(postData)
-            }); 
-    
+            });
             if (!response.ok) {
                 throw new Error('Failed to add post');
             }
-            
+
             onRefreshFeed();
 
             // Reset state
@@ -86,7 +94,7 @@ const PostBox = ({ onRefreshFeed  }) => {
             alert('Failed to add post.');
         }
     };
-    
+
 
     return (
         <div className="postBox">
@@ -96,7 +104,7 @@ const PostBox = ({ onRefreshFeed  }) => {
                 <img src={user ? user.getImage() : ""} alt="profile" className="profilePic" />
                 {/** Display input field */}
                 <input type="text" value={postContent} onChange={handleInputChange}
-                 placeholder="What's on your mind?" className="postInput" />
+                    placeholder="What's on your mind?" className="postInput" />
             </div>
             {/** Display buttons */}
             <div className="postBox_buttons">
@@ -108,7 +116,7 @@ const PostBox = ({ onRefreshFeed  }) => {
                 <button className="postButton">Feeling/Activity</button>
             </div>
             {/** Display selected image */}
-            {image && <img src={image} alt="selected" className="selectedImage" />} 
+            {image && <img src={image} alt="selected" className="selectedImage" />}
         </div>
     );
 }
