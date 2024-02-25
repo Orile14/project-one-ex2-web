@@ -5,28 +5,36 @@ const Posts = ({ posts }) => {
     const [postsWithProfile, setPostsWithProfile] = useState([]);
 
     useEffect(() => {
-        const fetchProfiles = async () => {
-            // Fetch profile images for each post and update state
-            const postsWithProfileData = await Promise.all(posts.map(async (post) => {
+        const fetchProfilesAndNicknames = async () => {
+            const postsWithExtraData = await Promise.all(posts.map(async (post) => {
                 try {
-                    // Fetch profile image based on the username
-                    const response = await fetch(`http://localhost:12345/api/posts/profile/${post.postOwnerID}`);
-                    if (!response.ok) {
+                    // Fetch profile image
+                    const profileResponse = await fetch(`http://localhost:12345/api/posts/profile/${post.postOwnerID}`);
+                    if (!profileResponse.ok) {
                         throw new Error('Profile fetch failed');
                     }
-                    const profileData = await response.json();
-
-                    return { ...post, profile: profileData.imgUrl }; // Add profile image URL to post
+                    const profileData = await profileResponse.json();
+                    
+    
+                    // Fetch nickname
+                    const nicknameResponse = await fetch(`http://localhost:12345/api/posts/nickname/${post.postOwnerID}`);
+                    if (!nicknameResponse.ok) {
+                        throw new Error('Nickname fetch failed');
+                    }
+                    const nicknameData = await nicknameResponse.json();
+                    console.log("aaaaaaaaaaaaaa")
+                    console.log(nicknameData)
+                    // Combine post data with fetched profile image and nickname
+                    return { ...post, profile: profileData.imgUrl, nickname: nicknameData.nickname };
                 } catch (error) {
-                    console.error('Fetch profile error:', error);
-                    return { ...post, profile: null }; // Handle error by setting profile to null
+                    console.error('Fetch profile or nickname error:', error);
+                    return { ...post, profile: null, nickname: null }; // Handle error by setting profile and nickname to null
                 }
             }));
-            setPostsWithProfile(postsWithProfileData);
+            setPostsWithProfile(postsWithExtraData);
         };
-        fetchProfiles();
+        fetchProfilesAndNicknames();
     }, [posts]); // Run effect when 'posts' prop changes
-
     
   
     
@@ -43,13 +51,14 @@ const Posts = ({ posts }) => {
         const year = date.getFullYear();
         return `${hours}:${minutes} ${day}/${month}/${year}`;
     };
+
     return (
         <div className="posts">
             {sortedPosts.map((post) => (
                 <CreatePost
                     key={post._id}
                     id={post._id}
-                    username={post.username}
+                    username={post.nickname}
                     timestamp={formatDate(post.date)}
                     originalContent={post.content}
                     likes={post.likes}
@@ -62,4 +71,4 @@ const Posts = ({ posts }) => {
     );
 };
 
-export default Posts;
+export default Posts;
