@@ -7,13 +7,23 @@ const createUser = async (req, res) => {
 const authUser = async (req, res) => {
     res.json(await userService.authUser(req.body.username, req.body.password))
 };
-
-function isLogedIn(req,res,next){
-    if(req.session.username!=null){
-        return next();
-    }else{
-        res.redirect('/')
+const getUserDetails = async (req, res) => {
+    try {
+        const username = req.params.name; 
+        const userDetails = await userService.getUserDetailsByUsername(username);
+        res.json(userDetails); // Send both img and nick in the response
+    } catch (error) {
+        res.status(404).json({ message: error.message });
     }
-}
+};
 
-module.exports = { createUser, authUser,isLogedIn }
+const getUserImage = async (req, res) => {
+    try {
+        const username = req.params.name; 
+        const imgUrl = await userService.getUserProfileImageByUsername(username);
+        res.json({ imgUrl }); 
+    } catch (error) {
+        res.status(404).json({ message: error.message }); // User not found or other errors
+    }
+};
+module.exports = { createUser, authUser, getUserImage,getUserDetails }

@@ -1,9 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'; // Import useState and useEffect
 import CreatePost from './createPost';
 
 const Posts = ({ posts }) => {
-    // Sort posts by date in descending order
-    const sortedPosts = posts.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+    const [postsWithProfile, setPostsWithProfile] = useState([]);
+
+    useEffect(() => {
+        const fetchProfiles = async () => {
+            // Fetch profile images for each post and update state
+            const postsWithProfileData = await Promise.all(posts.map(async (post) => {
+                try {
+                    // Fetch profile image based on the username
+                    const response = await fetch(`http://localhost:12345/api/posts/profile/${post.postOwnerID}`);
+                    if (!response.ok) {
+                        throw new Error('Profile fetch failed');
+                    }
+                    const profileData = await response.json();
+
+                    return { ...post, profile: profileData.imgUrl }; // Add profile image URL to post
+                } catch (error) {
+                    console.error('Fetch profile error:', error);
+                    return { ...post, profile: null }; // Handle error by setting profile to null
+                }
+            }));
+            setPostsWithProfile(postsWithProfileData);
+        };
+        fetchProfiles();
+    }, [posts]); // Run effect when 'posts' prop changes
+
+    
+  
+    
+
+    // Use 'postsWithProfile' for sorted and mapped posts to include fetched profiles
+    const sortedPosts = postsWithProfile.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
 
     const formatDate = (isoDateString) => {
         const date = new Date(isoDateString);
@@ -14,16 +43,9 @@ const Posts = ({ posts }) => {
         const year = date.getFullYear();
         return `${hours}:${minutes} ${day}/${month}/${year}`;
     };
-
-    // Log the images for all posts (if needed for debugging)
-    sortedPosts.forEach(post => {
-        console.log('AAAAAAAAA')
-        console.log(post.comments);
-    });
-
     return (
         <div className="posts">
-            {sortedPosts.map(post => (
+            {sortedPosts.map((post) => (
                 <CreatePost
                     key={post._id}
                     id={post._id}
@@ -33,7 +55,7 @@ const Posts = ({ posts }) => {
                     likes={post.likes}
                     comments={post.comments}
                     image={post.img}
-                    profile={post.profile}
+                    profile={post.profile} // Profile image from fetched data
                 />
             ))}
         </div>

@@ -38,6 +38,6 @@
 
     const post = require('./routes/post');
     app.use('/api/posts', post);
-
+    
     app.listen(process.env.PORT);
 

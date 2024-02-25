@@ -57,7 +57,8 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
   }
 
 
-
+console.log("aaaaaaaaaaaaaaaa")
+console.log(profile)
   return (
     isRemoved ? null :
       // Create a post component

@@ -56,9 +56,6 @@ const Comment = ({ comments, postId }) => {
     const length = () => {
         
     }
-    console.log("AAAAAAAAAAAAAAAAAAAA")
-
-    console.log(newComments)
 
     return (
         <div>

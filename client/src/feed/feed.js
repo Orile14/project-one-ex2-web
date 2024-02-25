@@ -32,7 +32,6 @@ const Feed = () => {
                 console.error('There has been a problem with your fetch operation:', error);
             }
         };
-        
         fetchPosts();
     },[refreshFeed]); 
     
