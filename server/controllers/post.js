@@ -2,8 +2,8 @@ const postService = require('../services/post');
 
 
 const createPost = async (req, res) => {
-    res.json(await postService.createPost(req.body.ownerID, req.body.content, req.body.image,
-                                          req.body.date, req.body.comments, req.body.likes ))
+    res.json(await postService.createPost(req.body.postOwnerID, req.body.content, req.body.img,
+                                          req.body.date, req.body.comments, req.body.likesID))
 };
 
 const getPost = async(req,res)=>{
@@ -21,8 +21,8 @@ const getPosts = async (req, res) => {
 
 
 const updatePost = async(req,res)=>{
-    const post = await postService.updatePost(req.body.ownerID, req.body.content, req.body.image,
-        req.body.date, req.body.comments, req.body.likes)
+    const post = await postService.updatePost(req.body.postOwnerID, req.body.content, req.body.img,
+        req.body.date, req.body.comments, req.body.likesID)
         if(!post){
             return res.status(404).json({errors:['Post not found']})
         }
