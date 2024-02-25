@@ -8,4 +8,12 @@ const authUser = async (req, res) => {
     res.json(await userService.authUser(req.body.username, req.body.password))
 };
 
-module.exports = { createUser, authUser }
+function isLogedIn(req,res,next){
+    if(req.session.username!=null){
+        return next();
+    }else{
+        res.redirect('/')
+    }
+}
+
+module.exports = { createUser, authUser,isLogedIn }

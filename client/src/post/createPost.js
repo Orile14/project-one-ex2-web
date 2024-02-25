@@ -3,7 +3,6 @@ import './createPost.css';
 import Comment from '../comment/comment';
 import ShareMenu from './shareMenu';
 const CreatePost = ({ id, username, timestamp, originalContent, likes, comments, image, profile }) => {
-
   // Initialize state variables
   const [isLiked, setIsLiked] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
@@ -52,9 +51,12 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
     reader.readAsDataURL(file);
   };
 
+
   if (isRemoved) {
     return null;
   }
+
+
 
   return (
     isRemoved ? null :

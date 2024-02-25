@@ -1,3 +1,4 @@
+const session = require('express-session');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -9,6 +10,11 @@ const seedUsers = require('./seed/seedUsers');
 const seedPosts = require('./seed/seedPosts');
 
 var app = express();
+app.use(session({
+    secret:'foo',
+    saveUninitialized:false,
+    resave:false
+}));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.json());

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './feed.css';
 import NavigationBar from '../navigationBar/navigationBar';
 import LeftMenu from '../leftMenu/leftMenu';
 import Posts from '../post/posts';
 import PostBox from '../postBox/postBox';
 import FriendList from '../friendList/friendList';
+import PostList from '../post/postsList';
+import User from '../signUp/user';
 
 // This function creates the feed
 const Feed = () => {
