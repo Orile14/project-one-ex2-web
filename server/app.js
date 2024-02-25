@@ -1,5 +1,13 @@
+const session = require('express-session');
 const express = require('express');
 var app = express();
+
+
+app.use(session({
+    secret:'foo',
+    saveUninitialized:false,
+    resave:false
+}));
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '50mb' }));

@@ -8,6 +8,7 @@
     "cors": "^2.8.5",
     "custom-env": "^2.0.2",
     "express": "^4.18.2",
+    "express-session": "^1.18.0",
     "mongoos": "^0.0.1-security",
     "mongoose": "^8.1.3"
   }

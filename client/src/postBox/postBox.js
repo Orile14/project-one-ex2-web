@@ -64,7 +64,7 @@ const PostBox = ({ addPost }) => {
                 likes: []
               };
             
-            const response = await fetch('http://localhost:12345/api/posts', {
+            const response = await fetch('http://localhost:12345/api/posts/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(postData)

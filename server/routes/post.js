@@ -1,4 +1,6 @@
 const postController = require('../controllers/post');
+const userController = require('../controllers/user');
+
 
 
 const express = require('express');
@@ -8,8 +10,8 @@ router.route('/:id').get(postController.getPost)
                     .delete(postController.deletePost)
 
 router.route('/')
-.get(postController.getPosts)
-.post(postController.createPost);
+        .get(userController.isLogedIn,postController.getPosts)
+        .post(userController.isLogedIn,postController.createPost);
 
 
 module.exports = router;
