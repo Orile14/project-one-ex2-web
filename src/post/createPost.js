@@ -15,9 +15,37 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
     setIsRemoved(true);
   };
   // Function to handle post like
-  const handleLike = () => {
-    setIsLiked(!isLiked);
-  };
+  const handleLike = async () => {
+    try {
+        // Toggle the like state optimistically
+        setIsLiked(!isLiked);
+        // Send the request to the server
+        const response = await fetch(`http://localhost:12345/api/posts/like/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                // Include authentication headers if needed
+            },
+            body: JSON.stringify({
+                userId: 'user123', // Include the user ID if needed
+            }),
+        });
+        // Check if the request was successful
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+        // Optionally, update the component state based on the response
+        const data = await response.json();
+        console.log('Post liked:', data);
+        // For example, if your server responds with the updated likes count
+        // setLikes(data.likes);
+    } catch (error) {
+        console.error('Failed to like post:', error);
+        // Revert the like state if the request fails
+        setIsLiked(!isLiked);
+    }
+};
+
   // Function to handle post edit
   const handleEdit = () => {
     setIsEditing(true);
@@ -55,10 +83,7 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
   if (isRemoved) {
     return null;
   }
-
-
-console.log("aaaaaaaaaaaaaaaa")
-console.log(profile)
+  
   return (
     isRemoved ? null :
       // Create a post component
