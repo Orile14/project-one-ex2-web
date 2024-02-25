@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const Post = new Schema({
+const Post = new Schema({ 
     ownerID: {
         type: String,
         required: true
@@ -16,8 +16,8 @@ const Post = new Schema({
         required: false
     },
     date: {
-        type: String,
-        default: Date.now()
+        type: Date,
+        default: Date.now
     },
     comments: {
         type: [String],

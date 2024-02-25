@@ -2,9 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import './postBox.css';
 import User from '../signUp/user';
-const PostBox = ({ addPost }) => {
+const PostBox = ({ onRefreshFeed  }) => {
+
     // Get the first user from the list of all users
     const user = User.allUsers[0];
+
     // Initialize state for post content and image
     const [postContent, setPostContent] = useState(""); 
     const [image, setImage] = useState(null);
@@ -69,14 +71,13 @@ const PostBox = ({ addPost }) => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(postData)
             }); 
-            console.log('response:', response);
     
             if (!response.ok) {
                 throw new Error('Failed to add post');
             }
-    
-            const data = await response.json();
-    
+            
+            onRefreshFeed();
+
             // Reset state
             setPostContent("");
             setImage(null);

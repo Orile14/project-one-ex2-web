@@ -65,7 +65,6 @@ const CommentsCreate = ({ id, username, timestamp, content, deleteComment, likes
                 {/** Add the like button */}
                 <button onClick={handleLike} className={`comments-like ${likeActive ? 'active' : ''}`}>
                     <i className="bi bi-hand-thumbs-up"></i>
-                    <span>{likes.count}</span>
                 </button>
             </div>
         </div>

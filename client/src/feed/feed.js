@@ -9,14 +9,20 @@ import FriendList from '../friendList/friendList';
 // This function creates the feed
 const Feed = () => {
 
-    // This function creates the feed
-
     const [DBposts, setDBPosts] = useState([]);
+    const [refreshFeed, setRefreshFeed] = useState(false);
+
+    const triggerFeedRefresh = () => {
+        setRefreshFeed(prev => !prev);
+    };
+    
 
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await fetch('http://localhost:12345/api/posts/get'); // Replace with your server URL
+                const response = await fetch('http://localhost:12345/api/posts/get', {
+                    method: 'GET'
+                });
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -27,8 +33,14 @@ const Feed = () => {
             }
         };
         fetchPosts();
-    }, []);
+    },[refreshFeed]); 
 
+    // Log the images for all posts (if needed for debugging)
+    DBposts.forEach(post => {
+        console.log('AAAAAAAAA')
+        console.log(post.image);
+    });
+    
     return (
         //deviide the feed into 3 columns
         <div className='Feed'>
@@ -40,8 +52,8 @@ const Feed = () => {
                 </div>
                 {/* Add the post box and posts to the middle column */}
                 <div className="col-8 d-flex flex-column justify-content-start align-items-center">
-                    <PostBox />
-                    <Posts posts={DBposts} />
+                <PostBox onRefreshFeed={triggerFeedRefresh} />
+                <Posts posts={DBposts} />
                 </div>
                 {/* Add the friend list to the right column */}
                 <div className="col-2">
