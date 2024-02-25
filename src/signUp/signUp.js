@@ -82,7 +82,7 @@ const SignUp = () => {
     };
   
     try {
-      const response = await fetch('http://localhost:12345/api/users', {
+      const response = await fetch('http://localhost:12345/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData)

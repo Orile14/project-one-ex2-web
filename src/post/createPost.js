@@ -57,10 +57,11 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
   }
 
 
-
+console.log("aaaaaaaaaaaaaaaa")
+console.log(profile)
   return (
     isRemoved ? null :
-    // Create a post component
+      // Create a post component
       <div className="post">
         <div className="post-header">
           {/** Display user profile picture and post information */}
@@ -94,19 +95,18 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
             // Display post content and image if not editing
             <p>{editableContent}</p>
           )}
-          {editableImage && <img src={editableImage} alt="PostIm" className="post-image" />}
-        </div>
+          {editableImage && <img src={editableImage} alt="PostIm" className="post-image" />}        </div>
 
         <div className="buttons">
-        {/** Display like, comment, and share buttons */}
+          {/** Display like, comment, and share buttons */}
           <button className="like-button" onClick={handleLike}>
             <i className="bi bi-hand-thumbs-up"></i>
             &nbsp; Likes: {isLiked ? likes + 1 : likes}
           </button>
-          
+
           {/** Display comment button */}
           <Comment postId={id} comments={comments} className="comment-button" />
-            {/** Display share button */}
+          {/** Display share button */}
           <ShareMenu className="share-button" />
 
         </div>

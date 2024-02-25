@@ -2,9 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import './postBox.css';
 import User from '../signUp/user';
-const PostBox = ({ addPost }) => {
+const PostBox = ({ onRefreshFeed  }) => {
+
     // Get the first user from the list of all users
     const user = User.allUsers[0];
+
     // Initialize state for post content and image
     const [postContent, setPostContent] = useState(""); 
     const [image, setImage] = useState(null);
@@ -31,17 +33,61 @@ const PostBox = ({ addPost }) => {
             setImage(null);
         }
     };
+    
     // Function to handle adding a new post
-    const handleAddPost = () => {
-        // Check if both content and image are empty
-        if (!postContent.trim() && !image) {
-            alert('Please add at least some content or an image.');
-            return;
+    const handleAddPost = async () => {
+        try {
+            // Check if both content and image are empty
+            if (!postContent.trim() && !image) {
+                alert('Please add at least some content or an image.');
+                return;
+            }
+    
+            const readFileAsBase64 = (file) => {
+                return new Promise((resolve, reject) => {
+                  const reader = new FileReader();
+                  reader.onload = () => resolve(reader.result);
+                  reader.onerror = reject;
+                  reader.readAsDataURL(file);
+                });
+              };
+            
+              let base64Image = "";
+              if (document.getElementById('imageInput').files[0]) {
+                base64Image = await readFileAsBase64(document.getElementById('imageInput').files[0]);
+              }
+    
+            const postData = {
+                ownerID: 'userID', // Set the ownerID to the user's ID
+                content: postContent,
+                image: base64Image, // Use the base64 representation of the image
+                date: new Date().toISOString(),
+                comments: [],
+                likes: []
+              };
+            
+            const response = await fetch('http://localhost:12345/api/posts/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(postData)
+            }); 
+    
+            if (!response.ok) {
+                throw new Error('Failed to add post');
+            }
+            
+            onRefreshFeed();
+
+            // Reset state
+            setPostContent("");
+            setImage(null);
+        } catch (error) {
+            console.error('Error adding post:', error);
+            alert('Failed to add post.');
         }
-        addPost(postContent, image);
-        setPostContent("");
-        setImage(null);
     };
+    
+
     return (
         <div className="postBox">
             {/* Display user profile picture and input field */}
@@ -56,7 +102,7 @@ const PostBox = ({ addPost }) => {
             <div className="postBox_buttons">
                 <button className="postButton" onClick={handleAddPost}>Post</button>
                 <label className="postButton">
-                    <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
+                    <input type="file" accept="image/*" id="imageInput" onChange={handleImageChange} style={{ display: 'none' }} />
                     Add Image
                 </label>
                 <button className="postButton">Feeling/Activity</button>
