@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import './commentCreate.css';
 
-const CommentsCreate = ({ id, username, timestamp, content, deleteComment, likes, toggleLike }) => {
+const CommentsCreate = ({ id, username, timestamp, content, deleteComment, handleEditComment,handleSaveComment, likes, toggleLike }) => {
     // Initialize state variables
     const [isEditing, setIsEditing] = useState(false);
     const [editableContent, setEditableContent] = useState(content);
     const [likeActive, setLikeActive] = useState(false);
+    const textareaRef = useRef(null);
+
     // Function to handle the like button
     const handleLike = () => {
         toggleLike(id);
-        setLikeActive(!likeActive); 
+        setLikeActive(!likeActive);
     };
     // Function to handle the edit button
-    const handleEdit = () => {
-        setIsEditing(true);
+    const handleEdit = async () => {
+        const canEdit = await handleEditComment(username);
+        if (canEdit) {
+            console.log('Editing comment===================');
+            setIsEditing(true);
+        } 
     };
     // Function to handle the save button
     const handleSave = () => {
-        setIsEditing(false);
+        if (textareaRef.current) {
+            handleSaveComment(id, textareaRef.current.value);
+            setIsEditing(false);
+        }
     };
     // Function to handle the change event
     const handleChange = (event) => {
@@ -53,7 +62,7 @@ const CommentsCreate = ({ id, username, timestamp, content, deleteComment, likes
                 <div className="post-content">
                     {isEditing ? (
                         //if the user is editing the comment, show the textarea
-                        <textarea value={editableContent} onChange={handleChange} className="edit-textarea" />
+                        <textarea ref={textareaRef} value={editableContent} onChange={handleChange} className="edit-textarea" />
                     ) : (
                         //if the user is not editing the comment, show the content
                         <p>{editableContent}</p>

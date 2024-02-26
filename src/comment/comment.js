@@ -97,6 +97,65 @@ const Comment = ({ comments, postId }) => {
             alert('Failed to add comment.');
         }
     };
+    const handleEditComment = async (id) => {
+        try {
+            const token = localStorage.getItem('userToken');
+            if (!token) {
+                alert('You must be logged in to edit comments.');
+                return false;
+            }
+            const responseAuth = await fetch(`http://localhost:12345/api/posts/comment/edit/${postId}/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+            });
+
+            if (!responseAuth.ok) {
+                // If the response is not OK, it means there's either an authorization error or another issue.
+                console.error(`Error: ${responseAuth.statusText}`);
+                alert('You are not authorized or there was an error.');
+                return false;
+            }
+
+            const data = await responseAuth.json();
+            return data;
+        } catch (error) {
+            console.error('Failed to check authorization:', error);
+            return false;
+        }
+    };
+
+    // Function to handle post save
+    const handleSaveComment = async (id,newContent) => {
+        try {
+            const token = localStorage.getItem('userToken');
+            // Check if both content and image are empty
+            if (!token) {
+                alert('You must be logged in to edit comments.');
+                return false;
+            }
+            const response = await fetch(`http://localhost:12345/api/posts/comment/edit/${postId}/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ content:newContent }),
+
+            });
+            // Check if the request was successful
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+            const data = await response.json();
+        }
+        catch (error) {
+            console.error('Failed to edit post:', error);
+        }
+    };
+
     return (
         <div>
             <button className="commentButton" id="commentbutton" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
@@ -121,6 +180,8 @@ const Comment = ({ comments, postId }) => {
                                     content={comment.content}
                                     timestamp={comment.date}
                                     deleteComment={deleteComment}
+                                    handleEditComment={handleEditComment}
+                                    handleSaveComment={handleSaveComment}
                                     likes={comment.likesID}
                                     toggleLike={toggleLike}
                                 />
