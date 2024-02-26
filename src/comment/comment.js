@@ -4,7 +4,6 @@ import './comment.css';
 
 const Comment = ({ comments, postId }) => {
 
-    
     // Initialize state variables
     const [isAdded, setIsAdded] = useState(false);
     const input = useRef(null);
@@ -38,59 +37,57 @@ const Comment = ({ comments, postId }) => {
         setIsAdded(true);
     }
     // Function to add a comment
-    // Function to add a comment
-const AddComment = async () => {
-    try {
-        const token = localStorage.getItem('userToken');
-        if (!token) {
-            alert('You must be logged in to add comments.');
-            return;
+    const AddComment = async () => {
+        try {
+            const token = localStorage.getItem('userToken');
+            if (!token) {
+                alert('You must be logged in to add comments.');
+                return;
+            }
+
+            const response = await fetch(`http://localhost:12345/api/posts/comment/${postId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    content: input.current.value 
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+
+            console.log('Comment added successfully');
+            setIsAdded(false);
+
+            // Refresh the comments list after adding a comment
+            const updatedComments = await response.json();
+            console.log('updatedComments:', updatedComments);
+            setNewComments(updatedComments);
+            
+        } catch (error) {
+            console.error('Failed to add comment:', error);
+            alert('Failed to add comment.');
         }
+    };
 
-        const response = await fetch(`http://localhost:12345/api/posts/comment/${postId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                content: input.current.value // Include the content of the comment in the request body
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`Error: ${response.status}`);
-        }
-
-        console.log('Comment added successfully');
-        setIsAdded(false);
-        
-        // Refresh the comments list after adding a comment
-        const updatedComments = await response.json();
-        setNewComments(updatedComments);
-
-    } catch (error) {
-        console.error('Failed to add comment:', error);
-        alert('Failed to add comment.');
-    }
-};
-
-
-    
 
     return (
         <div>
-            <button className="commentButton" id = "commentbutton"  data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
+            <button className="commentButton" id="commentbutton" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
                 <i className="bi bi-chat"></i>
-                &nbsp; Comments: {}
+                &nbsp; Comments: { }
             </button>
             <div className="modal fade" id={modalId} tabIndex="-1" aria-labelledby={`${modalId}Label`} aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5" id={`${modalId}Label`}>Comments List</h1>
-                            <button type="button" className="btn-close CloseEditMode" data-bs-dismiss="modal" 
-                            aria-label="Close"></button>
+                            <button type="button" className="btn-close CloseEditMode" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
                             {newComments.map((comment) => (

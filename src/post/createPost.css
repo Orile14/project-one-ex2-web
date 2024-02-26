@@ -14,9 +14,8 @@ body[data-theme="dark"] .post {
     background-color: var(--bg-color-soft-dark); /* Dark mode background color */
     color: var(--text-color-dark); /* Dark mode text color */
 }
-.post-header-info:hover{
-    cursor: pointer;
-    border-radius: 3%;
+.post:hover {
+    cursor: default;
 }
 .post-image {
     max-width: 100%; 
@@ -134,3 +133,18 @@ body[data-theme="dark"] .Edit:hover {
     color: white; /* Change text color on hover */
 }
 
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+.post-header-info{
+    display: flex;
+    align-items: center;
+    border-radius: 3%;
+}
+.username {
+    margin-bottom: 1px;
+}
+.timestamp {
+    margin-bottom: 1px;
+}

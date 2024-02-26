@@ -66,7 +66,7 @@ const PostBox = ({ onRefreshFeed }) => {
 
             const postData = {
                 content: postContent,
-                image: base64Image, // Use the base64 representation of the image
+                img: base64Image, // Use the base64 representation of the image
                 date: new Date().toISOString(),
                 comments: [],
                 likes: []
