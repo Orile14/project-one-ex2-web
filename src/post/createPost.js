@@ -143,6 +143,11 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
     reader.readAsDataURL(file);
   };
 
+  const redirectProfile = async () => {
+    navigate('/profile');
+  };
+
+
 
   if (isRemoved) {
     return null;
@@ -153,9 +158,9 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
       <div className="post-header">
         {/** Display user profile picture and post information */}
         <div className="post-header-info">
-          <img src={profile} alt="PostIm" className="profilePic" />
+        <button class="button-with-profilePic" onClick={redirectProfile}><img src={profile} alt="PostIm" className="profilePic" /></button>
           <div className="user-info">
-            <p className="username">{username}</p>
+            <button className="username" onClick={redirectProfile}>{username}</button>
             <p className="timestamp">{timestamp}</p>
           </div>
         </div>
