@@ -50,6 +50,7 @@ const Posts = ({ posts }) => {
         const year = date.getFullYear();
         return `${hours}:${minutes} ${day}/${month}/${year}`;
     };
+  
     return (
         <div className="posts">
             {sortedPosts.map((post) => (

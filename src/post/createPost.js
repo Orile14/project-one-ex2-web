@@ -142,8 +142,7 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
     };
     reader.readAsDataURL(file);
   };
-
-
+console.log(id)
   if (isRemoved) {
     return null;
   }

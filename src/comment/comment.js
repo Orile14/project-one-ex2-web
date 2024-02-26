@@ -28,10 +28,37 @@ const Comment = ({ comments, postId }) => {
         // }));
     };
     // Function to delete a comment
-    const deleteComment = (commentId) => {
-        // const updatedComments = newComments.filter((comment) => comment.id !== id);
-        // setNewComments(updatedComments);
+    const deleteComment = async (commentId) => {
+        try{
+            const token = localStorage.getItem('userToken');
+            if (!token) {
+                alert('You must be logged in to delete comments.');
+                return;
+            }
+
+            const response = await fetch(`http://localhost:12345/api/posts/comment/${postId}/${commentId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+
+            console.log('Comment deleted successfully');
+            // Refresh the comments list after deleting a comment
+            const updatedComments = await response.json();
+            console.log('updatedComments:', updatedComments);
+            setNewComments(updatedComments);
+        
+        }
+    catch (error) {
+        console.error('Failed to delete comment:', error);
+        alert('Failed to delete comment.');
     }
+};
     // Function to add a comment
     const Add = () => {
         setIsAdded(true);
@@ -73,13 +100,11 @@ const Comment = ({ comments, postId }) => {
             alert('Failed to add comment.');
         }
     };
-
-
     return (
         <div>
             <button className="commentButton" id="commentbutton" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
                 <i className="bi bi-chat"></i>
-                &nbsp; Comments: { }
+                &nbsp; Comments: {newComments.length }
             </button>
             <div className="modal fade" id={modalId} tabIndex="-1" aria-labelledby={`${modalId}Label`} aria-hidden="true">
                 <div className="modal-dialog">
