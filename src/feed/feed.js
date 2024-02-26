@@ -34,7 +34,6 @@ const Feed = () => {
         };
         fetchPosts();
     },[refreshFeed]); 
-    console.log("=============",DBposts);
     return (
         //deviide the feed into 3 columns
         <div className='Feed'>

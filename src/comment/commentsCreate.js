@@ -27,7 +27,6 @@ const CommentsCreate = ({ id, username, timestamp, content, deleteComment, likes
     const Remove = () => {
         deleteComment(id);
     };
-
     return (
         // Add the comment to the container
         <div className='container'>

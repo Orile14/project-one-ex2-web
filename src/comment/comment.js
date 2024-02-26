@@ -27,15 +27,14 @@ const Comment = ({ comments, postId }) => {
         //     return comment;
         // }));
     };
-    // Function to delete a comment
+
     const deleteComment = async (commentId) => {
-        try{
+        try {
             const token = localStorage.getItem('userToken');
             if (!token) {
                 alert('You must be logged in to delete comments.');
                 return;
             }
-
             const response = await fetch(`http://localhost:12345/api/posts/comment/${postId}/${commentId}`, {
                 method: 'DELETE',
                 headers: {
@@ -44,21 +43,19 @@ const Comment = ({ comments, postId }) => {
             });
 
             if (!response.ok) {
-                throw new Error(`Error: ${response.status}`);
+                throw new Error(`Error: ${response.statusText}`);
             }
 
             console.log('Comment deleted successfully');
             // Refresh the comments list after deleting a comment
-            const updatedComments = await response.json();
-            console.log('updatedComments:', updatedComments);
-            setNewComments(updatedComments);
-        
+            // Assuming the backend returns the updated comments array after deletion
+            const updatedComments = await response.json(); // Make sure the backend returns the updated list of comments
+            setNewComments(updatedComments); // Update the local state to reflect the deletion
+        } catch (error) {
+            console.error('Failed to delete comment:', error);
+            alert('Failed to delete comment.');
         }
-    catch (error) {
-        console.error('Failed to delete comment:', error);
-        alert('Failed to delete comment.');
-    }
-};
+    };
     // Function to add a comment
     const Add = () => {
         setIsAdded(true);
@@ -79,7 +76,7 @@ const Comment = ({ comments, postId }) => {
                     'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    content: input.current.value 
+                    content: input.current.value
                 })
             });
 
@@ -94,7 +91,7 @@ const Comment = ({ comments, postId }) => {
             const updatedComments = await response.json();
             console.log('updatedComments:', updatedComments);
             setNewComments(updatedComments);
-            
+
         } catch (error) {
             console.error('Failed to add comment:', error);
             alert('Failed to add comment.');
@@ -104,7 +101,7 @@ const Comment = ({ comments, postId }) => {
         <div>
             <button className="commentButton" id="commentbutton" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
                 <i className="bi bi-chat"></i>
-                &nbsp; Comments: {newComments.length }
+                &nbsp; Comments: {newComments.length}
             </button>
             <div className="modal fade" id={modalId} tabIndex="-1" aria-labelledby={`${modalId}Label`} aria-hidden="true">
                 <div className="modal-dialog">
