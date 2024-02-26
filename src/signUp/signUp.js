@@ -82,7 +82,7 @@ const SignUp = () => {
     };
   
     try {
-      const response = await fetch('http://localhost:12345/api/users/login', {
+      const response = await fetch('http://localhost:12345/api/users', { 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData)
@@ -90,8 +90,6 @@ const SignUp = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      const data = await response.json();
-      console.log(data);
       navigate('/login');
     } catch (error) {
       console.error('Error:', error);

@@ -22,8 +22,7 @@ const Posts = ({ posts }) => {
                         throw new Error('Nickname fetch failed');
                     }
                     const nicknameData = await nicknameResponse.json();
-                    console.log("aaaaaaaaaaaaaa")
-                    console.log(nicknameData)
+            
                     // Combine post data with fetched profile image and nickname
                     return { ...post, profile: profileData.imgUrl, nickname: nicknameData.nickname };
                 } catch (error) {
@@ -51,7 +50,7 @@ const Posts = ({ posts }) => {
         const year = date.getFullYear();
         return `${hours}:${minutes} ${day}/${month}/${year}`;
     };
-
+    console.log(sortedPosts);
     return (
         <div className="posts">
             {sortedPosts.map((post) => (
@@ -61,7 +60,7 @@ const Posts = ({ posts }) => {
                     username={post.nickname}
                     timestamp={formatDate(post.date)}
                     originalContent={post.content}
-                    likes={post.likes}
+                    likes={post.likesID}
                     comments={post.comments}
                     image={post.img}
                     profile={post.profile} // Profile image from fetched data

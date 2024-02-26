@@ -4,6 +4,8 @@ import Comment from '../comment/comment';
 import ShareMenu from './shareMenu';
 const CreatePost = ({ id, username, timestamp, originalContent, likes, comments, image, profile }) => {
   // Initialize state variables
+  const [totalLikes, setTotalLikes] = useState(likes);
+
   const [isLiked, setIsLiked] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -11,40 +13,80 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
   const [editableImage, setEditableImage] = useState(image);
 
   // Function to handle post removal
-  const Remove = () => {
-    setIsRemoved(true);
+  const Remove = async () => {
+    try {
+      
+      const token = localStorage.getItem('userToken');
+      if (!token) {
+        alert('You must be logged in to remove posts.');
+        return;
+      }
+
+      const response = await fetch(`http://localhost:12345/api/posts/delete/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      console.log('Post removed successfully');
+      setIsRemoved(true); 
+    } catch (error) {
+      if(error.message === 'Error: 401'){
+        alert('You are not authorized to remove this post.');
+        return;
+      }
+      console.error('Failed to remove post:', error);
+      alert('Failed to remove post.');
+    }
+    setIsRemoved(false); 
+
   };
+
   // Function to handle post like
   const handleLike = async () => {
     try {
-        // Toggle the like state optimistically
-        setIsLiked(!isLiked);
-        // Send the request to the server
-        const response = await fetch(`http://localhost:12345/api/posts/like/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                // Include authentication headers if needed
-            },
-            body: JSON.stringify({
-                userId: 'user123', // Include the user ID if needed
-            }),
-        });
-        // Check if the request was successful
-        if (!response.ok) {
-            throw new Error(`Error: ${response.status}`);
-        }
-        // Optionally, update the component state based on the response
-        const data = await response.json();
-        console.log('Post liked:', data);
-        // For example, if your server responds with the updated likes count
-        // setLikes(data.likes);
+      // Retrieve the token from local storage
+      const token = localStorage.getItem('userToken');
+      if (!token) {
+        alert('You must be logged in to like posts.');
+        return;
+      }
+
+      // Optimistically toggle the like state
+      setIsLiked(!isLiked);
+
+      // Send the request to the server
+      const response = await fetch(`http://localhost:12345/api/posts/like/${id}`, {
+        method: 'PUT', // or 'POST', as per your backend API
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          isLiked: !isLiked
+        }),
+      });
+
+      // Check if the request was successful
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+
+      // Optionally, update the component state based on the response
+      const data = await response.json();
+      console.log('Post liked:', data);
+
     } catch (error) {
-        console.error('Failed to like post:', error);
-        // Revert the like state if the request fails
-        setIsLiked(!isLiked);
+      console.error('Failed to like post:', error);
+      // Revert the like state if the request fails
+      setIsLiked(!isLiked);
+      alert('Failed to like post.');
     }
-};
+  };
 
   // Function to handle post edit
   const handleEdit = () => {
@@ -59,16 +101,12 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
       return;
     }
     setIsEditing(false);
-
   };
+
   // Function to handle input change
   const handleChange = (event) => {
     setEditableContent(event.target.value);
   };
-
-  if (isRemoved) {
-    return null;
-  }
 
   const handlleImage = (event) => {
     const file = event.target.files[0];
@@ -79,11 +117,9 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
     reader.readAsDataURL(file);
   };
 
-
   if (isRemoved) {
     return null;
   }
-  
   return (
     isRemoved ? null :
       // Create a post component
@@ -126,14 +162,13 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
           {/** Display like, comment, and share buttons */}
           <button className="like-button" onClick={handleLike}>
             <i className="bi bi-hand-thumbs-up"></i>
-            &nbsp; Likes: {isLiked ? likes + 1 : likes}
+            &nbsp; Likes: {likes.length}
           </button>
 
           {/** Display comment button */}
           <Comment postId={id} comments={comments} className="comment-button" />
           {/** Display share button */}
           <ShareMenu className="share-button" />
-
         </div>
       </div>
   );
