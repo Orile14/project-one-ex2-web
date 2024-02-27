@@ -1,24 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./feedSection.css";
 import FeedItem from "./feedItem/feedItem";
 import FeedData from "./feedItem/feedItem.json";
 
-const FeedSection = () => {
-  // Initialize selectedIcon with the class of the first icon in FeedData
-  const initialSelectedIcon = FeedData.length > 0 ? FeedData[0] : null;
-  const [selectedIcon, setSelectedIcon] = useState(initialSelectedIcon);
+const FeedSection = ({ currentPage }) => {
+  const [selectedIcon, setSelectedIcon] = useState(currentPage);
+  const navigate = useNavigate();
 
-  const handleItemClick = (iconClass) => {
-    setSelectedIcon(iconClass);
+  const getID = async () => {
+    try {
+      const token = localStorage.getItem('userToken');
+      if (!token) {
+        alert('You must be logged in to post.');
+        return;
+      }
+
+      const response = await fetch('http://localhost:12345/api/users/getID', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      return data.ownerId
+
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to create user.');
+    }
+  }
+
+  useEffect(() => {
+    if (currentPage === 'feed') {
+      setSelectedIcon(FeedData[0]);
+    } else if (currentPage === 'profile') {
+      setSelectedIcon(FeedData[1]);
+    }
+  }, [currentPage]);
+
+  const handleItemClick = async (iconClass) => {
+    // Only update if the clicked icon is different from the current page
+    if ((iconClass === FeedData[0] && currentPage !== 'feed') ||
+      (iconClass === FeedData[1])) {
+      setSelectedIcon(iconClass);
+
+      if (iconClass === FeedData[0]) {
+        navigate('/feed');
+      } else if (iconClass === FeedData[1]) {
+        const id = await getID();
+        navigate(`/profile/${id}`);
+      }
+    }
   };
-
-  // Import the array of Bootstrap icon classes from FeedItem.json
-  const feedItems = FeedData;
 
   return (
     <div className="d-flex align-items-center">
-      {/** Map through the feedItems and create a FeedItem for each item */}
-      {feedItems.map((iconClass, index) => (
+      {FeedData.map((iconClass, index) => (
         <FeedItem
           key={index}
           iconClass={iconClass}

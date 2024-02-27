@@ -14,9 +14,8 @@ body[data-theme="dark"] .post {
     background-color: var(--bg-color-soft-dark); /* Dark mode background color */
     color: var(--text-color-dark); /* Dark mode text color */
 }
-.post-header-info:hover{
-    cursor: pointer;
-    border-radius: 3%;
+.post:hover {
+    cursor: default;
 }
 .post-image {
     max-width: 100%; 
@@ -31,6 +30,7 @@ body[data-theme="dark"] .post {
     background-color: #f0f2f5;
     color: black;
 }
+
 .edit-textarea {
     width: 100%;
     border: 1px solid #ccc;
@@ -39,7 +39,7 @@ body[data-theme="dark"] .post {
     margin-top: 10px;
     background-color: var(--bg-color-light); /* Light mode background */
     color: var(--text-color-light); /* Light mode text color */
-  } 
+} 
 
   /* Dark Mode styles for edit-textarea */
 body[data-theme="dark"] .edit-textarea {
@@ -134,3 +134,25 @@ body[data-theme="dark"] .Edit:hover {
     color: white; /* Change text color on hover */
 }
 
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-header-info{
+    display: flex;
+    align-items: center;
+    border-radius: 3%;
+}
+.username {
+    all: unset;
+    margin-bottom: 1px;
+}
+.timestamp {
+    margin-bottom: 1px;
+}
+.button-with-profilePic {
+    padding: 0;
+    background-color: transparent;
+    border: transparent;
+}

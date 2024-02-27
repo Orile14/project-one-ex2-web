@@ -4,7 +4,6 @@ import './comment.css';
 
 const Comment = ({ comments, postId }) => {
 
-    
     // Initialize state variables
     const [isAdded, setIsAdded] = useState(false);
     const input = useRef(null);
@@ -13,63 +12,186 @@ const Comment = ({ comments, postId }) => {
 
     // Function to handle the like button
     const toggleLike = (commentId) => {
-        // setNewComments(newComments.map(comment => {
-        //     // If the comment id matches the id of the comment being liked, update the likes
-        //     if (comment.id === id) {
-        //         const currentLikes = comment.likes || { count: 0, likedByUser: false };
-        //         return {
-        //             ...comment,
-        //             likes: {
-        //                 count: currentLikes.likedByUser ? currentLikes.count - 1 : currentLikes.count + 1,
-        //                 likedByUser: !currentLikes.likedByUser
-        //             }
-        //         };
-        //     }
-        //     return comment;
-        // }));
+        //  setNewComments(newComments.map(comment => {
+        //      // If the comment id matches the id of the comment being liked, update the likes
+        //      if (comment.id === id) {
+        //          const currentLikes = comment.likes || { count: 0, likedByUser: false };
+        //          return {
+        //              ...comment,
+        //              likes: {
+        //                  count: currentLikes.likedByUser ? currentLikes.count - 1 : currentLikes.count + 1,
+        //                  likedByUser: !currentLikes.likedByUser
+        //              }
+        //          };
+        //      }
+        //      return comment;
+        //  }));
     };
-    // Function to delete a comment
-    const deleteComment = (commentId) => {
-        // const updatedComments = newComments.filter((comment) => comment.id !== id);
-        // setNewComments(updatedComments);
-    }
+
+    const deleteComment = async (commentId) => {
+        try {
+            const token = localStorage.getItem('userToken');
+            if (!token) {
+                alert('You must be logged in to delete comments.');
+                return;
+            }
+            const response = await fetch(`http://localhost:12345/api/posts/comment/${postId}/${commentId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error: ${response.statusText}`);
+            }
+
+            console.log('Comment deleted successfully');
+            // Refresh the comments list after deleting a comment
+            // Assuming the backend returns the updated comments array after deletion
+            const updatedComments = await response.json(); // Make sure the backend returns the updated list of comments
+            setNewComments(updatedComments); // Update the local state to reflect the deletion
+        } catch (error) {
+            console.error('Failed to delete comment:', error);
+            alert('Failed to delete comment.');
+        }
+    };
     // Function to add a comment
     const Add = () => {
-        // setIsAdded(true);
+        setIsAdded(true);
     }
     // Function to add a comment
-    const AddComment = () => {
-        // // Create a new comment object
-        // const comment = {
-        //     id: newComments.length + 1,
-        //     username: username,
-        //     timestamp: "Just now",
-        //     content: input.current.value,
-        //     likes: { count: 0, likedByUser: false }
-        // };
-        // // Add the new comment to the comments list
-        // setNewComments([...newComments, comment]);
-        // input.current.value = "";
-        // setIsAdded(false);
-    }
+    const AddComment = async () => {
+        try {
+            const token = localStorage.getItem('userToken');
+            if (!token) {
+                alert('You must be logged in to add comments.');
+                return;
+            }
 
-    const length = () => {
-        
-    }
+            const response = await fetch(`http://localhost:12345/api/posts/comment/${postId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    content: input.current.value
+                })
+            });
 
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+
+            console.log('Comment added successfully');
+            setIsAdded(false);
+
+            // Refresh the comments list after adding a comment
+            const updatedComments = await response.json();
+            console.log('updatedComments:', updatedComments);
+            setNewComments(updatedComments);
+
+        } catch (error) {
+            console.error('Failed to add comment:', error);
+            alert('Failed to add comment.');
+        }
+    };
+    const handleEditComment = async (id) => {
+        try {
+            const token = localStorage.getItem('userToken');
+            if (!token) {
+                alert('You must be logged in to edit comments.');
+                return false;
+            }
+            const responseAuth = await fetch(`http://localhost:12345/api/posts/comment/edit/${postId}/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+            });
+
+            if (!responseAuth.ok) {
+                // If the response is not OK, it means there's either an authorization error or another issue.
+                console.error(`Error: ${responseAuth.statusText}`);
+                alert('You are not authorized or there was an error.');
+                return false;
+            }
+
+            const data = await responseAuth.json();
+            return data;
+        } catch (error) {
+            console.error('Failed to check authorization:', error);
+            return false;
+        }
+    };
+    // Function to handle post save
+    const handleSaveComment = async (id,newContent) => {
+        try {
+            const token = localStorage.getItem('userToken');
+            // Check if both content and image are empty
+            if (!token) {
+                alert('You must be logged in to edit comments.');
+                return false;
+            }
+            const response = await fetch(`http://localhost:12345/api/posts/comment/edit/${postId}/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ content:newContent }),
+
+            });
+            // Check if the request was successful
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+            const data = await response.json();
+        }
+        catch (error) {
+            console.error('Failed to edit post:', error);
+        }
+    };
+    const handleLikeComment = async (id) => {
+        try {
+            const token = localStorage.getItem('userToken');
+            if (!token) {
+                alert('You must be logged in to like comments.');
+                return;
+            }
+            const response = await fetch(`http://localhost:12345/api/posts/comment/like/${postId}/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log('data:', data);
+        } catch (error) {
+            console.error('Failed to like comment:', error);
+            alert('Failed to like comment.');
+        }
+    }
     return (
         <div>
-            <button className="commentButton" id = "commentbutton"  data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
+            <button className="commentButton" id="commentbutton" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
                 <i className="bi bi-chat"></i>
-                &nbsp; Comments: {length()}
+                &nbsp; Comments: {newComments.length}
             </button>
             <div className="modal fade" id={modalId} tabIndex="-1" aria-labelledby={`${modalId}Label`} aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5" id={`${modalId}Label`}>Comments List</h1>
-                            <button type="button" className="btn-close CloseEditMode" data-bs-dismiss="modal" 
-                            aria-label="Close"></button>
+                            <button type="button" className="btn-close CloseEditMode" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
                             {newComments.map((comment) => (
@@ -81,7 +203,10 @@ const Comment = ({ comments, postId }) => {
                                     content={comment.content}
                                     timestamp={comment.date}
                                     deleteComment={deleteComment}
-                                    likes={comment.likesID}
+                                    handleEditComment={handleEditComment}
+                                    handleSaveComment={handleSaveComment}
+                                    handleLikeComment={handleLikeComment}
+                                    likes={comment.likes}
                                     toggleLike={toggleLike}
                                 />
                             ))}

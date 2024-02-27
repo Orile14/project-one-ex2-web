@@ -2,13 +2,13 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./login.css";
 import InputBox from "../inputBox/inputBox";
-import User from "../signUp/user"; 
+import User from "../signUp/user";
 import { ThemeContext } from '../themeContext/themeContext';
 import { useAuth } from '../authContext/authContext';
 
 const Login = () => {
   // Accessing theme and toggleTheme from ThemeContext using useContext hook
-  const { theme, toggleTheme } = useContext(ThemeContext); 
+  const { theme, toggleTheme } = useContext(ThemeContext);
   // Use the useNavigate hook to navigate to other pages
   const navigate = useNavigate();
   // Initialize state for username, password, and login message
@@ -19,41 +19,58 @@ const Login = () => {
 
   const handleSignUpClick = () => {
     // Change this to the path of your signup page
-    navigate('/signup'); 
+    navigate('/signup');
   };
 
   const handleLoginClick = async () => {
     try {
-        const response = await fetch('http://localhost:12345/api/users/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
+      const response = await fetch('http://localhost:12345/api/users/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (data) {
+        // Now, get the token from the specified URL
+        const tokenResponse = await fetch('http://localhost:12345/api/tokens', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password }) 
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+
+        if (!tokenResponse.ok) {
+          throw new Error(`HTTP error! Status: ${tokenResponse.status}`);
         }
 
-        const data = await response.json();
-        if (data) {
-            setLoginMessage(`Welcome, ${username}! You have successfully logged in.`);
-            login();
-            navigate('/Feed');
-        } else {
-            setLoginMessage('Invalid email or password. Please try again.');
-        }
+        const tokenData = await tokenResponse.json();
+
+        // Store the received token in local storage
+        localStorage.setItem('userToken', tokenData.token);
+        
+        setLoginMessage(`Welcome, ${username}! You have successfully logged in.`);
+        login();
+        navigate('/Feed');
+      } else {
+        setLoginMessage('Invalid email or password. Please try again.');
+      }
     } catch (error) {
-        console.error('Error:', error);
-        setLoginMessage('Login failed. Please try again later.');
+      console.error('Error:', error);
+      setLoginMessage('Login failed. Please try again later.');
     }
-};
+  };
 
 
   return (
     <div className="Login">
       {/* Use the theme to conditionally render the class */}
       <button className="Toggle" onClick={toggleTheme}>
-        {theme === 'dark' ? 'Dark Mode' : 'Light Mode'} 
+        {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
       </button>
       <div className="content-box">
         {/* Add the login form */}

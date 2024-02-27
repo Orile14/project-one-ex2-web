@@ -15,15 +15,13 @@ const Posts = ({ posts }) => {
                     }
                     const profileData = await profileResponse.json();
                     
-    
                     // Fetch nickname
                     const nicknameResponse = await fetch(`http://localhost:12345/api/posts/nickname/${post.postOwnerID}`);
                     if (!nicknameResponse.ok) {
                         throw new Error('Nickname fetch failed');
                     }
                     const nicknameData = await nicknameResponse.json();
-                    console.log("aaaaaaaaaaaaaa")
-                    console.log(nicknameData)
+            
                     // Combine post data with fetched profile image and nickname
                     return { ...post, profile: profileData.imgUrl, nickname: nicknameData.nickname };
                 } catch (error) {
@@ -35,8 +33,6 @@ const Posts = ({ posts }) => {
         };
         fetchProfilesAndNicknames();
     }, [posts]); // Run effect when 'posts' prop changes
-    
-  
     
 
     // Use 'postsWithProfile' for sorted and mapped posts to include fetched profiles
@@ -51,17 +47,17 @@ const Posts = ({ posts }) => {
         const year = date.getFullYear();
         return `${hours}:${minutes} ${day}/${month}/${year}`;
     };
-
     return (
         <div className="posts">
             {sortedPosts.map((post) => (
                 <CreatePost
                     key={post._id}
                     id={post._id}
+                    postOwnerID={post.postOwnerID}
                     username={post.nickname}
                     timestamp={formatDate(post.date)}
                     originalContent={post.content}
-                    likes={post.likes}
+                    likes={post.likesID}
                     comments={post.comments}
                     image={post.img}
                     profile={post.profile} // Profile image from fetched data
