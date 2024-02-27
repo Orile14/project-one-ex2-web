@@ -192,7 +192,6 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
     navigate(`/profile/${userId}`);
   };
 
-
   if (isRemoved) {
     return null;
   }

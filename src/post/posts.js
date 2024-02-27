@@ -15,7 +15,6 @@ const Posts = ({ posts }) => {
                     }
                     const profileData = await profileResponse.json();
                     
-    
                     // Fetch nickname
                     const nicknameResponse = await fetch(`http://localhost:12345/api/posts/nickname/${post.postOwnerID}`);
                     if (!nicknameResponse.ok) {
@@ -34,8 +33,6 @@ const Posts = ({ posts }) => {
         };
         fetchProfilesAndNicknames();
     }, [posts]); // Run effect when 'posts' prop changes
-    
-  
     
 
     // Use 'postsWithProfile' for sorted and mapped posts to include fetched profiles

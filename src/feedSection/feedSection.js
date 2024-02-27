@@ -27,7 +27,6 @@ const FeedSection = ({ currentPage }) => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("aaaaaaaaaaaaaaaa",data, data.ownerId)
       return data.ownerId
 
     } catch (error) {

@@ -5,14 +5,14 @@ import NavigationBar from '../navigationBar/navigationBar';
 import LeftMenu from '../leftMenu/leftMenu';
 import Posts from '../post/posts';
 import PostBox from '../postBox/postBox';
-import UserProfile from '../userProfile/userProfile'
 import FriendList from '../friendList/friendList';
+import UserProfile from '../userProfile/userProfile';
 
 // This function creates the feed
 const Feed = () => {
 
     // Inside your Feed component
-    const { nick } = useParams();
+    const { userId } = useParams();
     const [DBposts, setDBPosts] = useState([]);
     const [refreshFeed, setRefreshFeed] = useState(false);
 
@@ -21,7 +21,7 @@ const Feed = () => {
     };
 
     useEffect(() => {
-        if (!nick) {
+        if (!userId) {
             const fetchPosts = async () => {
                 try {
                     const response = await fetch('http://localhost:12345/api/posts/get', {
@@ -38,12 +38,12 @@ const Feed = () => {
             };
             fetchPosts();
         }
-    }, [refreshFeed, nick]);
+    }, [refreshFeed, userId]);
 
     return (
         //deviide the feed into 3 columns
         <div className='Feed'>
-            <NavigationBar currentPage={nick ? 'profile' : 'feed'} />
+            <NavigationBar currentPage={userId ? 'profile' : 'feed'} />
             <div className="row">
                 {/* Add the left menu to the left column */}
                 <div className="col-2">
@@ -51,7 +51,7 @@ const Feed = () => {
                 </div>
                 {/* Add the post box and posts to the middle column */}
                 <div className="col-8 d-flex flex-column justify-content-start align-items-center">
-                    {nick ? <UserProfile nick={nick} /> :
+                    {userId ? <UserProfile nick={userId} /> :
                         <>
                             <PostBox onRefreshFeed={triggerFeedRefresh} />
                             <Posts posts={DBposts} />

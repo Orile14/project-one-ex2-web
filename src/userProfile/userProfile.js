@@ -1,3 +1,21 @@
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+const UserProfile = () => {
+    const { id } = useParams(); // You can still retrieve the ID if needed
+
+    return (
+        <div>
+            <h1>Hey</h1>
+            <p>User ID: {id}</p> {/* Optional: Display the user ID */}
+        </div>
+    );
+};
+
+export default UserProfile;
+
+
+
 // import React, { useState, useEffect } from 'react';
 // import { useParams } from 'react-router-dom';
 
