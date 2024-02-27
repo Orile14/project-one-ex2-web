@@ -6,14 +6,14 @@ import FeedSection from '../feedSection/feedSection';
 import OptionSection from '../optionSection/optionSection';
 import { ThemeContext } from '../themeContext/themeContext';
 
-const NavigationBar = () => {
+const NavigationBar = ({ currentPage }) => {
 
     // Use the theme and toggleTheme from the ThemeContext
     const { theme, toggleTheme } = useContext(ThemeContext);
 
     return (
         <nav className="navbar">
-            
+
             <div className="navbar-left">
                 <i className="bi bi-facebook logo-icon"></i>
                 <button className="toggle-theme-btn" onClick={toggleTheme}>
@@ -25,7 +25,7 @@ const NavigationBar = () => {
             </div>
 
             <div className="navbar-center">
-                <FeedSection />
+                <FeedSection currentPage={currentPage} />
             </div>
 
             <div className="navbar-right">

@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import './createPost.css';
 import Comment from '../comment/comment';
 import ShareMenu from './shareMenu';
-const CreatePost = ({ id, username, timestamp, originalContent, likes, comments, image, profile }) => {
+const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, likes, comments, image, profile }) => {
   // Initialize state variables
+  const navigate = useNavigate();
   const [isRemoved, setIsRemoved] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editableContent, setEditableContent] = useState(originalContent);
@@ -143,10 +146,9 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
     reader.readAsDataURL(file);
   };
 
-  const redirectProfile = async () => {
-    navigate('/profile');
+  const handleUserClick = (userId) => {
+    navigate(`/profile/${userId}`);
   };
-
 
 
   if (isRemoved) {
@@ -158,9 +160,11 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
       <div className="post-header">
         {/** Display user profile picture and post information */}
         <div className="post-header-info">
-        <button class="button-with-profilePic" onClick={redirectProfile}><img src={profile} alt="PostIm" className="profilePic" /></button>
+          <button className="button-with-profilePic" onClick={() => handleUserClick(postOwnerID)}>
+            <img src={profile} alt="PostIm" className="profilePic" />
+          </button>
           <div className="user-info">
-            <button className="username" onClick={redirectProfile}>{username}</button>
+          <button className="username" onClick={() => handleUserClick(postOwnerID)}>{username}</button>
             <p className="timestamp">{timestamp}</p>
           </div>
         </div>

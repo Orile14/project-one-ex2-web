@@ -56,6 +56,7 @@ const Posts = ({ posts }) => {
                 <CreatePost
                     key={post._id}
                     id={post._id}
+                    postOwnerID={post.postOwnerID}
                     username={post.nickname}
                     timestamp={formatDate(post.date)}
                     originalContent={post.content}

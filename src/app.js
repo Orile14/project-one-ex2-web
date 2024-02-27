@@ -31,6 +31,11 @@ const AppContent = () => {
               <Feed />
             </ProtectedRoute>
           } />
+          <Route path="/profile/:userId" element={
+            <ProtectedRoute>
+              <Feed />
+            </ProtectedRoute>
+          } />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>

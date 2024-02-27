@@ -40,7 +40,7 @@ const Login = () => {
         const tokenResponse = await fetch('http://localhost:12345/api/tokens', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username }) // Send username in the body
+          body: JSON.stringify({ username, password }) 
         });
 
 

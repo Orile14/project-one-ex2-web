@@ -89,6 +89,9 @@ const PostBox = ({ onRefreshFeed }) => {
             // Reset state
             setPostContent("");
             setImage(null);
+
+            // Also reset the file input
+            document.getElementById('imageInput').value = "";
         } catch (error) {
             console.error('Error adding post:', error);
             alert('Failed to add post.');
