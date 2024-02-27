@@ -1,7 +1,8 @@
 import React, { useState,useRef } from 'react';
 import './commentCreate.css';
 
-const CommentsCreate = ({ id, username, timestamp, content, deleteComment, handleEditComment,handleSaveComment, likes, toggleLike }) => {
+const CommentsCreate = ({ id, username, timestamp, content, deleteComment, handleEditComment,
+    handleLikeComment,handleSaveComment, likes, toggleLike }) => {
     // Initialize state variables
     const [isEditing, setIsEditing] = useState(false);
     const [editableContent, setEditableContent] = useState(content);
@@ -9,7 +10,8 @@ const CommentsCreate = ({ id, username, timestamp, content, deleteComment, handl
     const textareaRef = useRef(null);
 
     // Function to handle the like button
-    const handleLike = () => {
+    const handleLike = async() => {
+        await handleLikeComment(id);
         toggleLike(id);
         setLikeActive(!likeActive);
     };
@@ -36,6 +38,7 @@ const CommentsCreate = ({ id, username, timestamp, content, deleteComment, handl
     const Remove = () => {
         deleteComment(id);
     };
+    
     return (
         // Add the comment to the container
         <div className='container'>

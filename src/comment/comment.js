@@ -12,20 +12,20 @@ const Comment = ({ comments, postId }) => {
 
     // Function to handle the like button
     const toggleLike = (commentId) => {
-        // setNewComments(newComments.map(comment => {
-        //     // If the comment id matches the id of the comment being liked, update the likes
-        //     if (comment.id === id) {
-        //         const currentLikes = comment.likes || { count: 0, likedByUser: false };
-        //         return {
-        //             ...comment,
-        //             likes: {
-        //                 count: currentLikes.likedByUser ? currentLikes.count - 1 : currentLikes.count + 1,
-        //                 likedByUser: !currentLikes.likedByUser
-        //             }
-        //         };
-        //     }
-        //     return comment;
-        // }));
+        //  setNewComments(newComments.map(comment => {
+        //      // If the comment id matches the id of the comment being liked, update the likes
+        //      if (comment.id === id) {
+        //          const currentLikes = comment.likes || { count: 0, likedByUser: false };
+        //          return {
+        //              ...comment,
+        //              likes: {
+        //                  count: currentLikes.likedByUser ? currentLikes.count - 1 : currentLikes.count + 1,
+        //                  likedByUser: !currentLikes.likedByUser
+        //              }
+        //          };
+        //      }
+        //      return comment;
+        //  }));
     };
 
     const deleteComment = async (commentId) => {
@@ -126,7 +126,6 @@ const Comment = ({ comments, postId }) => {
             return false;
         }
     };
-
     // Function to handle post save
     const handleSaveComment = async (id,newContent) => {
         try {
@@ -155,7 +154,31 @@ const Comment = ({ comments, postId }) => {
             console.error('Failed to edit post:', error);
         }
     };
+    const handleLikeComment = async (id) => {
+        try {
+            const token = localStorage.getItem('userToken');
+            if (!token) {
+                alert('You must be logged in to like comments.');
+                return;
+            }
+            const response = await fetch(`http://localhost:12345/api/posts/comment/like/${postId}/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
 
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log('data:', data);
+        } catch (error) {
+            console.error('Failed to like comment:', error);
+            alert('Failed to like comment.');
+        }
+    }
     return (
         <div>
             <button className="commentButton" id="commentbutton" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
@@ -182,7 +205,8 @@ const Comment = ({ comments, postId }) => {
                                     deleteComment={deleteComment}
                                     handleEditComment={handleEditComment}
                                     handleSaveComment={handleSaveComment}
-                                    likes={comment.likesID}
+                                    handleLikeComment={handleLikeComment}
+                                    likes={comment.likes}
                                     toggleLike={toggleLike}
                                 />
                             ))}

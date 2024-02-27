@@ -134,14 +134,58 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
     setEditableContent(event.target.value);
   };
 
-  const handlleImage = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setEditableImage(reader.result);
-    };
-    reader.readAsDataURL(file);
+  const handleImage = async (event) => {
+    try {
+      const file = event.target.files[0];
+      if (!file) {
+        alert('No file selected.');
+        return;
+      }
+  
+      const readFileAsBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = error => reject(error);
+          reader.readAsDataURL(file);
+        });
+      };
+  
+      const base64Image = await readFileAsBase64(file);
+  
+      // Retrieve the token from local storage
+      const token = localStorage.getItem('userToken');
+      if (!token) {
+        alert('You must be logged in to upload images.');
+        return;
+      }
+  
+      // Send the base64 image to the server
+      const response = await fetch(`http://localhost:12345/api/posts/uploadImage/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ image: base64Image })
+      });
+  
+      if (!response.ok) {
+        throw new Error('Image upload failed');
+      }
+  
+      const responseData = await response.json();
+  
+      // Assuming the server returns the URL of the uploaded image
+      setEditableImage(responseData.img);
+  
+    } catch (error) {
+      console.error('Failed to upload image:', error);
+      alert('Failed to upload image.');
+    }
   };
+  
+
   if (isRemoved) {
     return null;
   }
@@ -176,7 +220,7 @@ const CreatePost = ({ id, username, timestamp, originalContent, likes, comments,
           // Display textarea and file input if editing
           <div>
             <textarea value={editableContent} onChange={handleChange} className="edit-textarea" />
-            <input type="file" onChange={handlleImage} />
+            <input type="file" onChange={handleImage} />
           </div>
 
         ) : (
