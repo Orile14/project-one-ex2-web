@@ -19,12 +19,9 @@
   }
 /* Existing styles for .row */
 .row {
+    margin-top: 60px;
     overflow: auto;
     background-color: var(--bg-color-light); /* Light mode background color */
-}
-
-.col-8 {
-    margin-top: 60px;
 }
 
 /* Dark Mode styles for .row */

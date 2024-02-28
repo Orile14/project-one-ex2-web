@@ -46,11 +46,11 @@ const Feed = () => {
             <NavigationBar currentPage={userId ? 'profile' : 'feed'} />
             <div className="row">
                 {/* Add the left menu to the left column */}
-                <div className="col-2">
+                <div className="col-3">
                     <LeftMenu />
                 </div>
                 {/* Add the post box and posts to the middle column */}
-                <div className="col-8 d-flex flex-column justify-content-start align-items-center">
+                <div className="col-6 d-flex flex-column justify-content-start align-items-center">
                     {userId ? <UserProfile nick={userId} /> :
                         <>
                             <PostBox onRefreshFeed={triggerFeedRefresh} />
@@ -58,7 +58,7 @@ const Feed = () => {
                         </>}
                 </div>
                 {/* Add the friend list to the right column */}
-                <div className="col-2">
+                <div className="col-3">
                     <FriendList />
                 </div>
             </div>
