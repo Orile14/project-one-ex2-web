@@ -28,3 +28,7 @@
     border: 3px solid white; /* Optional border */
     z-index: 2; /* Ensures profile photo is on top */
 }
+
+.userPosts {
+    margin-top: 60px;
+}

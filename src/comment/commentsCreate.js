@@ -2,7 +2,7 @@ import React, { useState,useRef } from 'react';
 import './commentCreate.css';
 
 const CommentsCreate = ({ id, username, timestamp, content, deleteComment, handleEditComment,
-    handleLikeComment,handleSaveComment, likes, toggleLike }) => {
+    handleLikeComment,handleSaveComment }) => {
     // Initialize state variables
     const [isEditing, setIsEditing] = useState(false);
     const [editableContent, setEditableContent] = useState(content);
@@ -12,7 +12,6 @@ const CommentsCreate = ({ id, username, timestamp, content, deleteComment, handl
     // Function to handle the like button
     const handleLike = async() => {
         await handleLikeComment(id);
-        toggleLike(id);
         setLikeActive(!likeActive);
     };
     // Function to handle the edit button

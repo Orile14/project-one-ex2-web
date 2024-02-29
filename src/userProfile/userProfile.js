@@ -1,13 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import './userProfile.css';
 import { useParams } from 'react-router-dom';
+import Posts from '../post/posts';
+
 
 const UserProfile = () => {
     const { userId } = useParams();
+    const [DBposts, setDBPosts] = useState([]);
     const [userData, setUserData] = useState({ profilePic: '', coverPic: '', nick: '' });
 
     useEffect(() => {
         window.scrollTo(0, 0);
+
+        const fetchPosts = async () => {
+            try {
+                const response = await fetch('http://localhost:12345/api/posts/get', {
+                    method: 'GET'
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const postsJSON = await response.json();
+                setDBPosts(postsJSON);
+            } catch (error) {
+                console.error('There has been a problem with your fetch operation:', error);
+            }
+        };
+        fetchPosts();
 
         const getUserInfo = async () => {
             try {
@@ -38,8 +57,8 @@ const UserProfile = () => {
                 console.error('Error:', error);
                 alert('Failed to load user info.');
             }
+            
         };
-
         getUserInfo();
     }, [userId]);
 
@@ -55,6 +74,9 @@ const UserProfile = () => {
             ></div>
             <div className="user-nickname">
                 {userData.nick} 
+            </div>
+            <div className='userPosts'>
+            <Posts posts={DBposts} />
             </div>
         </div>
     );
