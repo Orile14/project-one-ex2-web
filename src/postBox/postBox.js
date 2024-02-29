@@ -45,7 +45,8 @@ const PostBox = ({ onRefreshFeed }) => {
         };
 
         fetchUserProfile();
-    }, []);
+    }, []);
+
 
     // Function to handle input change
     const handleInputChange = (event) => {
