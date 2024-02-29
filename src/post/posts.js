@@ -7,37 +7,7 @@ const Posts = ({ posts }) => {
     useEffect(() => {
         setPostsWithProfile(posts);
     }, [posts]);
-    
-    // useEffect(() => {
-    //     const fetchProfilesAndNicknames = async () => {
-    //         const postsWithExtraData = await Promise.all(posts.map(async (post) => {
-    //             try {
-    //                 // Fetch profile image
-    //                 const profileResponse = await fetch(`http://localhost:12345/api/posts/profile/${post.postOwnerID}`);
-    //                 if (!profileResponse.ok) {
-    //                     throw new Error('Profile fetch failed');
-    //                 }
-    //                 const profileData = await profileResponse.json();
-                    
-    //                 // Fetch nickname
-    //                 const nicknameResponse = await fetch(`http://localhost:12345/api/posts/nickname/${post.postOwnerID}`);
-    //                 if (!nicknameResponse.ok) {
-    //                     throw new Error('Nickname fetch failed');
-    //                 }
-    //                 const nicknameData = await nicknameResponse.json();
-            
-    //                 // Combine post data with fetched profile image and nickname
-    //                 return { ...post, profile: profileData.imgUrl, nickname: nicknameData.nickname };
-    //             } catch (error) {
-    //                 console.error('Fetch profile or nickname error:', error);
-    //                 return { ...post, profile: null, nickname: null }; // Handle error by setting profile and nickname to null
-    //             }
-    //         }));
-    //         setPostsWithProfile(postsWithExtraData);
-    //     };
-    //     fetchProfilesAndNicknames();
-    // }, [posts]); // Run effect when 'posts' prop changes
-    
+
 
     // Use 'postsWithProfile' for sorted and mapped posts to include fetched profiles
     const sortedPosts = postsWithProfile.slice().sort((a, b) => new Date(b.date) - new Date(a.date));

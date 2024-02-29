@@ -11,17 +11,25 @@ const UserProfile = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-
         const fetchPosts = async () => {
             try {
-                const response = await fetch('http://localhost:12345/api/posts/get', {
-                    method: 'GET'
+                const token = localStorage.getItem('userToken');
+                if (!token) {
+                    alert('You must be logged in to view this.');
+                    return;
+                }
+                const response = await fetch(`http://localhost:12345/api/users/${userId}/posts`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }                
                 });
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const postsJSON = await response.json();
-                setDBPosts(postsJSON);
+                setDBPosts(postsJSON.posts);
             } catch (error) {
                 console.error('There has been a problem with your fetch operation:', error);
             }
