@@ -21,13 +21,15 @@ const OptionSection = () => {
 
   const deleteUser = async () => {
     const token = localStorage.getItem('userToken');
-    if (!token) {
+    const userId = localStorage.getItem('userID');
+
+    if (!token||!userId) {
       alert('You must be logged in to delete your account.');
       return;
     }
   
     try {
-      const response = await fetch('http://localhost:12345/api/users/', {
+      const response = await fetch(`http://localhost:12345/api/users/${userId}`, {
         method: 'DELETE',
         headers: { 
           'Authorization': `Bearer ${token}`
