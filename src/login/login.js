@@ -52,6 +52,8 @@ const Login = () => {
 
         // Store the received token in local storage
         localStorage.setItem('userToken', tokenData.token);
+        localStorage.setItem('userID', data.id);
+
         
         setLoginMessage(`Welcome, ${username}! You have successfully logged in.`);
         login();

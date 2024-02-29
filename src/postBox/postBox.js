@@ -17,24 +17,15 @@ const PostBox = ({ onRefreshFeed }) => {
                     return;
                 }
 
-                // Fetching user ID
-                let response = await fetch('http://localhost:12345/api/users/getID', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to fetch user ID');
+                const userId = localStorage.getItem('userID');
+                if (!token) {
+                    alert('FATAL ERORR!!!! TURN OFF YOU WIFI AND COMPUTER IMMEDIATELY!!!!!!!!!!');
+                    return;
                 }
 
-                const userIdData = await response.json();
-                const userId = userIdData.ownerId; // Assuming the ID is returned in the 'id' field
 
                 // Fetching user profile
-                response = await fetch(`http://localhost:12345/api/users/${userId}`, {
+                const response = await fetch(`http://localhost:12345/api/users/${userId}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
