@@ -19,7 +19,6 @@ const CommentsCreate = ({ id, username, timestamp, content, deleteComment, handl
     const handleEdit = async () => {
         const canEdit = await handleEditComment(username);
         if (canEdit) {
-            console.log('Editing comment===================');
             setIsEditing(true);
         } 
     };

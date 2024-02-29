@@ -72,3 +72,18 @@ body[data-theme="dark"] .circular-container:has(>.bi-box-arrow-right) {
   background-color: rgb(225, 47, 50);
 }
 
+#logOutBtn{
+  margin-right: 5px;
+  margin-left: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--button-bg-light);
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.3s, height 0.3s;
+  border: none;
+
+}

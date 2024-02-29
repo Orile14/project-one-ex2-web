@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import './feed.css';
 import NavigationBar from '../navigationBar/navigationBar';
 import LeftMenu from '../leftMenu/leftMenu';
@@ -24,8 +24,16 @@ const Feed = () => {
         if (!userId) {
             const fetchPosts = async () => {
                 try {
-                    const response = await fetch('http://localhost:12345/api/posts/get', {
-                        method: 'GET'
+                    const token = localStorage.getItem('userToken');
+                    if (!token) {
+                        alert('You must be logged in to view posts.');
+                        return;
+                    }
+                    const response = await fetch('http://localhost:12345/api/posts/', {
+                        method: 'GET',
+                        headers: { // This is where headers should be defined
+                            'Authorization': `Bearer ${token}`
+                        }
                     });
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -39,6 +47,7 @@ const Feed = () => {
             fetchPosts();
         }
     }, [refreshFeed, userId]);
+    
 
     return (
         //deviide the feed into 3 columns
