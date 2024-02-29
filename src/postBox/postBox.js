@@ -1,15 +1,51 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './postBox.css';
-import User from '../signUp/user';
 const PostBox = ({ onRefreshFeed }) => {
-
-    // Get the first user from the list of all users
-    const user = User.allUsers[0];
 
     // Initialize state for post content and image
     const [postContent, setPostContent] = useState("");
     const [image, setImage] = useState(null);
+    const [userProfilePic, setUserProfilePic] = useState("");
+
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const token = localStorage.getItem('userToken');
+                if (!token) {
+                    alert('You must be logged in to post.');
+                    return;
+                }
+
+                const userId = localStorage.getItem('userID');
+                if (!token) {
+                    alert('FATAL ERORR!!!! TURN OFF YOU WIFI AND COMPUTER IMMEDIATELY!!!!!!!!!!');
+                    return;
+                }
+
+
+                // Fetching user profile
+                const response = await fetch(`http://localhost:12345/api/users/${userId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user profile');
+                }
+
+                const userData = await response.json();
+                setUserProfilePic(userData.img); // Assuming 'img' is the key for the user's profile picture
+            } catch (error) {
+                console.error('Error fetching user profile:', error);
+            }
+        };
+
+        fetchUserProfile();
+    }, []);
 
     // Function to handle input change
     const handleInputChange = (event) => {
@@ -103,7 +139,7 @@ const PostBox = ({ onRefreshFeed }) => {
             {/* Display user profile picture and input field */}
             <div className="postBox_top">
                 {/** Display user profile picture */}
-                <img src={user ? user.getImage() : ""} alt="profile" className="profilePic" />
+                <img src={userProfilePic} alt="profile" className="profilePic" />
                 {/** Display input field */}
                 <input type="text" value={postContent} onChange={handleInputChange}
                     placeholder="What's on your mind?" className="postInput" />

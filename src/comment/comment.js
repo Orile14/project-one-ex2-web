@@ -10,24 +10,6 @@ const Comment = ({ comments, postId }) => {
     const modalId = `commentsModal-${postId}`;
     const [newComments, setNewComments] = useState(comments);
 
-    // Function to handle the like button
-    const toggleLike = (commentId) => {
-        //  setNewComments(newComments.map(comment => {
-        //      // If the comment id matches the id of the comment being liked, update the likes
-        //      if (comment.id === id) {
-        //          const currentLikes = comment.likes || { count: 0, likedByUser: false };
-        //          return {
-        //              ...comment,
-        //              likes: {
-        //                  count: currentLikes.likedByUser ? currentLikes.count - 1 : currentLikes.count + 1,
-        //                  likedByUser: !currentLikes.likedByUser
-        //              }
-        //          };
-        //      }
-        //      return comment;
-        //  }));
-    };
-
     const deleteComment = async (commentId) => {
         try {
             const token = localStorage.getItem('userToken');
@@ -68,35 +50,33 @@ const Comment = ({ comments, postId }) => {
                 alert('You must be logged in to add comments.');
                 return;
             }
-
+            const commentContent = input.current.value;
             const response = await fetch(`http://localhost:12345/api/posts/comment/${postId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({
-                    content: input.current.value
-                })
+                body: JSON.stringify({ content: commentContent })
             });
 
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }
 
-            console.log('Comment added successfully');
+            const updatedComments = await response.json();
+            console.log("updatedComments", updatedComments);
+            setNewComments(updatedComments); // Update the state with the new data
+            input.current.value = '';
             setIsAdded(false);
 
-            // Refresh the comments list after adding a comment
-            const updatedComments = await response.json();
-            console.log('updatedComments:', updatedComments);
-            setNewComments(updatedComments);
 
         } catch (error) {
             console.error('Failed to add comment:', error);
             alert('Failed to add comment.');
         }
     };
+
     const handleEditComment = async (id) => {
         try {
             const token = localStorage.getItem('userToken');
@@ -127,7 +107,7 @@ const Comment = ({ comments, postId }) => {
         }
     };
     // Function to handle post save
-    const handleSaveComment = async (id,newContent) => {
+    const handleSaveComment = async (id, newContent) => {
         try {
             const token = localStorage.getItem('userToken');
             // Check if both content and image are empty
@@ -141,7 +121,7 @@ const Comment = ({ comments, postId }) => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ content:newContent }),
+                body: JSON.stringify({ content: newContent }),
 
             });
             // Check if the request was successful
@@ -206,8 +186,6 @@ const Comment = ({ comments, postId }) => {
                                     handleEditComment={handleEditComment}
                                     handleSaveComment={handleSaveComment}
                                     handleLikeComment={handleLikeComment}
-                                    likes={comment.likes}
-                                    toggleLike={toggleLike}
                                 />
                             ))}
                             <div className="modal-footer">

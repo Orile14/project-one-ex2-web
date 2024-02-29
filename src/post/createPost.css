@@ -149,10 +149,25 @@ body[data-theme="dark"] .Edit:hover {
     margin-bottom: 1px;
 }
 .timestamp {
-    margin-bottom: 1px;
+    margin-bottom: 1px;
+    width: auto;
+    display: inline-block; /* or 'inline' depending on your layout */
+    white-space: nowrap; /* Prevents text from wrapping */
 }
+
 .button-with-profilePic {
     padding: 0;
+    margin-bottom: 0;
     background-color: transparent;
     border: transparent;
+}
+
+body[data-theme="dark"] .button-with-profilePic {
+    background-color: transparent;
+    border: transparent;
+}
+body[data-theme="dark"] .username {
+    background-color: transparent;
+    border: transparent;
+
 }
