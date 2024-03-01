@@ -39,10 +39,42 @@
     min-width: auto;
     width: 200px;
     margin-top: 10px;
-    margin-left:182px;
-
 }
 .user-name {
     display: flex;
     align-items: center; /* Align vertically */
+}
+
+
+
+
+
+
+body {
+  margin: 0;
+  background: #666;
+}
+a{
+  text-decoration: none;
+}
+.accept {
+    color: #FFF;
+    background-color: var(--bs-primary);
+    border-color: #007bff; /* Bootstrap primary color for border */
+    padding: 15px 20px;
+    border-radius: 15px;
+    margin: 5px;
+}
+.accept:hover {
+  background: #6f6fe7;
+}
+.deny {
+  color: #FFF;
+  background-color: var(--bs-danger);
+  padding: 15px 20px;
+  border-radius: 15px;
+
+}
+.deny:hover {
+  background: rgb(255, 147, 128);
 }

@@ -53,7 +53,7 @@ const FeedSection = ({ currentPage }) => {
         navigate('/feed');
       } else if (iconClass === FeedData[1]) {
         const id = await getID();
-        navigate(`/profile/${id}`);
+        navigate(`/profile/${id}`, { state: { fromFeedSection: true } });
       }
     }
   };
