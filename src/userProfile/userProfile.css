@@ -35,7 +35,14 @@
     font-size: 30px; /* Optional: Adjust the font size */
     font-weight: bold; /* Optional: Adjust the font weight */
 }
+#Follow-btn{
+    min-width: auto;
+    width: 200px;
+    margin-top: 10px;
+    margin-left:182px;
 
-.userPosts {
-    margin-top: 20px;
+}
+.user-name {
+    display: flex;
+    align-items: center; /* Align vertically */
 }
