@@ -1,16 +1,24 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import MakeButton from "./makeButton";
 import buttonsData from "./buttons.json";
 import "./signUp.css";
 import User from './user';
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from '../themeContext/themeContext';
+import { useParams, useLocation } from 'react-router-dom';
 
 
 const SignUp = () => {
   // Accessing theme and toggleTheme from ThemeContext using useContext hook
   const { theme, toggleTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const [isFromProfile, setIsFromProfile] = useState(false);
+
+  useEffect(() => {
+    const fromProfile = location.state?.fromProfile;
+    setIsFromProfile(!!fromProfile);
+  }, [location]);
 
   // Initialize formData state with default values
   const [formData, setFormData] = useState({
@@ -51,12 +59,12 @@ const SignUp = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     if (formData.Password !== formData.ConfirmPassword) {
       alert("Password and Confirm Password must be the same");
       return;
     }
-  
+
     const readFileAsBase64 = (file) => {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -65,7 +73,7 @@ const SignUp = () => {
         reader.readAsDataURL(file);
       });
     };
-  
+
     let base64Image = "";
     if (document.getElementById('imageInput').files[0]) {
       base64Image = await readFileAsBase64(document.getElementById('imageInput').files[0]);
@@ -73,30 +81,51 @@ const SignUp = () => {
       alert("Please select an image.");
       return;
     }
-  
+
     const userData = {
       username: formData.Name,
       password: formData.Password,
       nick: formData.NickName,
       img: base64Image
     };
-  
+
     try {
-      const response = await fetch('http://localhost:12345/api/users', { 
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userData)
-      });
+      let response;
+      const token = localStorage.getItem('userToken');
+      const userId = localStorage.getItem('userID');
+      
+      if (!token || !userId) {
+        alert('You must be logged in to modify friendship requests.');
+        return;
+      }
+      if (!isFromProfile) {
+        response = await fetch('http://localhost:12345/api/users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(userData)
+        });
+      } else {
+
+        response = await fetch(`http://localhost:12345/api/users/${userId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+          body: JSON.stringify(userData)
+        });
+      }
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      navigate('/login');
+      if(!isFromProfile){ navigate('/login')}
+      else{ navigate(`/profile/${userId}`)};
     } catch (error) {
       console.error('Error:', error);
       alert('Failed to create user.');
     }
   };
-  
+
 
   // Render the SignUp component
   return (

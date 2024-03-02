@@ -29,7 +29,7 @@ const Feed = () => {
                         alert('You must be logged in to view posts.');
                         return;
                     }
-                    const response = await fetch('http://localhost:12345/api/posts/', {
+                    const response = await fetch('http://localhost:12345/api/posts', {
                         method: 'GET',
                         headers: { // This is where headers should be defined
                             'Authorization': `Bearer ${token}`
