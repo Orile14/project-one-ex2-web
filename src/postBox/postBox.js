@@ -108,8 +108,12 @@ const PostBox = ({ onRefreshFeed }) => {
                 comments: [],
                 likes: []
             };
-
-            const response = await fetch('http://localhost:12345/api/posts/add', {
+            const userId = localStorage.getItem('userID');
+            if (!userId) {
+                alert('FATAL ERORR!!!! TURN OFF YOU WIFI AND COMPUTER IMMEDIATELY!!!!!!!!!!');
+                return;
+            }
+            const response = await fetch(`http://localhost:12345/api/users/${userId}/posts`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
