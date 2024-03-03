@@ -107,7 +107,7 @@ const SignUp = () => {
       } else {
 
         response = await fetch(`http://localhost:12345/api/users/${userId}`, {
-          method: 'POST',
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -115,12 +115,17 @@ const SignUp = () => {
           body: JSON.stringify(userData)
         });
       }
+      if(response.status === 409){
+        alert('Username already exists.');
+        return;
+      }
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       if(!isFromProfile){ navigate('/login')}
       else{ navigate(`/profile/${userId}`)};
     } catch (error) {
+     
       console.error('Error:', error);
       alert('Failed to create user.');
     }
