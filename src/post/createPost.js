@@ -105,32 +105,44 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
   // Function to handle post save
   const handleSave = async () => {
     try {
+      const userId = localStorage.getItem('userID');
       const token = localStorage.getItem('userToken');
-      // Check if both content and image are empty
-      if (!editableContent.trim() && !editableImage) {
-        alert('Post must have at least an image or some content.');
+      if (!token) {
+        alert('You must be logged in to edit posts.');
         return;
       }
-      const response = await fetch(`http://localhost:12345/api/posts/edit/${id}`, {
+  
+      // Initialize FormData
+      const formData = new FormData();
+  
+      // Append editable content
+      formData.append('content', editableContent);
+  
+      // Append image file if a new one has been selected
+      if (document.getElementById('imageInput').files[0]) {
+        formData.append('image', document.getElementById('imageInput').files[0]);
+      } 
+  
+      const response = await fetch(`http://localhost:12345/api/users/${userId}/posts/${id}`, {
         method: 'PATCH',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ content: editableContent, image: editableImage }),
-
+        body: formData,
       });
-      // Check if the request was successful
+  
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
       const data = await response.json();
-    }
-    catch (error) {
+  
+      console.log('Post updated successfully:', data);
+      setIsEditing(false);
+    } catch (error) {
       console.error('Failed to edit post:', error);
     }
-    setIsEditing(false);
   };
+  
 
   // Function to handle input change
   const handleChange = (event) => {
@@ -228,7 +240,7 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
           // Display textarea and file input if editing
           <div>
             <textarea value={editableContent} onChange={handleChange} className="edit-textarea" />
-            <input type="file" onChange={handleImage} />
+            <input type="file"  />
           </div>
 
         ) : (
