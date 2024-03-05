@@ -151,8 +151,8 @@ body[data-theme="dark"] .Edit:hover {
 .timestamp {
     margin-bottom: 1px;
     width: auto;
-    display: inline-block; /* or 'inline' depending on your layout */
-    white-space: nowrap; /* Prevents text from wrapping */
+    display: inline-block; 
+    white-space: nowrap;
 }
 
 .button-with-profilePic {

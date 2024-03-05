@@ -38,13 +38,25 @@ body[data-theme="dark"] .container {
     align-items: center;
 }
 
-.username {
-    font-weight: bold;
+.user-info {
+    display: flex;
+    flex-direction: column;
 }
 
+.post-header-info{
+    display: flex;
+    align-items: center;
+    border-radius: 3%;
+}
+.username {
+    all: unset;
+    margin-bottom: 1px;
+}
 .timestamp {
-    color: var(--text-color-light);
-    font-size: 0.8em;
+    margin-bottom: 1px;
+    width: auto;
+    display: inline-block; 
+    white-space: nowrap;
 }
 
 /* Dark Mode styles for timestamp */

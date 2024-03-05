@@ -159,6 +159,7 @@ const Comment = ({ comments, postId }) => {
             alert('Failed to like comment.');
         }
     }
+    console.log("newComments", newComments);
     return (
         <div>
             <button className="commentButton" id="commentbutton" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
@@ -179,7 +180,8 @@ const Comment = ({ comments, postId }) => {
                                 <CommentsCreate
                                     key={comment._id}
                                     id={comment._id}
-                                    username={comment.commentOwnerID}
+                                    username={comment.nickname}
+                                    profile = {comment.profilePic}
                                     content={comment.content}
                                     timestamp={comment.date}
                                     deleteComment={deleteComment}

@@ -1,8 +1,8 @@
-import React, { useState,useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import './commentCreate.css';
 
-const CommentsCreate = ({ id, username, timestamp, content, deleteComment, handleEditComment,
-    handleLikeComment,handleSaveComment }) => {
+const CommentsCreate = ({ id, username, profile, timestamp, content, deleteComment, handleEditComment,
+    handleLikeComment, handleSaveComment }) => {
     // Initialize state variables
     const [isEditing, setIsEditing] = useState(false);
     const [editableContent, setEditableContent] = useState(content);
@@ -10,7 +10,7 @@ const CommentsCreate = ({ id, username, timestamp, content, deleteComment, handl
     const textareaRef = useRef(null);
 
     // Function to handle the like button
-    const handleLike = async() => {
+    const handleLike = async () => {
         await handleLikeComment(id);
         setLikeActive(!likeActive);
     };
@@ -19,7 +19,7 @@ const CommentsCreate = ({ id, username, timestamp, content, deleteComment, handl
         const canEdit = await handleEditComment(username);
         if (canEdit) {
             setIsEditing(true);
-        } 
+        }
     };
     // Function to handle the save button
     const handleSave = () => {
@@ -36,15 +36,18 @@ const CommentsCreate = ({ id, username, timestamp, content, deleteComment, handl
     const Remove = () => {
         deleteComment(id);
     };
-    
+
     return (
         // Add the comment to the container
         <div className='container'>
             <div className="post-header">
                 {/** Add the user's profile picture and the time stamp to the post header */}
                 <div className="post-header-info">
-                    <p className="username">{username}</p>
-                    <p className="timestamp">{timestamp}</p>
+                    <img src={profile} alt="PostIm" className="profilePic" />
+                    <div className="user-info">
+                        <p className="username">{username}</p>
+                        <p className="timestamp">{timestamp}</p>
+                    </div>
                 </div>
                 {/** Add the post header actions */}
                 <div className="post-header-actions">
