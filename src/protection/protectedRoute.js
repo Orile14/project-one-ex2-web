@@ -1,4 +1,3 @@
-// ProtectedRoute.js
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import verifyToken from './tokenVerification';
@@ -18,7 +17,7 @@ const ProtectedRoute = ({ children }) => {
 
   if (isAuthenticated === null) {
     console.log("asdasdsad")
-   return <div>Loading...</div>; // Or any loading indicator
+   return <div>Loading...</div>; 
   }
 
 

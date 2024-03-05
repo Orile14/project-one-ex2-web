@@ -1,5 +1,3 @@
-// tokenVerification.js
-
 const verifyToken = async () => {
     const token = localStorage.getItem('userToken');
     if (!token) {
