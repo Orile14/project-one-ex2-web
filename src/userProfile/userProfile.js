@@ -173,29 +173,7 @@ const UserProfile = ({ updatedFriendsList }) => {
             alert('Failed to send friendship request.');
         }
     }
-    const denyRequest = async () => {
-        try {
-            const token = localStorage.getItem('userToken');
-            if (!token) {
-                alert('You must be logged in to modify friendship requests.');
-                return;
-            }
-            const response = await fetch(`http://localhost:12345/api/users/${userId}/friends`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            updatedFriendsList();
-            alert('Friendship request denied.');
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Failed to deny friendship request.');
-        }
-    }
+
     const update = () => {
         navigate(`/signup`, { state: { fromProfile: true } });
     }
@@ -249,7 +227,7 @@ const UserProfile = ({ updatedFriendsList }) => {
                         :
                         <div>
                             <a href="#" id="Follow-btn" class="btn btn-primary" onClick={acceptRequest}>Confirm request <span class="fa fa-check"></span></a>
-                            <a href="#" id="Follow-btn" className="btn btn-danger" onClick={denyRequest}>Delete request <span class="fa fa-close"></span></a>
+                            <a href="#" id="Follow-btn" className="btn btn-danger" onClick={deleteFriend}>Delete request <span class="fa fa-close"></span></a>
                         </div>)}
                 {isFriend && checkCompleted && !isMyProfile ?
                     <><>
