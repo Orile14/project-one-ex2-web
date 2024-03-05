@@ -4,7 +4,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import Posts from '../post/posts';
 import { useNavigate } from 'react-router-dom';
 
-const UserProfile = () => {
+const UserProfile = ({ updatedFriendsList }) => {
     const [DBposts, setDBPosts] = useState([]);
     const [userData, setUserData] = useState({ profilePic: '', coverPic: '', nick: '' });
     const [isFriend, setIsFriend] = useState(false);
@@ -15,7 +15,7 @@ const UserProfile = () => {
     const [isMyProfile, setIsMyProfile] = useState(false);
     const [friends, setFriends] = useState([{}]);
     const navigate = useNavigate();
-
+    const [actionTriggered, setActionTriggered] = useState(false);
     useEffect(() => {
         const fromFriendRequest = location.state?.fromFriendRequest;
         setIsFromFriendRequest(!!fromFriendRequest);
@@ -91,7 +91,7 @@ const UserProfile = () => {
 
         };
         getUserInfo();
-    }, [location, userId]);
+    }, [location, userId,actionTriggered]);
 
 
     const SendFriendship = async () => {
@@ -137,6 +137,9 @@ const UserProfile = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             setIsFriend(true);
+            setActionTriggered(prevState => !prevState);
+            updatedFriendsList();
+            
         }
 
         catch (error) {
@@ -162,7 +165,9 @@ const UserProfile = () => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            setIsFriend(true);
+            setIsFriend(false);
+            setActionTriggered(prevState => !prevState);
+           updatedFriendsList();
         }
 
         catch (error) {
@@ -186,7 +191,7 @@ const UserProfile = () => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-
+            updatedFriendsList();
             alert('Friendship request denied.');
         } catch (error) {
             console.error('Error:', error);
@@ -216,12 +221,12 @@ const UserProfile = () => {
             }
             const data = await response.json();
             setFriends(data.friends);
+            updatedFriendsList();
         }
         catch (error) {
             console.error('Error fetching friends:', error);
         }
     };
-
 
     return (
         <div className="profile">
@@ -249,7 +254,7 @@ const UserProfile = () => {
             </div>
             <div className='userPosts'>
                 {isFriend && checkCompleted && !isMyProfile ?
-                    <><><button id="Follow-btn" className="btn btn-danger" onClick={deleteFriend}>delete</button>
+                    <><><button id="Follow-btn" className="btn btn-danger" onClick={deleteFriend}>remove</button>
                         <button id="Follow-btn" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                             aria-controls="offcanvasRight" onClick={fetchFriends}>users friends list</button></><div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                             <div class="offcanvas-header">

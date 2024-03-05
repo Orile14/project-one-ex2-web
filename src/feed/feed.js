@@ -60,7 +60,7 @@ const Feed = () => {
                 </div>
                 {/* Add the post box and posts to the middle column */}
                 <div className="col-6 d-flex flex-column justify-content-start align-items-center">
-                    {userId ? <UserProfile nick={userId} /> :
+                    {userId ? <UserProfile nick={userId} updatedFriendsList={triggerFeedRefresh} /> :
                         <>
                             <PostBox onRefreshFeed={triggerFeedRefresh} />
                             <Posts posts={DBposts} />
@@ -68,7 +68,7 @@ const Feed = () => {
                 </div>
                 {/* Add the friend list to the right column */}
                 <div className="col-3">
-                    <FriendList />
+                    <FriendList refreshFeed={refreshFeed}/>
                 </div>
             </div>
         </div>
