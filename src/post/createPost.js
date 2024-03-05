@@ -23,8 +23,12 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
         alert('You must be logged in to remove posts.');
         return;
       }
-
-      const response = await fetch(`http://localhost:12345/api/posts/delete/${id}`, {
+      const userID = localStorage.getItem('userID');
+      if (!userID) {
+        alert('You must be logged in to remove posts.');
+        return;
+      }
+      const response = await fetch(`http://localhost:12345/api/users/${userID}/posts/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
