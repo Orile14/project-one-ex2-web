@@ -107,13 +107,12 @@ const UserProfile = ({ updatedFriendsList }) => {
             });
 
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                throw alert(`Friend request already sent`);
             }
             alert('Friendship request sent');
         }
         catch (error) {
             console.error('Error:', error);
-            alert('Failed to send friendship request.');
         }
     }
     const acceptRequest = async () => {

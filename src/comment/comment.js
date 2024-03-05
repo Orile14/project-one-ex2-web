@@ -35,7 +35,7 @@ const Comment = ({ comments, postId }) => {
             setNewComments(updatedComments); // Update the local state to reflect the deletion
         } catch (error) {
             console.error('Failed to delete comment:', error);
-            alert('Failed to delete comment.');
+            alert('You are not authorized.');
         }
     };
     // Function to add a comment
