@@ -126,7 +126,12 @@ const SignUp = () => {
     } catch (error) {
 
       console.error('Error:', error);
-      alert('Failed to create user.');
+      if(isFromProfile){
+        alert('Username is already taken')
+      }else{
+        alert('Failed to create user.');
+
+      }
     }
   };
 

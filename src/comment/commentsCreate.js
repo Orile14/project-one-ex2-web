@@ -16,7 +16,7 @@ const CommentsCreate = ({ id, username, profile, timestamp, content, deleteComme
     };
     // Function to handle the edit button
     const handleEdit = async () => {
-        const canEdit = await handleEditComment(username);
+        const canEdit = await handleEditComment(id);
         if (canEdit) {
             setIsEditing(true);
         }
