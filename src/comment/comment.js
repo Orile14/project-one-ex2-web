@@ -159,7 +159,15 @@ const Comment = ({ comments, postId }) => {
             alert('Failed to like comment.');
         }
     }
-    console.log("newComments", newComments);
+    const formatDate = (isoDateString) => {
+        const date = new Date(isoDateString);
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
+        const year = date.getFullYear();
+        return `${hours}:${minutes} ${day}/${month}/${year}`;
+    };
     return (
         <div>
             <button className="commentButton" id="commentbutton" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
@@ -183,7 +191,7 @@ const Comment = ({ comments, postId }) => {
                                     username={comment.nickname}
                                     profile = {comment.profilePic}
                                     content={comment.content}
-                                    timestamp={comment.date}
+                                    timestamp={formatDate(comment.date)}
                                     deleteComment={deleteComment}
                                     handleEditComment={handleEditComment}
                                     handleSaveComment={handleSaveComment}
