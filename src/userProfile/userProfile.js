@@ -43,8 +43,6 @@ const UserProfile = ({ updatedFriendsList }) => {
                     throw new Error('Network response was not ok');
                 }
                 const postsJSON = await response.json();
-                console.log(postsJSON)
-
                 if (response.status < 250) {
                     setIsFriend(true);
                 }
@@ -208,7 +206,6 @@ const UserProfile = ({ updatedFriendsList }) => {
                 alert('You must be logged in to view friends.');
                 return;
             }
-            console.log(userId)
             const response = await fetch(`http://localhost:12345/api/users/${userId}/friends`, {
                 method: 'GET',
                 headers: {
@@ -240,25 +237,27 @@ const UserProfile = ({ updatedFriendsList }) => {
             ></div>
             <div className="user-name">
                 <div className="user-nickname">{userData.nick}</div>
+                
+            </div>
+            <div className='userPosts'>
                 {/* Conditionally render the "Send request" button based on posts */}
                 {!isFriend && checkCompleted && (
                     !isFromFriendRequest ? (
                         <div className="d-grid gap-2 col-6 mx-auto">
-                            <button id="Follow-btn" className="btn btn-primary" onClick={SendFriendship} type="button">Send request</button>
+                            <button id="Follow-btn" className="btn btn-primary" onClick={SendFriendship} type="button">Send friendship</button>
                         </div>)
                         :
                         <div>
-                            <a href="#" class="accept" onClick={acceptRequest}>ACCEPT <span class="fa fa-check"></span></a>
-                            <a href="#" class="deny" onClick={denyRequest}>DENY <span class="fa fa-close"></span></a>
+                            <a href="#" id="Follow-btn" class="btn btn-primary" onClick={acceptRequest}>Accept friendship <span class="fa fa-check"></span></a>
+                            <a href="#" id="Follow-btn" className="btn btn-danger" onClick={denyRequest}>Reject <span class="fa fa-close"></span></a>
                         </div>)}
-            </div>
-            <div className='userPosts'>
                 {isFriend && checkCompleted && !isMyProfile ?
-                    <><><button id="Follow-btn" className="btn btn-danger" onClick={deleteFriend}>remove</button>
+                    <><><button id="Follow-btn" className="btn btn-danger" onClick={deleteFriend}>Delete friend</button>
                         <button id="Follow-btn" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                            aria-controls="offcanvasRight" onClick={fetchFriends}>users friends list</button></><div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                            aria-controls="offcanvasRight" onClick={fetchFriends}>Users friends</button></><div class="offcanvas offcanvas-end" 
+                            tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                             <div class="offcanvas-header">
-                                <h5 class="offcanvas-title" id="offcanvasRightLabel">users friends list</h5>
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel">Users friends list</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
@@ -272,7 +271,7 @@ const UserProfile = ({ updatedFriendsList }) => {
                             </div>
                         </div></> :
                     isMyProfile ?
-                        <button id="Follow-btn" className="btn btn-primary" onClick={update}>Update User details</button> : null}
+                        <button id="Follow-btn" className="btn btn-primary" onClick={update}>Update user info</button> : null}
                 {DBposts.length === 0 && checkCompleted ? null : <Posts posts={DBposts} />}
             </div>
 
