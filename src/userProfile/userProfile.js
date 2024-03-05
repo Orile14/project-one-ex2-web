@@ -243,21 +243,23 @@ const UserProfile = ({ updatedFriendsList }) => {
                 {/* Conditionally render the "Send request" button based on posts */}
                 {!isFriend && checkCompleted && (
                     !isFromFriendRequest ? (
-                        <div className="d-grid gap-2 col-6 mx-auto">
+                        <div >
                             <button id="Follow-btn" className="btn btn-primary" onClick={SendFriendship} type="button">Send friendship</button>
                         </div>)
                         :
                         <div>
-                            <a href="#" id="Follow-btn" class="btn btn-primary" onClick={acceptRequest}>Accept friendship <span class="fa fa-check"></span></a>
-                            <a href="#" id="Follow-btn" className="btn btn-danger" onClick={denyRequest}>Reject <span class="fa fa-close"></span></a>
+                            <a href="#" id="Follow-btn" class="btn btn-primary" onClick={acceptRequest}>Confirm request <span class="fa fa-check"></span></a>
+                            <a href="#" id="Follow-btn" className="btn btn-danger" onClick={denyRequest}>Delete request <span class="fa fa-close"></span></a>
                         </div>)}
                 {isFriend && checkCompleted && !isMyProfile ?
-                    <><><button id="Follow-btn" className="btn btn-danger" onClick={deleteFriend}>Delete friend</button>
+                    <><>
                         <button id="Follow-btn" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                            aria-controls="offcanvasRight" onClick={fetchFriends}>Users friends</button></><div class="offcanvas offcanvas-end" 
-                            tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                            aria-controls="offcanvasRight" onClick={fetchFriends}>User's friends</button>
+                            <button id="Follow-btn" className="btn btn-danger" onClick={deleteFriend}>Delete friend</button>
+                            </>
+                            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                             <div class="offcanvas-header">
-                                <h5 class="offcanvas-title" id="offcanvasRightLabel">Users friends list</h5>
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel">User's friends list</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
