@@ -60,3 +60,9 @@ body {
 a {
   text-decoration: none;
 }
+
+body[data-theme="dark"] .offcanvas {
+  background-color: var(--bg-color-soft-dark); /* Dark mode background color */
+    color: var(--text-color-dark); /* Dark mode text color */
+}
+

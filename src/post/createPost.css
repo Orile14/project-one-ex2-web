@@ -25,6 +25,16 @@ body[data-theme="dark"] .post {
     display: block; 
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
 }
+#save{
+   width: 45px;
+   height: 33px;
+   margin-top: 11px;
+   display: flex;           /* Use flexbox for alignment */
+  align-items: center;     /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  text-align: center; 
+}
+
 #save:hover{
     cursor: pointer;
     background-color: #f0f2f5;
