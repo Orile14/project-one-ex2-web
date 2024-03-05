@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './friendList.css';
 import { useNavigate } from 'react-router-dom';
 
-const FriendList = () => {
+const FriendList = ({ refreshFeed }) => {
   const navigate = useNavigate();
   const [friends, setFriends] = useState([]);
   const [friendRequests, setFriendRequests] = useState([]);
@@ -11,7 +11,7 @@ const FriendList = () => {
   useEffect(() => {
     fetchFriends(); 
     fetchRequests();
-  }, []); 
+  }, [refreshFeed]); 
 
   const fetchFriends = async () => {
     try {

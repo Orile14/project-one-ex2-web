@@ -1,80 +1,62 @@
 .profile {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    width: 100%;
-    height: auto; /* Adjust height to auto to accommodate content */
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  height: auto;
+  /* Adjust height to auto to accommodate content */
 }
 
 .cover-photo {
-    border-radius: 5px;
-    width: 100%;
-    height: 200px; /* Height of the cover photo */
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    z-index: 1; /* Ensures cover photo is behind profile photo */
+  border-radius: 5px;
+  width: 100%;
+  height: 200px;
+  /* Height of the cover photo */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+  /* Ensures cover photo is behind profile photo */
 }
 
 .profile-photo {
-    width: 100px; /* Width of the profile photo */
-    height: 100px; /* Height of the profile photo */
-    background-size: cover;
-    background-position: center;
-    border-radius: 50%;
-    position: absolute;
-    top: 150px; /* Adjust so that half is below the cover photo */
-    left: 20px; /* Distance from the left side */
-    border: 3px solid white; /* Optional border */
-    z-index: 2; /* Ensures profile photo is on top */
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  position: absolute;
+  top: 150px;
+  left: 20px;
+  border: 3px solid white;
+  z-index: 2;
 }
 
 .user-nickname {
-    margin-left: 120px; /* Adjust as needed, should be greater than the width of the profile photo */
-    margin-top: 10px; /* Adjust so it's below the profile photo */
-    font-size: 30px; /* Optional: Adjust the font size */
-    font-weight: bold; /* Optional: Adjust the font weight */
+  margin-left: 120px;
+  margin-top: 10px;
+  font-size: 30px;
+  font-weight: bold;
 }
-#Follow-btn{
-    min-width: auto;
-    width: 200px;
-    margin-top: 10px;
+
+#Follow-btn {
+  min-width: auto;
+  width: 150px;
+  margin-top: 10px;
+  margin: 5px;
 }
+
+
 .user-name {
-    display: flex;
-    align-items: center; /* Align vertically */
+  display: flex;
+  align-items: center;
 }
-
-
-
-
-
 
 body {
   margin: 0;
   background: #666;
 }
-a{
-  text-decoration: none;
-}
-.accept {
-    color: #FFF;
-    background-color: var(--bs-primary);
-    border-color: #007bff; /* Bootstrap primary color for border */
-    padding: 15px 20px;
-    border-radius: 15px;
-    margin: 5px;
-}
-.accept:hover {
-  background: #6f6fe7;
-}
-.deny {
-  color: #FFF;
-  background-color: var(--bs-danger);
-  padding: 15px 20px;
-  border-radius: 15px;
 
-}
-.deny:hover {
-  background: rgb(255, 147, 128);
+a {
+  text-decoration: none;
 }

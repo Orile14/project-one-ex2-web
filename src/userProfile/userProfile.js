@@ -4,7 +4,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import Posts from '../post/posts';
 import { useNavigate } from 'react-router-dom';
 
-const UserProfile = () => {
+const UserProfile = ({ updatedFriendsList }) => {
     const [DBposts, setDBPosts] = useState([]);
     const [userData, setUserData] = useState({ profilePic: '', coverPic: '', nick: '' });
     const [isFriend, setIsFriend] = useState(false);
@@ -15,7 +15,7 @@ const UserProfile = () => {
     const [isMyProfile, setIsMyProfile] = useState(false);
     const [friends, setFriends] = useState([{}]);
     const navigate = useNavigate();
-
+    const [actionTriggered, setActionTriggered] = useState(false);
     useEffect(() => {
         const fromFriendRequest = location.state?.fromFriendRequest;
         setIsFromFriendRequest(!!fromFriendRequest);
@@ -43,8 +43,6 @@ const UserProfile = () => {
                     throw new Error('Network response was not ok');
                 }
                 const postsJSON = await response.json();
-                console.log(postsJSON)
-
                 if (response.status < 250) {
                     setIsFriend(true);
                 }
@@ -91,7 +89,7 @@ const UserProfile = () => {
 
         };
         getUserInfo();
-    }, [location, userId]);
+    }, [location, userId,actionTriggered]);
 
 
     const SendFriendship = async () => {
@@ -137,6 +135,9 @@ const UserProfile = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             setIsFriend(true);
+            setActionTriggered(prevState => !prevState);
+            updatedFriendsList();
+            
         }
 
         catch (error) {
@@ -162,7 +163,9 @@ const UserProfile = () => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            setIsFriend(true);
+            setIsFriend(false);
+            setActionTriggered(prevState => !prevState);
+           updatedFriendsList();
         }
 
         catch (error) {
@@ -170,29 +173,7 @@ const UserProfile = () => {
             alert('Failed to send friendship request.');
         }
     }
-    const denyRequest = async () => {
-        try {
-            const token = localStorage.getItem('userToken');
-            if (!token) {
-                alert('You must be logged in to modify friendship requests.');
-                return;
-            }
-            const response = await fetch(`http://localhost:12345/api/users/${userId}/friends`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
 
-            alert('Friendship request denied.');
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Failed to deny friendship request.');
-        }
-    }
     const update = () => {
         navigate(`/updateUser`, { state: { fromProfile: true } });
     }
@@ -203,7 +184,6 @@ const UserProfile = () => {
                 alert('You must be logged in to view friends.');
                 return;
             }
-            console.log(userId)
             const response = await fetch(`http://localhost:12345/api/users/${userId}/friends`, {
                 method: 'GET',
                 headers: {
@@ -216,12 +196,12 @@ const UserProfile = () => {
             }
             const data = await response.json();
             setFriends(data.friends);
+            updatedFriendsList();
         }
         catch (error) {
             console.error('Error fetching friends:', error);
         }
     };
-
 
     return (
         <div className="profile">
@@ -235,25 +215,29 @@ const UserProfile = () => {
             ></div>
             <div className="user-name">
                 <div className="user-nickname">{userData.nick}</div>
+                
+            </div>
+            <div className='userPosts'>
                 {/* Conditionally render the "Send request" button based on posts */}
                 {!isFriend && checkCompleted && (
                     !isFromFriendRequest ? (
-                        <div className="d-grid gap-2 col-6 mx-auto">
-                            <button id="Follow-btn" className="btn btn-primary" onClick={SendFriendship} type="button">Send request</button>
+                        <div >
+                            <button id="Follow-btn" className="btn btn-primary" onClick={SendFriendship} type="button">Send friendship</button>
                         </div>)
                         :
                         <div>
-                            <a href="#" class="accept" onClick={acceptRequest}>ACCEPT <span class="fa fa-check"></span></a>
-                            <a href="#" class="deny" onClick={denyRequest}>DENY <span class="fa fa-close"></span></a>
+                            <a href="#" id="Follow-btn" class="btn btn-primary" onClick={acceptRequest}>Confirm request <span class="fa fa-check"></span></a>
+                            <a href="#" id="Follow-btn" className="btn btn-danger" onClick={deleteFriend}>Delete request <span class="fa fa-close"></span></a>
                         </div>)}
-            </div>
-            <div className='userPosts'>
                 {isFriend && checkCompleted && !isMyProfile ?
-                    <><><button id="Follow-btn" className="btn btn-danger" onClick={deleteFriend}>delete</button>
+                    <><>
                         <button id="Follow-btn" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                            aria-controls="offcanvasRight" onClick={fetchFriends}>users friends list</button></><div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                            aria-controls="offcanvasRight" onClick={fetchFriends}>User's friends</button>
+                            <button id="Follow-btn" className="btn btn-danger" onClick={deleteFriend}>Delete friend</button>
+                            </>
+                            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                             <div class="offcanvas-header">
-                                <h5 class="offcanvas-title" id="offcanvasRightLabel">users friends list</h5>
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel">User's friends list</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
@@ -267,7 +251,7 @@ const UserProfile = () => {
                             </div>
                         </div></> :
                     isMyProfile ?
-                        <button id="Follow-btn" className="btn btn-primary" onClick={update}>Update User details</button> : null}
+                        <button id="Follow-btn" className="btn btn-primary" onClick={update}>Update user info</button> : null}
                 {DBposts.length === 0 && checkCompleted ? null : <Posts posts={DBposts} />}
             </div>
 
