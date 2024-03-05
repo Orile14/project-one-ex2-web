@@ -3,18 +3,16 @@ import React from 'react';
 import "./optionSection.css";
 import OptionItem from "./optionItem/optionItem";
 import OptionData from "./optionItem/optionItem.json";
-import { useAuth } from '../authContext/authContext';
 import { useNavigate } from 'react-router-dom';
 
 const OptionSection = () => {
 
-  const { logout } = useAuth();
 
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    logout();
-    //change the path to the feed page
+    localStorage.setItem('userToken', "");
+    localStorage.setItem('userID', "");
     navigate('/login');
   };
 

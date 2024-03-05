@@ -24,13 +24,20 @@
   align-items: center;
   justify-content: center;
   transition: width 0.3s, height 0.3s; /* Add transition for a smooth effect */
+  transition: transform 0.3s ease;
 }
 body[data-theme="dark"] .circular-container {
   background-color: var(--button-bg-dark); /* Dark background color */
   color: var(--text-color-dark); /* Dark text color */
 }
+
+.circular-container:hover{
+  transform: scale(1.2); 
+
+}
 .option-section-button {
   height: 58px;
+  width: 66px;
   border: none;
   background-color: white;
   text-align: center;
@@ -38,7 +45,7 @@ body[data-theme="dark"] .circular-container {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  transition: background-color 0.3s ease, width 0.3s, height 0.3s; /* Add a smooth transition effect for background-color, width, and height */
+  transition: background-color 0.s ease, width 0.9s, height 0.9s;
 }
 
 /* Dark mode styles for option section button */
@@ -53,37 +60,22 @@ body[data-theme="dark"] .option-section-button {
   background-color: white;
 }
 
-/* Adjust the size of the circular-container on hover */
-.option-section-button:hover .circular-container {
-  width: 40px; /* Adjust the size as needed */
-  height: 40px; /* Adjust the size as needed */
-}
-/* Adjusting the size of the circular-container on hover in dark mode */
-body[data-theme="dark"] .option-section-button:hover .circular-container {
-  width: 40px; /* Adjust the size as needed */
-  height: 40px; /* Adjust the size as needed */
-}
-.circular-container:has(>.bi-box-arrow-right) {
-  /* primary color from bootstrap */
-  background-color: rgb(225, 47, 50);
-}
-
-body[data-theme="dark"] .circular-container:has(>.bi-box-arrow-right) {
-  background-color: rgb(225, 47, 50);
-}
-
-#logOutBtn{
-  margin-right: 5px;
+#logOutBtn {
+  margin-top: 10px;
+  margin-right: 20px;
   margin-left: 5px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: var(--button-bg-light);
+  background-color: rgb(255, 49, 49);
   color: black;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: width 0.3s, height 0.3s;
+  transition: transform 0.3s; /* Use transform for transition */
   border: none;
+}
 
+#logOutBtn:hover {
+  transform: scale(1.2); 
 }

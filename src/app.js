@@ -4,8 +4,7 @@ import { ThemeProvider, ThemeContext } from './themeContext/themeContext';
 import Feed from './feed/feed';
 import Signup from './signUp/signUp';
 import Login from './login/login';
-import ProtectedRoute from './authContext/protectedRoute';
-import { AuthProvider } from './authContext/authContext';
+import ProtectedRoute from './protection/protectedRoute';
 
 // AppContent is the main component that includes the application's routing logic.
 const AppContent = () => {
@@ -37,7 +36,11 @@ const AppContent = () => {
             </ProtectedRoute>
           } />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/updateUser" element={
+           <ProtectedRoute>
+           <Signup />
+         </ProtectedRoute>
+          } />
           <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
@@ -48,11 +51,9 @@ const AppContent = () => {
 // App component wraps the whole application with ThemeProvider.
 // ThemeProvider provides a theme context to all components inside it.
 const App = () => (
-  <AuthProvider>
     <ThemeProvider>
       <AppContent />
     </ThemeProvider>
-  </AuthProvider>
 );
 
 export default App;

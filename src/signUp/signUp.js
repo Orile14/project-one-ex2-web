@@ -2,10 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 import MakeButton from "./makeButton";
 import buttonsData from "./buttons.json";
 import "./signUp.css";
-import User from './user';
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from '../themeContext/themeContext';
-import { useParams, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 
 const SignUp = () => {
@@ -61,6 +60,7 @@ const SignUp = () => {
     event.preventDefault();
 
     if (formData.Password !== formData.ConfirmPassword) {
+
       alert("Password and Confirm Password must be the same");
       return;
     }
@@ -91,13 +91,7 @@ const SignUp = () => {
 
     try {
       let response;
-      const token = localStorage.getItem('userToken');
-      const userId = localStorage.getItem('userID');
-      
-      if (!token || !userId) {
-        alert('You must be logged in to modify friendship requests.');
-        return;
-      }
+      let userId;
       if (!isFromProfile) {
         response = await fetch('http://localhost:12345/api/users', {
           method: 'POST',
@@ -105,27 +99,32 @@ const SignUp = () => {
           body: JSON.stringify(userData)
         });
       } else {
-
+        const token = localStorage.getItem('userToken');
+        userId = localStorage.getItem('userID');
+        if (!token || !userId) {
+          alert('You must be logged in to modify friendship requests.');
+          return;
+        }
         response = await fetch(`http://localhost:12345/api/users/${userId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
-        },
+          },
           body: JSON.stringify(userData)
         });
       }
-      if(response.status === 409){
+      if (response.status === 409) {
         alert('Username already exists.');
         return;
       }
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      if(!isFromProfile){ navigate('/login')}
-      else{ navigate(`/profile/${userId}`)};
+      if (!isFromProfile) { navigate('/login') }
+      else { navigate(`/profile/${userId}`) };
     } catch (error) {
-     
+
       console.error('Error:', error);
       alert('Failed to create user.');
     }
@@ -145,7 +144,17 @@ const SignUp = () => {
           <MakeButton
             key={button.id}
             id={button.id}
-            label={button.label}
+            label1={
+              button.name 
+            }
+            label2={
+              button.id === "ConfirmPassword" ?
+                `Confirm password` :
+                isFromProfile ?
+                  `Enter new ${button.label}` :
+                  `Enter ${button.label}`
+            }
+            placeholder={button.id}
             type={button.type}
             value={formData[button.id] || ""}
             handleChange={(e) => handleInputChange(button.id, e.target.value)}

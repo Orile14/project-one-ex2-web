@@ -2,9 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./login.css";
 import InputBox from "../inputBox/inputBox";
-import User from "../signUp/user";
 import { ThemeContext } from '../themeContext/themeContext';
-import { useAuth } from '../authContext/authContext';
 
 const Login = () => {
   // Accessing theme and toggleTheme from ThemeContext using useContext hook
@@ -15,7 +13,6 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
-  const { login } = useAuth();
 
   const handleSignUpClick = () => {
     // Change this to the path of your signup page
@@ -29,7 +26,6 @@ const Login = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
       });
-
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -54,9 +50,9 @@ const Login = () => {
         localStorage.setItem('userToken', tokenData.token);
         localStorage.setItem('userID', data.id);
 
-        
+
         setLoginMessage(`Welcome, ${username}! You have successfully logged in.`);
-        login();
+        
         navigate('/Feed');
       } else {
         setLoginMessage('Invalid email or password. Please try again.');

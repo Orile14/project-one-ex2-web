@@ -10,7 +10,8 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
   const [isRemoved, setIsRemoved] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editableContent, setEditableContent] = useState(originalContent);
-  const [editableImage, setEditableImage] = useState(image);
+  const [currentImage, setCurrentImage] = useState(image);
+  const [newImage, setNewImage] = useState(image);
   const [LikeCount, setLikeCount] = useState(likes.length);
 
   // Function to handle post removal
@@ -111,92 +112,59 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
         alert('You must be logged in to edit posts.');
         return;
       }
-  
-      // Initialize FormData
-      const formData = new FormData();
-  
-      // Append editable content
-      formData.append('content', editableContent);
-  
-      // Append image file if a new one has been selected
-      if (document.getElementById('imageInput').files[0]) {
-        formData.append('image', document.getElementById('imageInput').files[0]);
-      } 
-  
+
+      const postData = {
+        content: editableContent,
+        image: newImage,
+      };
+
       const response = await fetch(`http://localhost:12345/api/users/${userId}/posts/${id}`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         },
-        body: formData,
+        body: JSON.stringify(postData)
       });
-  
+
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
       const data = await response.json();
-  
+
       console.log('Post updated successfully:', data);
       setIsEditing(false);
+      setCurrentImage(newImage);
     } catch (error) {
       console.error('Failed to edit post:', error);
     }
   };
+
   // Function to handle input change
   const handleChange = (event) => {
     setEditableContent(event.target.value);
   };
 
-  // const handleImage = async (event) => {
-  //   try {
-  //     const file = event.target.files[0];
-  //     if (!file) {
-  //       alert('No file selected.');
-  //       return;
-  //     }
+  const handleImage = async (event) => {
+
+    const readFileAsBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+      });
+    }
   
-  //     const readFileAsBase64 = (file) => {
-  //       return new Promise((resolve, reject) => {
-  //         const reader = new FileReader();
-  //         reader.onload = () => resolve(reader.result);
-  //         reader.onerror = error => reject(error);
-  //         reader.readAsDataURL(file);
-  //       });
-  //     };
+    let base64Image = "";
+    const file = event.target.files[0];
+    if (file) {
+      base64Image = await readFileAsBase64(file); // Ensure this is awaited
+    }
   
-  //     const base64Image = await readFileAsBase64(file);
+    setNewImage(base64Image);
+  };
   
-  //     // Retrieve the token from local storage
-  //     const token = localStorage.getItem('userToken');
-  //     if (!token) {
-  //       alert('You must be logged in to upload images.');
-  //       return;
-  //     }
-  
-  //     // Send the base64 image to the server
-  //     const response = await fetch(`http://localhost:12345/api/posts/uploadImage/${id}`, {
-  //       method: 'PATCH',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': `Bearer ${token}`
-  //       },
-  //       body: JSON.stringify({ image: base64Image })
-  //     });
-  
-  //     if (!response.ok) {
-  //       throw new Error('Image upload failed');
-  //     }
-  
-  //     const responseData = await response.json();
-  
-  //     // Assuming the server returns the URL of the uploaded image
-  //     setEditableImage(responseData.img);
-  
-  //   } catch (error) {
-  //     console.error('Failed to upload image:', error);
-  //     alert('Failed to upload image.');
-  //   }
-  // };
 
   const handleUserClick = (userId) => {
     navigate(`/profile/${userId}`);
@@ -215,7 +183,7 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
             <img src={profile} alt="PostIm" className="profilePic" />
           </button>
           <div className="user-info">
-          <button className="username" onClick={() => handleUserClick(postOwnerID)}>{username}</button>
+            <button className="username" onClick={() => handleUserClick(postOwnerID)}>{username}</button>
             <p className="timestamp">{timestamp}</p>
           </div>
         </div>
@@ -234,17 +202,18 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
       {/** Display post content and image */}
       <div className="post-content">
         {isEditing ? (
-          // Display textarea and file input if editing
           <div>
             <textarea value={editableContent} onChange={handleChange} className="edit-textarea" />
-            <input type="file"  />
+            <input type="file" id="imageInput" onChange={handleImage} />
+            {newImage && <img src={newImage} alt="New Post" className="post-image" />}
           </div>
-
         ) : (
-          // Display post content and image if not editing
-          <p>{editableContent}</p>
+          <div>
+            <p>{editableContent}</p>
+            {currentImage && <img src={currentImage} alt="Post" className="post-image" />}
+          </div>
         )}
-        {editableImage && <img src={editableImage} alt="PostIm" className="post-image" />}        </div>
+      </div>
 
       <div className="buttons">
         {/** Display like, comment, and share buttons */}

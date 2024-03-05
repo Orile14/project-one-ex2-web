@@ -1,6 +1,6 @@
 import React from "react";
 
-const OptionItem = ({ iconClass, onLogout,deleteUser }) => {
+const OptionItem = ({ iconClass, onLogout, deleteUser}) => {
     const isLogoutOption = iconClass === "bi-box-arrow-right";
     
     return (

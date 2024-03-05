@@ -194,7 +194,7 @@ const UserProfile = () => {
         }
     }
     const update = () => {
-        navigate(`/signup`, { state: { fromProfile: true } });
+        navigate(`/updateUser`, { state: { fromProfile: true } });
     }
     const fetchFriends = async () => {
         try {
