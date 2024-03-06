@@ -9,6 +9,7 @@ const Comment = ({ comments, postId }) => {
     const input = useRef(null);
     const modalId = `commentsModal-${postId}`;
     const [newComments, setNewComments] = useState(comments);
+    const [likes,setLikes]=useState()
 
     const deleteComment = async (commentId) => {
         try {
@@ -134,31 +135,6 @@ const Comment = ({ comments, postId }) => {
             console.error('Failed to edit post:', error);
         }
     };
-    const handleLikeComment = async (id) => {
-        try {
-            const token = localStorage.getItem('userToken');
-            if (!token) {
-                alert('You must be logged in to like comments.');
-                return;
-            }
-            const response = await fetch(`http://localhost:12345/api/posts/comment/like/${postId}/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error(`Error: ${response.status}`);
-            }
-            const data = await response.json();
-            console.log('data:', data);
-        } catch (error) {
-            console.error('Failed to like comment:', error);
-            alert('Failed to like comment.');
-        }
-    }
     const formatDate = (isoDateString) => {
         const date = new Date(isoDateString);
         const hours = date.getHours().toString().padStart(2, '0');
@@ -168,6 +144,7 @@ const Comment = ({ comments, postId }) => {
         const year = date.getFullYear();
         return `${hours}:${minutes} ${day}/${month}/${year}`;
     };
+    
     return (
         <div>
             <button className="commentButton" id="commentbutton" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
@@ -185,17 +162,18 @@ const Comment = ({ comments, postId }) => {
                         <div className="modal-body">
                             {newComments.map((comment) => (
                                 //map through the comments and create a new CommentsCreate component for each comment
-                                <CommentsCreate
+                                <CommentsCreate                               
                                     key={comment._id}
+                                    postId={postId}
                                     id={comment._id}
                                     username={comment.nickname}
                                     profile = {comment.profilePic}
+                                    likes = {comment.likes}
                                     content={comment.content}
                                     timestamp={formatDate(comment.date)}
                                     deleteComment={deleteComment}
                                     handleEditComment={handleEditComment}
                                     handleSaveComment={handleSaveComment}
-                                    handleLikeComment={handleLikeComment}
                                 />
                             ))}
                             <div className="modal-footer">

@@ -1,19 +1,62 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './commentCreate.css';
 
-const CommentsCreate = ({ id, username, profile, timestamp, content, deleteComment, handleEditComment,
-    handleLikeComment, handleSaveComment }) => {
+const CommentsCreate = ({ postId, id, username, profile, likes, timestamp, content, deleteComment, handleEditComment,
+    handleSaveComment }) => {
     // Initialize state variables
     const [isEditing, setIsEditing] = useState(false);
     const [editableContent, setEditableContent] = useState(content);
     const [likeActive, setLikeActive] = useState(false);
     const textareaRef = useRef(null);
-
+    const amount = likes ? likes.length : 0;
+    const [LikeCount, setLikeCount] = useState(amount);
+    useEffect(() => {
+        if (likes) {
+            const user = localStorage.getItem('userID');
+            const userLike = likes.find((like) => like == user);
+            if (userLike) {
+                setLikeActive(true);
+            } else {
+                setLikeActive(false);
+            }
+        }
+    }, [likes]);
     // Function to handle the like button
-    const handleLike = async () => {
-        await handleLikeComment(id);
-        setLikeActive(!likeActive);
-    };
+
+    const handleLikeComment = async () => {
+        try {
+            const token = localStorage.getItem('userToken');
+            if (!token) {
+                alert('You must be logged in to like comments.');
+                return;
+            }
+            const response = await fetch(`http://localhost:12345/api/posts/comment/like/${postId}/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+            const data = await response.json();
+            const user = localStorage.getItem('userID');
+            const userLike = data.find((like) => like == user);
+            if (userLike) {
+                setLikeActive(true);
+            } else {
+                setLikeActive(false);
+            }
+
+            setLikeCount(data.length);
+        } catch (error) {
+            console.error('Failed to like comment:', error);
+            alert('Failed to like comment.');
+        }
+    }
+
     // Function to handle the edit button
     const handleEdit = async () => {
         const canEdit = await handleEditComment(id);
@@ -75,8 +118,9 @@ const CommentsCreate = ({ id, username, profile, timestamp, content, deleteComme
             </div>
             <div className="comment-footer">
                 {/** Add the like button */}
-                <button onClick={handleLike} className={`comments-like ${likeActive ? 'active' : ''}`}>
-                    <i className="bi bi-hand-thumbs-up"></i>
+                <button onClick={handleLikeComment} className={`comments-like ${likeActive ? 'active' : ''}`}>
+                    <i className="bi bi-hand-thumbs-up"> </i>
+                    <label>{LikeCount}</label>
                 </button>
             </div>
         </div>
