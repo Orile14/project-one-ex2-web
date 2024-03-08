@@ -1,6 +1,6 @@
 .bar { 
   padding: 0px;
-  height: 60X; /* Set the height as a percentage */
+  height: 60X; 
 }
 
 .feed-item-icon {
@@ -32,10 +32,9 @@
   transition: background-color 0.3s ease; 
 }
 
-/* Dark mode styles for feed item button */
 body[data-theme="dark"] .feed-item-button {
   background-color: var(--bg-color-dark);
-  border: none; /* Remove border */
+  border: none;
 }
 
 .feed-item-button:hover {

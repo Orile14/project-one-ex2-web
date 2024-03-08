@@ -66,7 +66,7 @@ body[data-theme="dark"] .navbar {
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  outline: none; /* Added to remove the outline */
+  outline: none; 
 }
 
 /* Dark Theme Toggle Button */
@@ -86,14 +86,13 @@ body[data-theme="dark"] .navbar {
   color: var(--button-text-dark);
 }
 
-/* Search Input */
 .search-input {
   margin-top: 5px;
   margin-bottom: 5px;
   width: 100%;
-  width: 180px; /* Should this be 'max-width' instead of 'width'? */
+  width: 180px;
   border-radius: 20px;
-  color: gray; /* Added to change default text color to gray */
+  color: gray;
 }
 
 [data-theme="dark"] .search-input {
@@ -104,10 +103,10 @@ body[data-theme="dark"] .navbar {
 
 /* Dark Theme Search Input Placeholder */
 [data-theme="dark"] .search-input::placeholder {
-  color: var(--text-color-dark); /* Set a lighter color for better visibility */
+  color: var(--text-color-dark);
 }
 
-/* Additional Styles (if any) */
+
 .logo-icon {
   margin-right: 2px;
   font-size: 40px;

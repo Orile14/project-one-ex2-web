@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import CommentsCreate from './commentsCreate';
 import './comment.css';
 
+// This component displays the comments for a post
 const Comment = ({ comments, postId }) => {
 
     // Initialize state variables
@@ -10,31 +11,16 @@ const Comment = ({ comments, postId }) => {
     const modalId = `commentsModal-${postId}`;
     const [newComments, setNewComments] = useState(comments);
 
-    // Function to handle the like button
-    const toggleLike = (commentId) => {
-        //  setNewComments(newComments.map(comment => {
-        //      // If the comment id matches the id of the comment being liked, update the likes
-        //      if (comment.id === id) {
-        //          const currentLikes = comment.likes || { count: 0, likedByUser: false };
-        //          return {
-        //              ...comment,
-        //              likes: {
-        //                  count: currentLikes.likedByUser ? currentLikes.count - 1 : currentLikes.count + 1,
-        //                  likedByUser: !currentLikes.likedByUser
-        //              }
-        //          };
-        //      }
-        //      return comment;
-        //  }));
-    };
-
+    // Function to delete a comment
     const deleteComment = async (commentId) => {
         try {
+            // Retrieve the token from local storage
             const token = localStorage.getItem('userToken');
             if (!token) {
                 alert('You must be logged in to delete comments.');
                 return;
             }
+            // Send a DELETE request to the server
             const response = await fetch(`http://localhost:12345/api/posts/comment/${postId}/${commentId}`, {
                 method: 'DELETE',
                 headers: {
@@ -48,12 +34,11 @@ const Comment = ({ comments, postId }) => {
 
             console.log('Comment deleted successfully');
             // Refresh the comments list after deleting a comment
-            // Assuming the backend returns the updated comments array after deletion
-            const updatedComments = await response.json(); // Make sure the backend returns the updated list of comments
-            setNewComments(updatedComments); // Update the local state to reflect the deletion
+            const updatedComments = await response.json(); 
+            setNewComments(updatedComments); 
         } catch (error) {
             console.error('Failed to delete comment:', error);
-            alert('Failed to delete comment.');
+            alert('You are not authorized.');
         }
     };
     // Function to add a comment
@@ -63,47 +48,51 @@ const Comment = ({ comments, postId }) => {
     // Function to add a comment
     const AddComment = async () => {
         try {
+            // Retrieve the token from local storage
             const token = localStorage.getItem('userToken');
             if (!token) {
                 alert('You must be logged in to add comments.');
                 return;
             }
-
+            // Send a POST request to the server
+            const commentContent = input.current.value;
             const response = await fetch(`http://localhost:12345/api/posts/comment/${postId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({
-                    content: input.current.value
-                })
+                // Send the comment data to the server
+                body: JSON.stringify({ content: commentContent })
             });
 
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }
-
-            console.log('Comment added successfully');
-            setIsAdded(false);
-
-            // Refresh the comments list after adding a comment
+            // get the new comments
             const updatedComments = await response.json();
-            console.log('updatedComments:', updatedComments);
-            setNewComments(updatedComments);
-
+            console.log("updatedComments", updatedComments);
+            // Update the comments list after adding a comment
+            setNewComments(updatedComments); 
+            // Reset the input field and state variable
+            input.current.value = '';
+            setIsAdded(false);
         } catch (error) {
             console.error('Failed to add comment:', error);
             alert('Failed to add comment.');
         }
     };
+
+    // Function to check if the user is authorized to edit a comment
     const handleEditComment = async (id) => {
         try {
+            // Retrieve the token from local storage
             const token = localStorage.getItem('userToken');
             if (!token) {
                 alert('You must be logged in to edit comments.');
                 return false;
             }
+            // Send a GET request to the server
             const responseAuth = await fetch(`http://localhost:12345/api/posts/comment/edit/${postId}/${id}`, {
                 method: 'GET',
                 headers: {
@@ -118,7 +107,7 @@ const Comment = ({ comments, postId }) => {
                 alert('You are not authorized or there was an error.');
                 return false;
             }
-
+            // Parse the JSON response
             const data = await responseAuth.json();
             return data;
         } catch (error) {
@@ -127,7 +116,7 @@ const Comment = ({ comments, postId }) => {
         }
     };
     // Function to handle post save
-    const handleSaveComment = async (id,newContent) => {
+    const handleSaveComment = async (id, newContent) => {
         try {
             const token = localStorage.getItem('userToken');
             // Check if both content and image are empty
@@ -135,50 +124,40 @@ const Comment = ({ comments, postId }) => {
                 alert('You must be logged in to edit comments.');
                 return false;
             }
+            // Send a PATCH request to the server
             const response = await fetch(`http://localhost:12345/api/posts/comment/edit/${postId}/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ content:newContent }),
+                // Send the updated comment data to the server
+                body: JSON.stringify({ content: newContent }),
 
             });
             // Check if the request was successful
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }
+            //get the new comments
             const data = await response.json();
         }
         catch (error) {
             console.error('Failed to edit post:', error);
         }
     };
-    const handleLikeComment = async (id) => {
-        try {
-            const token = localStorage.getItem('userToken');
-            if (!token) {
-                alert('You must be logged in to like comments.');
-                return;
-            }
-            const response = await fetch(`http://localhost:12345/api/posts/comment/like/${postId}/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            });
 
-            if (!response.ok) {
-                throw new Error(`Error: ${response.status}`);
-            }
-            const data = await response.json();
-            console.log('data:', data);
-        } catch (error) {
-            console.error('Failed to like comment:', error);
-            alert('Failed to like comment.');
-        }
-    }
+    // Function to format the date in the comments list
+    const formatDate = (isoDateString) => {
+        const date = new Date(isoDateString);
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
+        const year = date.getFullYear();
+        return `${hours}:${minutes} ${day}/${month}/${year}`;
+    };
+    
     return (
         <div>
             <button className="commentButton" id="commentbutton" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
@@ -196,18 +175,18 @@ const Comment = ({ comments, postId }) => {
                         <div className="modal-body">
                             {newComments.map((comment) => (
                                 //map through the comments and create a new CommentsCreate component for each comment
-                                <CommentsCreate
+                                <CommentsCreate                               
                                     key={comment._id}
+                                    postId={postId}
                                     id={comment._id}
-                                    username={comment.commentOwnerID}
+                                    username={comment.nickname}
+                                    profile = {comment.profilePic}
+                                    likes = {comment.likes}
                                     content={comment.content}
-                                    timestamp={comment.date}
+                                    timestamp={formatDate(comment.date)}
                                     deleteComment={deleteComment}
                                     handleEditComment={handleEditComment}
                                     handleSaveComment={handleSaveComment}
-                                    handleLikeComment={handleLikeComment}
-                                    likes={comment.likes}
-                                    toggleLike={toggleLike}
                                 />
                             ))}
                             <div className="modal-footer">

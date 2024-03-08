@@ -4,14 +4,14 @@
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 15px;
-    max-width: 600px; /* Adjust width as needed */
-    margin: 10px auto; /* Center the post */
+    max-width: 600px;
+    margin: 10px auto;
     width: 600px;
 }
 
 body[data-theme="dark"] .postBox {
-    background-color: var(--bg-color-soft-dark); /* Dark mode background color */
-    color: var(--text-color-dark); /* Dark mode text color */
+    background-color: var(--bg-color-soft-dark); 
+    color: var(--text-color-dark); 
 }
 
 .postBox_top {
@@ -32,14 +32,14 @@ body[data-theme="dark"] .postBox {
     flex: 1;
     padding: 10px;
     font-size: 16px;
-    background-color: var(--bg-color-light); /* Light mode input background */
+    background-color: var(--bg-color-light);
     color: var(--text-color-light);
 }
 
 body[data-theme="dark"] .postInput {
-    background-color: var(--bg-color-soft-dark); /* Dark mode input background */
-    color: var(--text-color-dark); /* Dark mode input text color */
-    border-color: var(--input-border-dark); /* Dark mode input border color */
+    background-color: var(--bg-color-soft-dark); 
+    color: var(--text-color-dark); 
+    border-color: var(--input-border-dark); 
 }
 
 .postBox_buttons {
@@ -63,8 +63,8 @@ body[data-theme="dark"] .postInput {
 
 body[data-theme="dark"] .postButton {
     border: 1px solid var(--bs-primary);
-    background-color: var(--bg-color-dark); /* Dark mode button background */
-    color: var(--button-text-dark); /* Dark mode button text color */
+    background-color: var(--bg-color-dark); 
+    color: var(--button-text-dark); 
 }
 
 .postButton:hover {
@@ -72,10 +72,9 @@ body[data-theme="dark"] .postButton {
     color: black;
 }
 
-/* Dark Mode styles for PostButton hover */
 body[data-theme="dark"] .postButton:hover {
-    background-color: var(--bs-primary); /* Dark mode hover background */
-    color: var(--button-text-dark-hover); /* Dark mode hover text color */
+    background-color: var(--bs-primary); 
+    color: var(--button-text-dark-hover); 
 }
 .selectedImage{
     width: 100%;

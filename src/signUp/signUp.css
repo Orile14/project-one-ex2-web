@@ -35,7 +35,6 @@ body[data-theme="dark"] button {
   color: var(--button-text-dark);
 }
 
-/* Add similar styling for input fields, labels, etc., using the defined variables */
 input[type="text"],
 input[type="password"],
 input[type="file"] {

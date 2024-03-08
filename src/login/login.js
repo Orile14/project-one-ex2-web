@@ -2,9 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./login.css";
 import InputBox from "../inputBox/inputBox";
-import User from "../signUp/user";
 import { ThemeContext } from '../themeContext/themeContext';
-import { useAuth } from '../authContext/authContext';
 
 const Login = () => {
   // Accessing theme and toggleTheme from ThemeContext using useContext hook
@@ -15,25 +13,26 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
-  const { login } = useAuth();
 
   const handleSignUpClick = () => {
     // Change this to the path of your signup page
     navigate('/signup');
   };
 
+// Function to handle login button click
   const handleLoginClick = async () => {
     try {
+      // Send a POST request to the server
       const response = await fetch('http://localhost:12345/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        // Send the username and password in the request body
         body: JSON.stringify({ username, password })
       });
-
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
+      // Parse the JSON response
       const data = await response.json();
       if (data) {
         // Now, get the token from the specified URL
@@ -47,14 +46,16 @@ const Login = () => {
         if (!tokenResponse.ok) {
           throw new Error(`HTTP error! Status: ${tokenResponse.status}`);
         }
-
+        // Parse the JSON response
         const tokenData = await tokenResponse.json();
 
         // Store the received token in local storage
         localStorage.setItem('userToken', tokenData.token);
-        
+        localStorage.setItem('userID', data.id);
+
+        // Set the login message
         setLoginMessage(`Welcome, ${username}! You have successfully logged in.`);
-        login();
+        // Navigate to the feed page
         navigate('/Feed');
       } else {
         setLoginMessage('Invalid email or password. Please try again.');

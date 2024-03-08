@@ -6,24 +6,23 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
-    background-color: white; /* Light mode background color */
+    background-color: white;
     width: 100%;
     max-width: 600px;
 }
 
 .modal-content {
-    background-color: var(--bg-color-light); /* Light mode background color */
+    background-color: var(--bg-color-light);
 
 }
 
 body[data-theme="dark"] .modal-content {
-    background-color: var(--bg-color-dark); /* Dark mode background color */
+    background-color: var(--bg-color-dark);
 }
 
-/* Dark Mode styles for container */
 body[data-theme="dark"] .container {
-    background-color: var(--bg-color-dark); /* Dark mode background color */
-    color: var(--text-color-dark); /* Dark mode text color */
+    background-color: var(--bg-color-dark); 
+    color: var(--text-color-dark); 
 }
 
 .post-header {
@@ -38,64 +37,73 @@ body[data-theme="dark"] .container {
     align-items: center;
 }
 
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-header-info{
+    display: flex;
+    align-items: center;
+    border-radius: 3%;
+}
 .username {
-    font-weight: bold;
+    all: unset;
+    margin-bottom: 1px;
 }
-
 .timestamp {
-    color: var(--text-color-light);
-    font-size: 0.8em;
+    margin-bottom: 1px;
+    width: auto;
+    display: inline-block; 
+    white-space: nowrap;
 }
 
-/* Dark Mode styles for timestamp */
 body[data-theme="dark"] .timestamp {
-    color: var(--text-color-dark); /* Dark mode text color */
+    color: var(--text-color-dark); 
 }
 
 .input {
-    background-color: var(--bg-color-light); /* Light mode background */
-    color: var(--text-color-light); /* Light mode text color */
+    background-color: var(--bg-color-light); 
+    color: var(--text-color-light); 
     border: none;
     flex: 1;
     padding: 10px;
     font-size: 16px;
 }
 
-/* Dark Mode styles for input */
 body[data-theme="dark"] .input {
-    background-color: var(--bg-color-soft-dark); /* Dark mode background */
-    color: var(--text-color-dark); /* Dark mode text color */
+    background-color: var(--bg-color-soft-dark);
+    color: var(--text-color-dark); 
 }
 
 .post-header-actions {
-    background-color: white; /* Dark mode background color */
+    background-color: white;
 }
 
 body[data-theme="dark"] .post-header-actions {
-    background-color: var(--bg-color-soft-light); /* Light mode background color */
+    background-color: var(--bg-color-soft-light);
 }
 
 .modal-body {
     border-radius: 10px;
-    background-color: var(--bg-color-light); /* Dark mode background color */
+    background-color: var(--bg-color-light); 
 }
 
 body[data-theme="dark"] .modal-body {
-    background-color: var(--bg-color-soft-dark); /* Light mode background color */
+    background-color: var(--bg-color-soft-dark);
 }
 
 body[data-theme="dark"] .modal-header {
-    background-color: var(--bg-color-soft-dark); /* Light mode background color */
+    background-color: var(--bg-color-soft-dark);
 }
 
 body[data-theme="dark"] .btn-close {
-    background-color: var(--bg-color-soft-dark); /* Light mode background color */
+    background-color: var(--bg-color-soft-dark);
     color: white;
 }
 
-/* Dark Mode styles for edit-textarea */
 body[data-theme="dark"] .edit-textarea {
-    background-color: var(--bg-color-soft-dark); /* Dark mode background */
+    background-color: var(--bg-color-soft-dark); 
     
 }
 
@@ -105,21 +113,21 @@ body[data-theme="dark"] .edit-textarea {
     width: 50px;
     margin-top: 5px;
     cursor: pointer;
-    display: flex; /* Changed to flex for inline alignment */
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
-    padding: 5px; /* Adjust padding */
-    transition: color 0.3s; /* Smooth transition for color change */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    transition: color 0.3s; 
     border: transparent;
 }
 
 .comments-like i, .comments-like span {
-    margin-right: 5px; /* Space between icon and text */
+    margin-right: 5px;
 }
 
 .comments-like.active, .comments-like.active i {
-    font-weight: bold; /* Make text bold when active */
-    color: var(--bs-primary); /* Change color to blue when active */
+    font-weight: bold;
+    color: var(--bs-primary);
 }
 
 body[data-theme="dark"] .comments-like {

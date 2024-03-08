@@ -1,52 +1,113 @@
-import React, { useState,useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './commentCreate.css';
 
-const CommentsCreate = ({ id, username, timestamp, content, deleteComment, handleEditComment,
-    handleLikeComment,handleSaveComment, likes, toggleLike }) => {
+//this component is used to create a comment
+const CommentsCreate = ({ postId, id, username, profile, likes, timestamp, content, deleteComment, handleEditComment,
+    handleSaveComment }) => {
     // Initialize state variables
     const [isEditing, setIsEditing] = useState(false);
     const [editableContent, setEditableContent] = useState(content);
     const [likeActive, setLikeActive] = useState(false);
     const textareaRef = useRef(null);
+    const amount = likes ? likes.length : 0;
+    const [LikeCount, setLikeCount] = useState(amount);
+
+    useEffect(() => {
+        // Check if the user has liked the comment
+        if (likes) {
+            // Retrieve the user ID from local storage
+            const user = localStorage.getItem('userID');
+            const userLike = likes.find((like) => like == user);
+            // Set the likeActive state variable based on the user's like status
+            if (userLike) {
+                setLikeActive(true);
+            } else {
+                setLikeActive(false);
+            }
+        }
+    }, [likes]);
 
     // Function to handle the like button
-    const handleLike = async() => {
-        await handleLikeComment(id);
-        toggleLike(id);
-        setLikeActive(!likeActive);
-    };
+    const handleLikeComment = async () => {
+        try {
+            // Retrieve the token from local storage
+            const token = localStorage.getItem('userToken');
+            if (!token) {
+                alert('You must be logged in to like comments.');
+                return;
+            }
+            // Send a PUT request to the server
+            const response = await fetch(`http://localhost:12345/api/posts/comment/like/${postId}/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+            // Parse the JSON response
+            const data = await response.json();
+            const user = localStorage.getItem('userID');
+            // Check if the user has liked the comment
+            const userLike = data.find((like) => like == user);
+            // Set the likeActive state variable based on the user's like status
+            if (userLike) {
+                setLikeActive(true);
+            } else {
+                setLikeActive(false);
+            }
+
+            setLikeCount(data.length);
+        } catch (error) {
+            console.error('Failed to like comment:', error);
+            alert('Failed to like comment.');
+        }
+    }
+
     // Function to handle the edit button
     const handleEdit = async () => {
-        const canEdit = await handleEditComment(username);
+        // Check if the user is authorized to edit the comment
+        const canEdit = await handleEditComment(id);
+        // If the user is authorized, set the isEditing state variable to true
         if (canEdit) {
-            console.log('Editing comment===================');
             setIsEditing(true);
-        } 
+        }
     };
     // Function to handle the save button
     const handleSave = () => {
+        // Check if the textarea input is available
         if (textareaRef.current) {
+            // Call the handleSaveComment function and pass the comment
             handleSaveComment(id, textareaRef.current.value);
+            // Set the isEditing state variable to false
             setIsEditing(false);
         }
     };
+
     // Function to handle the change event
     const handleChange = (event) => {
         setEditableContent(event.target.value);
     };
     // Function to remove a comment
     const Remove = () => {
+        // Call the deleteComment function and pass the comment ID
         deleteComment(id);
     };
-    
+
     return (
         // Add the comment to the container
         <div className='container'>
             <div className="post-header">
                 {/** Add the user's profile picture and the time stamp to the post header */}
                 <div className="post-header-info">
-                    <p className="username">{username}</p>
-                    <p className="timestamp">{timestamp}</p>
+                    <img src={profile} alt="PostIm" className="profilePic" />
+                    <div className="user-info">
+                        <p className="username">{username}</p>
+                        <p className="timestamp">{timestamp}</p>
+                    </div>
                 </div>
                 {/** Add the post header actions */}
                 <div className="post-header-actions">
@@ -74,8 +135,9 @@ const CommentsCreate = ({ id, username, timestamp, content, deleteComment, handl
             </div>
             <div className="comment-footer">
                 {/** Add the like button */}
-                <button onClick={handleLike} className={`comments-like ${likeActive ? 'active' : ''}`}>
-                    <i className="bi bi-hand-thumbs-up"></i>
+                <button onClick={handleLikeComment} className={`comments-like ${likeActive ? 'active' : ''}`}>
+                    <i className="bi bi-hand-thumbs-up"> </i>
+                    <label>{LikeCount}</label>
                 </button>
             </div>
         </div>
