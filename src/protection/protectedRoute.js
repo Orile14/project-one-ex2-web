@@ -16,7 +16,7 @@ const ProtectedRoute = ({ children }) => {
     };
     // Call the checkAuth function when the component mounts
     checkAuth();
-  }, []);
+  }, []); 
   if (isAuthenticated === null) {
     // If the authentication status is not determined yet, display a loading message
     console.log("asdasdsad")

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import { ThemeProvider, ThemeContext } from './themeContext/themeContext';
 import Feed from './feed/feed';
 import Signup from './signUp/signUp';
@@ -42,6 +42,7 @@ const AppContent = () => {
          </ProtectedRoute>
           } />
           <Route path="/login" element={<Login />} />
+           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </Router>
     </div>
