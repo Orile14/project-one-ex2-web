@@ -86,7 +86,7 @@ const PostBox = ({ onRefreshFeed }) => {
                 alert('You must be logged in to post.');
                 return;
             }
-
+            // Function to read the file as base64
             const readFileAsBase64 = (file) => {
                 return new Promise((resolve, reject) => {
                     const reader = new FileReader();
@@ -95,19 +95,20 @@ const PostBox = ({ onRefreshFeed }) => {
                     reader.readAsDataURL(file);
                 });
             };
-
+            // Convert the selected image to base64
             let base64Image = "";
             if (document.getElementById('imageInput').files[0]) {
                 base64Image = await readFileAsBase64(document.getElementById('imageInput').files[0]);
             }
-
+            // Create a new post object
             const postData = {
                 content: postContent,
-                img: base64Image, // Use the base64 representation of the image
+                img: base64Image, 
                 date: new Date().toISOString(),
                 comments: [],
                 likes: []
             };
+            // Send a POST request to the server to add the new post
             const userId = localStorage.getItem('userID');
             if (!userId) {
                 alert('FATAL ERORR!!!! TURN OFF YOU WIFI AND COMPUTER IMMEDIATELY!!!!!!!!!!');
@@ -119,12 +120,13 @@ const PostBox = ({ onRefreshFeed }) => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
+                // Send the post data to the server
                 body: JSON.stringify(postData)
             });
             if (!response.ok) {
                 throw new Error('Failed to add post');
             }
-
+            // Refresh the feed
             onRefreshFeed();
 
             // Reset state

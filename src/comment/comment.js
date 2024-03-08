@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import CommentsCreate from './commentsCreate';
 import './comment.css';
 
+// This component displays the comments for a post
 const Comment = ({ comments, postId }) => {
 
     // Initialize state variables
@@ -9,15 +10,17 @@ const Comment = ({ comments, postId }) => {
     const input = useRef(null);
     const modalId = `commentsModal-${postId}`;
     const [newComments, setNewComments] = useState(comments);
-    const [likes,setLikes]=useState()
 
+    // Function to delete a comment
     const deleteComment = async (commentId) => {
         try {
+            // Retrieve the token from local storage
             const token = localStorage.getItem('userToken');
             if (!token) {
                 alert('You must be logged in to delete comments.');
                 return;
             }
+            // Send a DELETE request to the server
             const response = await fetch(`http://localhost:12345/api/posts/comment/${postId}/${commentId}`, {
                 method: 'DELETE',
                 headers: {
@@ -31,9 +34,8 @@ const Comment = ({ comments, postId }) => {
 
             console.log('Comment deleted successfully');
             // Refresh the comments list after deleting a comment
-            // Assuming the backend returns the updated comments array after deletion
-            const updatedComments = await response.json(); // Make sure the backend returns the updated list of comments
-            setNewComments(updatedComments); // Update the local state to reflect the deletion
+            const updatedComments = await response.json(); 
+            setNewComments(updatedComments); 
         } catch (error) {
             console.error('Failed to delete comment:', error);
             alert('You are not authorized.');
@@ -46,11 +48,13 @@ const Comment = ({ comments, postId }) => {
     // Function to add a comment
     const AddComment = async () => {
         try {
+            // Retrieve the token from local storage
             const token = localStorage.getItem('userToken');
             if (!token) {
                 alert('You must be logged in to add comments.');
                 return;
             }
+            // Send a POST request to the server
             const commentContent = input.current.value;
             const response = await fetch(`http://localhost:12345/api/posts/comment/${postId}`, {
                 method: 'POST',
@@ -58,33 +62,37 @@ const Comment = ({ comments, postId }) => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
+                // Send the comment data to the server
                 body: JSON.stringify({ content: commentContent })
             });
 
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }
-
+            // get the new comments
             const updatedComments = await response.json();
             console.log("updatedComments", updatedComments);
-            setNewComments(updatedComments); // Update the state with the new data
+            // Update the comments list after adding a comment
+            setNewComments(updatedComments); 
+            // Reset the input field and state variable
             input.current.value = '';
             setIsAdded(false);
-
-
         } catch (error) {
             console.error('Failed to add comment:', error);
             alert('Failed to add comment.');
         }
     };
 
+    // Function to check if the user is authorized to edit a comment
     const handleEditComment = async (id) => {
         try {
+            // Retrieve the token from local storage
             const token = localStorage.getItem('userToken');
             if (!token) {
                 alert('You must be logged in to edit comments.');
                 return false;
             }
+            // Send a GET request to the server
             const responseAuth = await fetch(`http://localhost:12345/api/posts/comment/edit/${postId}/${id}`, {
                 method: 'GET',
                 headers: {
@@ -99,7 +107,7 @@ const Comment = ({ comments, postId }) => {
                 alert('You are not authorized or there was an error.');
                 return false;
             }
-
+            // Parse the JSON response
             const data = await responseAuth.json();
             return data;
         } catch (error) {
@@ -116,12 +124,14 @@ const Comment = ({ comments, postId }) => {
                 alert('You must be logged in to edit comments.');
                 return false;
             }
+            // Send a PATCH request to the server
             const response = await fetch(`http://localhost:12345/api/posts/comment/edit/${postId}/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
+                // Send the updated comment data to the server
                 body: JSON.stringify({ content: newContent }),
 
             });
@@ -129,12 +139,15 @@ const Comment = ({ comments, postId }) => {
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }
+            //get the new comments
             const data = await response.json();
         }
         catch (error) {
             console.error('Failed to edit post:', error);
         }
     };
+
+    // Function to format the date in the comments list
     const formatDate = (isoDateString) => {
         const date = new Date(isoDateString);
         const hours = date.getHours().toString().padStart(2, '0');

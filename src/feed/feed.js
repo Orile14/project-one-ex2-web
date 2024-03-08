@@ -16,19 +16,23 @@ const Feed = () => {
     const [DBposts, setDBPosts] = useState([]);
     const [refreshFeed, setRefreshFeed] = useState(false);
 
+    // Function to trigger feed refresh
     const triggerFeedRefresh = () => {
         setRefreshFeed(prev => !prev);
     };
-
+    // Fetch posts when the component mounts
     useEffect(() => {
         if (!userId) {
+            // Fetch posts from the server
             const fetchPosts = async () => {
                 try {
+                    // Retrieve the token from local storage
                     const token = localStorage.getItem('userToken');
                     if (!token) {
                         alert('You must be logged in to view posts.');
                         return;
                     }
+                    // Send a GET request to the server
                     const response = await fetch('http://localhost:12345/api/posts', {
                         method: 'GET',
                         headers: { // This is where headers should be defined
@@ -38,7 +42,9 @@ const Feed = () => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
+                    // Parse the JSON response
                     const postsJSON = await response.json();
+                    // Set the posts state with the data from the server
                     setDBPosts(postsJSON);
                 } catch (error) {
                     console.error('There has been a problem with your fetch operation:', error);

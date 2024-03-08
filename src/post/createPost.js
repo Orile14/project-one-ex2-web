@@ -17,7 +17,7 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
   // Function to handle post removal
   const Remove = async () => {
     try {
-
+      // Retrieve the token from local storage
       const token = localStorage.getItem('userToken');
       if (!token) {
         alert('You must be logged in to remove posts.');
@@ -28,16 +28,18 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
         alert('You must be logged in to remove posts.');
         return;
       }
+      // Send the request to the server
       const response = await fetch(`http://localhost:12345/api/users/${userID}/posts/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-
+      // Check if the request was successful
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
+      // Log the success message
       console.log('Post removed successfully');
       setIsRemoved(true);
     } catch (error) {
@@ -73,7 +75,7 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
-
+      // get the new like count
       const responseData = await response.json();
       setLikeCount(responseData);
 
@@ -83,7 +85,7 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
     }
   };
 
-  // Function to handle post edit
+  // Function to handle post edit that check if the user is authorized to edit the post
   const handleEdit = async () => {
     try {
       const token = localStorage.getItem('userToken');
@@ -91,6 +93,7 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
         alert('You must be logged in to like posts.');
         return;
       }
+      // Send the request to the server
       const responseAuth = await fetch(`http://localhost:12345/api/posts/edit/${id}`, {
         method: 'GET',
         headers: {
@@ -101,33 +104,36 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
       if (!responseAuth.ok) {
         throw alert(`Error: not authorized`);
       }
+      //change the state to editing
       setIsEditing(true);
     } catch (error) {
       console.error('Failed to edit post:', error);
     }
   };
 
-  // Function to handle post save
+  // Function to handle post changes
   const handleSave = async () => {
     try {
+      // Retrieve the token from local storage
       const userId = localStorage.getItem('userID');
       const token = localStorage.getItem('userToken');
       if (!token) {
         alert('You must be logged in to edit posts.');
         return;
       }
-
+      // Send the request to the server
       const postData = {
         content: editableContent,
         image: newImage,
       };
-
+    
       const response = await fetch(`http://localhost:12345/api/users/${userId}/posts/${id}`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
+        // Send the updated post data to the server
         body: JSON.stringify(postData)
       });
 
@@ -135,7 +141,7 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
         throw new Error(`Error: ${response.status}`);
       }
       const data = await response.json();
-
+      // Log the success message
       console.log('Post updated successfully:', data);
       setIsEditing(false);
       setCurrentImage(newImage);
@@ -150,7 +156,8 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
   };
 
   const handleImage = async (event) => {
-
+// Function to handle image selection
+    //convert the image to base64
     const readFileAsBase64 = (file) => {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -159,17 +166,17 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
         reader.readAsDataURL(file);
       });
     }
-  
+    // Convert the selected image to base64
     let base64Image = "";
     const file = event.target.files[0];
     if (file) {
-      base64Image = await readFileAsBase64(file); // Ensure this is awaited
+      base64Image = await readFileAsBase64(file);
     }
-  
+    // Set the new image
     setNewImage(base64Image);
   };
   
-
+  // this function will navigate to the user profile
   const handleUserClick = (userId) => {
     navigate(`/profile/${userId}`);
   };
@@ -207,12 +214,14 @@ const CreatePost = ({ postOwnerID, id, username, timestamp, originalContent, lik
       <div className="post-content">
         {isEditing ? (
           <div>
+            {/** Display textarea for editing the post content */}
             <textarea value={editableContent} onChange={handleChange} className="edit-textarea" />
             <input type="file" id="imageInput" onChange={handleImage} />
             {newImage && <img src={newImage} alt="New Post" className="post-image" />}
           </div>
         ) : (
           <div>
+            {/** Display the post content */}
             <p>{editableContent}</p>
             {currentImage && <img src={currentImage} alt="Post" className="post-image" />}
           </div>

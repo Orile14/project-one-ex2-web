@@ -4,19 +4,16 @@
   position: relative;
   width: 100%;
   height: auto;
-  /* Adjust height to auto to accommodate content */
 }
 
 .cover-photo {
   border-radius: 5px;
   width: 100%;
   height: 200px;
-  /* Height of the cover photo */
   background-size: cover;
   background-position: center;
   position: relative;
   z-index: 1;
-  /* Ensures cover photo is behind profile photo */
 }
 
 .profile-photo {
@@ -62,7 +59,7 @@ a {
 }
 
 body[data-theme="dark"] .offcanvas {
-  background-color: var(--bg-color-soft-dark); /* Dark mode background color */
-    color: var(--text-color-dark); /* Dark mode text color */
+  background-color: var(--bg-color-soft-dark); 
+    color: var(--text-color-dark);
 }
 

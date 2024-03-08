@@ -2,7 +2,7 @@ import React from "react";
 
 const OptionItem = ({ iconClass, onLogout, deleteUser}) => {
     const isLogoutOption = iconClass === "bi-box-arrow-right";
-    
+    // If the iconClass is "bi-box-arrow-right", render the logout dropdown button
     return (
         <div>
             {isLogoutOption ? (

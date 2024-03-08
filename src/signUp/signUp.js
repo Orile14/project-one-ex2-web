@@ -13,8 +13,8 @@ const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isFromProfile, setIsFromProfile] = useState(false);
-
   useEffect(() => {
+    // Check if the user is redirected from the profile page
     const fromProfile = location.state?.fromProfile;
     setIsFromProfile(!!fromProfile);
   }, [location]);
@@ -55,16 +55,16 @@ const SignUp = () => {
       });
     }
   };
-
+  // Function to handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    // Check if the password and confirm password are the same
     if (formData.Password !== formData.ConfirmPassword) {
 
       alert("Password and Confirm Password must be the same");
       return;
     }
-
+    // Function to read the file as base64
     const readFileAsBase64 = (file) => {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -73,7 +73,7 @@ const SignUp = () => {
         reader.readAsDataURL(file);
       });
     };
-
+    // Convert the selected image to base64
     let base64Image = "";
     if (document.getElementById('imageInput').files[0]) {
       base64Image = await readFileAsBase64(document.getElementById('imageInput').files[0]);
@@ -81,7 +81,7 @@ const SignUp = () => {
       alert("Please select an image.");
       return;
     }
-
+    // Create user data object
     const userData = {
       username: formData.Name,
       password: formData.Password,
@@ -90,8 +90,10 @@ const SignUp = () => {
     };
 
     try {
+      // Send a POST request to the server to create a new user
       let response;
       let userId;
+      // Check if the user is redirected from the profile page
       if (!isFromProfile) {
         response = await fetch('http://localhost:12345/api/users', {
           method: 'POST',
@@ -99,6 +101,7 @@ const SignUp = () => {
           body: JSON.stringify(userData)
         });
       } else {
+        // Send a PUT request to the server to update the user data
         const token = localStorage.getItem('userToken');
         userId = localStorage.getItem('userID');
         if (!token || !userId) {
@@ -111,9 +114,11 @@ const SignUp = () => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
+          // Send the user data to the server
           body: JSON.stringify(userData)
         });
       }
+      // Check if the username already exists
       if (response.status === 409) {
         alert('Username already exists.');
         return;
@@ -124,7 +129,7 @@ const SignUp = () => {
       if (!isFromProfile) { navigate('/login') }
       else { navigate(`/profile/${userId}`) };
     } catch (error) {
-
+      // Handle errors
       console.error('Error:', error);
       if(isFromProfile){
         alert('Username is already taken')

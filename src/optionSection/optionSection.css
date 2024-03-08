@@ -1,15 +1,15 @@
 .friends-list {
   position: fixed;
-  top: 60px; /* Adjust as needed */
-  right: 0; /* Align to the right side */
-  width: 300px; /* Adjust width as needed */
+  top: 60px;
+  right: 0;
+  width: 300px;
   padding: 10px;
   box-sizing: border-box;
   background-color: var(--bg-color-light);
   color: var(--text-color-light);
-  overflow-y: auto; /* Allows scrolling within the container */
-  max-height: calc(100vh - 60px); /* Adjust height to fit the viewport */
-  z-index: 100; /* Ensure it's above other content */
+  overflow-y: auto;
+  max-height: calc(100vh - 60px); 
+  z-index: 100;
 }
 /* Your existing styling for circular-container */
 .circular-container {
@@ -23,12 +23,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: width 0.3s, height 0.3s; /* Add transition for a smooth effect */
+  transition: width 0.3s, height 0.3s;
   transition: transform 0.3s ease;
 }
 body[data-theme="dark"] .circular-container {
-  background-color: var(--button-bg-dark); /* Dark background color */
-  color: var(--text-color-dark); /* Dark text color */
+  background-color: var(--button-bg-dark);
+  color: var(--text-color-dark);
 }
 
 .circular-container:hover{
@@ -50,9 +50,9 @@ body[data-theme="dark"] .circular-container {
 
 /* Dark mode styles for option section button */
 body[data-theme="dark"] .option-section-button {
-  background-color: var(--bg-color-dark); /* Dark background for button */
-  color: var(--text-color-dark); /* Dark text color for button */
-  border: none; /* Remove border */
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-dark); 
+  border: none;
 }
 
 /* Add hover effect for the button */
@@ -72,7 +72,7 @@ body[data-theme="dark"] .option-section-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s; /* Use transform for transition */
+  transition: transform 0.3s;
   border: none;
 }
 

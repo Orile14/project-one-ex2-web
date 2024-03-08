@@ -11,8 +11,8 @@
 }
 
 body[data-theme="dark"] .post {
-    background-color: var(--bg-color-soft-dark); /* Dark mode background color */
-    color: var(--text-color-dark); /* Dark mode text color */
+    background-color: var(--bg-color-soft-dark);
+    color: var(--text-color-dark);
 }
 .post:hover {
     cursor: default;
@@ -29,9 +29,9 @@ body[data-theme="dark"] .post {
    width: 45px;
    height: 33px;
    margin-top: 11px;
-   display: flex;           /* Use flexbox for alignment */
-  align-items: center;     /* Center vertically */
-  justify-content: center; /* Center horizontally */
+   display: flex;
+  align-items: center; 
+  justify-content: center;
   text-align: center; 
 }
 
@@ -47,15 +47,15 @@ body[data-theme="dark"] .post {
     border-radius: 5px;
     padding: 10px;
     margin-top: 10px;
-    background-color: var(--bg-color-light); /* Light mode background */
-    color: var(--text-color-light); /* Light mode text color */
+    background-color: var(--bg-color-light); 
+    color: var(--text-color-light); 
 } 
 
   /* Dark Mode styles for edit-textarea */
 body[data-theme="dark"] .edit-textarea {
-    background-color: var(--bg-color-dark); /* Dark mode background */
-    color: var(--text-color-dark); /* Dark mode text color */
-    border-color: var(--input-border-dark); /* Dark mode border color */
+    background-color: var(--bg-color-dark); 
+    color: var(--text-color-dark);
+    border-color: var(--input-border-dark);
 }
   
 .buttons {
@@ -74,14 +74,14 @@ body[data-theme="dark"] .edit-textarea {
     font-weight: bold;
     color: black;
     margin: 5px;
-    display: inline-block; /* Display the buttons inline */
+    display: inline-block;
 }
 
 /* Dark Mode styles for like-button */
 body[data-theme="dark"] .like-button {
     border: 1px solid var(--bs-primary);    
-    background-color: var(--bg-color-dark); /* Dark mode background */
-    color: var(--button-text-dark); /* Dark mode text color */
+    background-color: var(--bg-color-dark); 
+    color: var(--button-text-dark); 
 }
 
 .like-button:hover {
@@ -105,18 +105,18 @@ body[data-theme="dark"] .like-button:hover {
 }
 
 body[data-theme="dark"] .x-button {
-    background-color: transparent; /* Dark mode background color */
+    background-color: transparent;
     border: var(--input-border-dark);
 }
 
 .x-button:hover {
-    background-color: #f5f2f0; /* Slight highlight on hover */
+    background-color: #f5f2f0;
     cursor: pointer;
 }
 
 body[data-theme="dark"] .x-button:hover {
-    background-color: #3a3b3d; /* Slight highlight on hover */
-    color: white; /* Change text color on hover */
+    background-color: #3a3b3d;
+    color: white;
 }
 
 .Edit {
@@ -130,18 +130,18 @@ body[data-theme="dark"] .x-button:hover {
 
 body[data-theme="dark"] .Edit {
     background-color: transparent;
-    color: var(--text-color-dark); /* Dark mode text color */
+    color: var(--text-color-dark);
     border: var(--input-border-dark);
 }
 
 .Edit:hover {
-    background-color: #f0f2f5; /* Slight highlight on hover */
+    background-color: #f0f2f5;
     cursor: pointer;
 }
 
 body[data-theme="dark"] .Edit:hover {
-    background-color: #3a3b3d; /* Slight highlight on hover */
-    color: white; /* Change text color on hover */
+    background-color: #3a3b3d;
+    color: white;
 }
 
 .user-info {
