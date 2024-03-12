@@ -234,10 +234,10 @@ const UserProfile = ({ updatedFriendsList }) => {
                 className="cover-photo"
                 style={{ backgroundImage: `url(${userData.coverPic})` }}
             ></div>
-            <div
+            <img    
                 className="profile-photo"
-                style={{ backgroundImage: `url(${userData.profilePic})` }}
-            ></div>
+                src={userData.profilePic}
+            ></img>
             <div className="user-name">
                 <div className="user-nickname">{userData.nick}</div>
                 
